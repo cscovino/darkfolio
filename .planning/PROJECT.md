@@ -104,6 +104,9 @@ Deployment
 | commitlint script carries no `--edit`; hook body passes it | pnpm appends hook args to the script — duplicated `--edit` silently validated COMMIT_EDITMSG instead of `$1` (gate bypass, found in Phase 0 code review, fixed + pinned by test) | Good |
 | `allowBuilds` pnpm-workspace entry for @biomejs/biome | pnpm 12 hard-fails unapproved postinstall builds; install was blocked otherwise | Good |
 | tsconfig include `src/**/*` (not `src/**`) | TS5010 rejects trailing recursive wildcards; `astro check` was vacuously green at `Result (0 files)` | Good |
+| Team agents flat in `.opencode/agents/` + `task: deny` leaves | OpenCode 2.0.29 doesn't discover nested `team/` agents; leaves prevent subagent sprawl during `/gsd-autonomous` | Good (Phase 00.1) |
+| CLI dispatch passes `--model` explicitly (never rely on agent frontmatter model) | 2.0.29 `opencode run` silently ignores frontmatter model — smoke proof in `.verify/smoke-*.log` | Good (Phase 00.1) |
+| Phaser skills vendored from pinned `phaserjs/phaser` snapshot, no auto-update | Provenance + supply-chain control (T-00.1-08); `PHASER-SNAPSHOT.md` is authoritative | Good (Phase 00.1) |
 
 ## Evolution
 
@@ -123,4 +126,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-10-15 after Phase 0*
+*Last updated: 2026-10-16 after Phase 00.1*

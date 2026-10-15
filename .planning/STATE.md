@@ -1,24 +1,24 @@
 ---
-gsd_state_version: 1.0
+gsd_state_version: "1.0"
 milestone: v1.0
-milestone_name: milestone
-current_phase: 00.1 (Agent Team & Skills — inserted, not yet planned)
-current_plan: 4
+current_plan: Not started
 status: executing
-stopped_at: Completed 00.1-04-PLAN.md
-last_updated: "2026-10-15T23:09:18.060Z"
+stopped_at: Phase 00.1 complete, ready to plan Phase 1
+last_updated: "2026-10-15T23:46:00.874Z"
+state_head: 31dac225adee318bef183914c253bfb206f25630
 progress:
-  total_phases: 2
+  total_phases: 8
   completed_phases: 2
-  total_plans: 5
+  total_plans: 0
   completed_plans: 5
-current_phase_name: agent-team-skills
-state_head: b4792295ea3269422a45d6600fbd0339d54d16f5
+milestone_name: milestone
+current_phase: 1
+current_phase_name: Core Game Loop
 ---
 
 # State: Darkfolio
 
-*Last updated: 2026-10-15 after Phase 0 completion + transition*
+*Last updated: 2026-10-16 after Phase 00.1 completion + transition*
 
 ## Project Reference
 
@@ -27,25 +27,27 @@ state_head: b4792295ea3269422a45d6600fbd0339d54d16f5
 **Repo:** `/home/jetson/github/darkfolio` (toolchain live on `chore-toolchain-foundation`; see `.planning/PROJECT.md`)
 **Mode:** mvp (vertical slices — every phase delivers a runnable, end-to-end capability)
 **Granularity:** standard (per `.planning/config.json`)
+**Current focus:** Phase 1 — Core Game Loop
 
 ## Current Position
 
-- **Current phase:** 00.1 (Agent Team & Skills — inserted, not yet planned)
+- **Current phase:** 1 (Core Game Loop)
 
-**Current Plan:** 4
-**Total Plans in Phase:** 4
+**Current Plan:** Not started
+**Total Plans in Phase:** TBD (plan-phase 1 will set)
 
-- **Status:** ✅ Phase 0 complete (verified 6/6, `/gsd-execute-phase 0` done) — ready to plan Phase 00.1
+- **Status:** ✅ Phase 00.1 complete (UAT 1/1 passed, VERIFICATION flipped to passed, SECURITY threats_open: 0, NYQUIST-compliant) — ready to plan Phase 1
 - **Active branch:** `chore-toolchain-foundation` (merge to `master` via PR per AGENTS.md when convenient)
-- **Last completed phase:** 00 — Setup (Foundation), 2026-10-15
-- **Next action:** `/gsd-plan-phase 00.1` (CLI `phase.complete` derived next=1 — decimal phase 00.1 precedes 1 in ROADMAP order)
+- **Last completed phase:** 00.1 — Agent Team & Skills, 2026-10-16
+- **Next action:** `/gsd-discuss-phase 1` (CONTEXT.md absent) then `/gsd-plan-phase 1`
 
 ## Phase Status
 
 | Phase | Branch              | Status               | Plans | Notes |
 |-------|---------------------|----------------------|-------|-------|
 | 0 — Setup (Foundation)        | `chore-toolchain-foundation`           | ✅ Complete (2026-10-15) | 1/1 | Foundation — no v1 reqs; enables every other phase |
-| 1 — Core Game Loop            | `feat-core-loop`       | ⏳ Pending            | 0/? | GAME-01, GAME-02, GAME-03 |
+| 00.1 — Agent Team & Skills    | `chore-toolchain-foundation`           | ✅ Complete (2026-10-16) | 4/4 | Meta — no v1 reqs; UAT 1/1, SECURITY 0 open, Nyquist-compliant |
+| 1 — Core Game Loop            | `feat-core-loop`       | ▶ Next                  | 0/? | GAME-01, GAME-02, GAME-03 |
 | 2 — Multi-Room                | `feat-multi-room`      | ⏳ Pending            | 0/? | GAME-04, ROOM-01, ROOM-02 — gateway to parallel branches |
 | 3 — Interaction               | `feat-interaction`     | ⏳ Pending            | 0/? | INTR-01..05 |
 | 4 — Lighting                  | `feat-lighting`        | ⏳ Pending            | 0/? | LITE-01..03 |
@@ -112,15 +114,15 @@ state_head: b4792295ea3269422a45d6600fbd0339d54d16f5
 
 ## Session Continuity
 
-**Last session:** 2026-10-15T23:09:17.982Z
-**Stopped at:** Completed 00.1-04-PLAN.md
+**Last session:** 2026-10-16
+**Stopped at:** Phase 00.1 complete, ready to plan Phase 1
 **Resume file:** None
 
 **Next session resume:**
 
-1. Run `/gsd-plan-phase 00.1` — Agent Team & Skills (inserted meta phase; directory `.planning/phases/00.1-agent-team-skills/` exists but is empty).
-2. Merge `chore-toolchain-foundation` → `master` when convenient (squash PR per AGENTS.md; branch also holds Phase 0 code-review fixes).
-3. Then `/gsd-discuss-phase 1` / `/gsd-plan-phase 1` and continue down the critical path; after Phase 2, dispatch Phases 3 / 4 / 5 / 7 in parallel per `parallelization: true`.
+1. Merge `chore-toolchain-foundation` → `master` when convenient (squash PR per AGENTS.md; branch also holds Phase 0 + 00.1 work).
+2. Run `/gsd-discuss-phase 1` (no CONTEXT.md yet) then `/gsd-plan-phase 1` — Core Game Loop; owner also commits the untracked `src/pages/index.astro` stub + `public/` assets.
+3. Continue down the critical path; after Phase 2, dispatch Phases 3 / 4 / 5 / 7 in parallel per `parallelization: true`. The 7-agent team + `pnpm smoke:team` harness are live for dispatch (AGENTS.md §"Agent team roster").
 
 **Resume anchor:** this file plus `.planning/ROADMAP.md` are enough to recover the full project state. Branches are named by intent/feature (AGENTS.md §"Branches & PRs") — this table's Branch column is the phase↔branch bookkeeping.
 
