@@ -13,17 +13,17 @@
 ## Current Position
 
 - **Current phase:** Phase 0 — Setup (Foundation)
-- **Current plan / step:** none yet — roadmap creation just completed; Phase 0 ready to plan
-- **Status:** 🔄 In Progress (Phase 0 marked as next; no plans / steps executed yet on this branch)
+- **Current plan / step:** planning complete — 1 plan (`00-PLAN.md`, 4 tasks, wave 1) ready for execution
+- **Status:** ✅ Planned (Ready to execute)
 - **Active branch:** `phase-0-setup` (per `.gsd/plans/darkfolio-plan.md` §"Git Workflow")
 - **Last completed phase:** None
-- **Next action:** `/gsd-plan-phase 0` to decompose Phase 0 success criteria into executable plans
+- **Next action:** `/gsd-execute-phase 0` to run 00-PLAN.md
 
 ## Phase Status
 
 | Phase | Branch              | Status               | Plans | Notes |
 |-------|---------------------|----------------------|-------|-------|
-| 0 — Setup (Foundation)        | `phase-0-setup`           | 🔄 In Progress (next) | 0/? | Foundation — no v1 reqs; enables every other phase |
+| 0 — Setup (Foundation)        | `phase-0-setup`           | ✅ Planned (ready to execute) | 0/1 | Foundation — no v1 reqs; enables every other phase |
 | 1 — Core Game Loop            | `phase-1-core-loop`       | ⏳ Pending            | 0/? | GAME-01, GAME-02, GAME-03 |
 | 2 — Multi-Room                | `phase-2-multi-room`      | ⏳ Pending            | 0/? | GAME-04, ROOM-01, ROOM-02 — gateway to parallel branches |
 | 3 — Interaction               | `phase-3-interaction`     | ⏳ Pending            | 0/? | INTR-01..05 |

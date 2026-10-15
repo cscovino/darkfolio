@@ -69,7 +69,9 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
   4. Pre-push hook runs Vitest + `pnpm build`
   5. `commit-msg` hook enforces the gitmoji + conventional commit format
 
-**Plans**: TBD
+**Plans**: 1
+
+- [ ] 00-PLAN.md — full toolchain foundation: devDeps + configs + husky hooks + gate verification (4 tasks, wave 1)
 
 ---
 
@@ -252,7 +254,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 
 | Phase | Plans Complete | Status   | Completed |
 |-------|----------------|----------|-----------|
-| 0. Setup (Foundation)        | 0/? | Not started            | - |
+| 0. Setup (Foundation)        | 0/1 | Planned              | - |
 | 1. Core Game Loop            | 0/? | Not started            | - |
 | 2. Multi-Room                | 0/? | Not started            | - |
 | 3. Interaction               | 0/? | Not started            | - |
