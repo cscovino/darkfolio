@@ -9,7 +9,7 @@
 
 ## Phases
 
-- [ ] **Phase 0: Setup (Foundation)** — Toolchain, git hooks, Astro config, path aliases — ready for `pnpm install` / `pnpm test` / `pnpm build`
+- [x] **Phase 0: Setup (Foundation)** — Toolchain, git hooks, Astro config, path aliases — ready for `pnpm install` / `pnpm test` / `pnpm build` (completed 2026-10-15)
 - [ ] **Phase 00.1: Agent Team & Skills** (INSERTED) — 7 specialist agents with per-role models, Phaser/Astro/pixel-art skills, near-autonomous execution
 - [ ] **Phase 1: Core Game Loop** — Player walks the Living Room with movement, collision, and camera follow
 - [ ] **Phase 2: Multi-Room** — Three 20×15 rooms (Living, Office, Bedroom) connected by slide-transition doors
@@ -73,7 +73,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 
 **Plans**: 1
 
-- [ ] 00-PLAN.md — full toolchain foundation: devDeps + configs + husky hooks + gate verification (4 tasks, wave 1)
+- [x] 00-PLAN.md — full toolchain foundation: devDeps + configs + husky hooks + gate verification (4 tasks, wave 1)
 
 ---
 
@@ -285,7 +285,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 
 | Phase | Plans Complete | Status   | Completed |
 |-------|----------------|----------|-----------|
-| 0. Setup (Foundation)        | 0/1 | Planned              | - |
+| 0. Setup (Foundation)        | 1/1 | Complete    | 2026-10-15 |
 | 00.1. Agent Team & Skills (INSERTED) | 0/? | Not started            | - |
 | 1. Core Game Loop            | 0/? | Not started            | - |
 | 2. Multi-Room                | 0/? | Not started            | - |

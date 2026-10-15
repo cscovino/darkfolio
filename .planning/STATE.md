@@ -1,43 +1,46 @@
 ---
-gsd_state_version: 1.0
+gsd_state_version: "1.0"
 milestone: v1.0
-milestone_name: milestone
-current_phase: 00.1
 status: executing
-last_updated: "2026-10-15T19:04:16.508Z"
+stopped_at: Phase 00 complete, ready to plan Phase 1
+last_updated: "2026-10-15T20:08:33.643Z"
+state_head: bf67a4efab094e44b5c866df54d21bfec3927174
 progress:
-  total_phases: 1
-  completed_phases: 0
+  total_phases: 9
+  completed_phases: 1
   total_plans: 1
-  completed_plans: 0
+  completed_plans: 1
+milestone_name: milestone
+current_phase: 1
+current_phase_name: Core Game Loop
 ---
 
 # State: Darkfolio
 
-*Last updated: 2026-10-15 after initial GSD roadmap creation*
+*Last updated: 2026-10-15 after Phase 0 completion + transition*
 
 ## Project Reference
 
 **Project:** Darkfolio — 16-bit RPG-style portfolio (Astro 7.3.5 + Phaser 4.2.1 + TypeScript ^5)
 **Core Value:** The portfolio is the experience — observable behavior (walking, interacting, opening overlays) IS the deliverable, not a decoration around it.
-**Repo:** `/home/jetson/github/darkfolio` (single Astro install on `master`, no commits yet)
+**Repo:** `/home/jetson/github/darkfolio` (toolchain live on `phase-0-setup`; see `.planning/PROJECT.md`)
 **Mode:** mvp (vertical slices — every phase delivers a runnable, end-to-end capability)
 **Granularity:** standard (per `.planning/config.json`)
 
 ## Current Position
 
-- **Current phase:** 00.1
-- **Current plan / step:** planning complete — 1 plan (`00-PLAN.md`, 4 tasks, wave 1) ready for execution
-- **Status:** ✅ Planned (Ready to execute)
-- **Active branch:** `phase-0-setup` (per `.gsd/plans/darkfolio-plan.md` §"Git Workflow")
-- **Last completed phase:** None
-- **Next action:** `/gsd-execute-phase 0` to run 00-PLAN.md
+- **Current phase:** 00.1 (Agent Team & Skills — inserted, not yet planned)
+- **Current plan / step:** not started
+- **Status:** ✅ Phase 0 complete (verified 6/6, `/gsd-execute-phase 0` done) — ready to plan Phase 00.1
+- **Active branch:** `phase-0-setup` (merge to `master` via PR per AGENTS.md when convenient)
+- **Last completed phase:** 00 — Setup (Foundation), 2026-10-15
+- **Next action:** `/gsd-plan-phase 00.1` (CLI `phase.complete` derived next=1 — decimal phase 00.1 precedes 1 in ROADMAP order)
 
 ## Phase Status
 
 | Phase | Branch              | Status               | Plans | Notes |
 |-------|---------------------|----------------------|-------|-------|
-| 0 — Setup (Foundation)        | `phase-0-setup`           | ✅ Planned (ready to execute) | 0/1 | Foundation — no v1 reqs; enables every other phase |
+| 0 — Setup (Foundation)        | `phase-0-setup`           | ✅ Complete (2026-10-15) | 1/1 | Foundation — no v1 reqs; enables every other phase |
 | 1 — Core Game Loop            | `phase-1-core-loop`       | ⏳ Pending            | 0/? | GAME-01, GAME-02, GAME-03 |
 | 2 — Multi-Room                | `phase-2-multi-room`      | ⏳ Pending            | 0/? | GAME-04, ROOM-01, ROOM-02 — gateway to parallel branches |
 | 3 — Interaction               | `phase-3-interaction`     | ⏳ Pending            | 0/? | INTR-01..05 |
@@ -69,6 +72,11 @@ progress:
 | Critical-path phases    | 6 (0, 1, 2, 3, 6, 8) | 6 ✅    |
 | Parallel branches       | 4 (3, 4, 5, 7)      | 4 ✅    |
 | Success criteria / phase | 4–6 each            | ✅      |
+**Per-Plan Metrics:**
+
+| Plan | Duration | Tasks | Files |
+|------|----------|-------|-------|
+| Phase 00 P01 | 9min | 4 tasks | 16 files |
 
 ## Accumulated Context
 
@@ -82,13 +90,13 @@ progress:
 
 ### Pending (will be addressed by downstream agents)
 
-- Site base path is `/darkfolio/` per `.planning/PROJECT.md` and prior plan — Phase 0 must set `base: '/darkfolio/'` on `astro.config.mjs`.
+- Commit the untracked `src/pages/index.astro` stub + `public/` assets (Phase 1 owner) — clean-clone build is green but emits 0 pages until then.
 - Phaser 4 lighting system specifics (Phase 4) — defer to phase planning.
 - Audio asset sources (Phase 5) — defer — freesound.org / opengameart.org / tabletaopaudio.com are the documented sources per prior plan.
 
 ### Constraints / blockers
 
-- None yet.
+- None. (Phase 0 resolved the `base: '/darkfolio/'` pending item; astro.config.mjs verified in SC#1.)
 
 ### Roadmap Evolution
 
@@ -96,10 +104,20 @@ progress:
 
 ## Session Continuity
 
+**Last session:** 2026-10-15T22:15:00.000Z
+**Stopped at:** Phase 00 complete (verified), ready to plan Phase 00.1
+**Resume file:** None
+
 **Next session resume:**
 
-1. Run `/gsd-plan-phase 0` to decompose Phase 0 success criteria into executable plans.
-2. After Phase 0 ships (`phase-0-setup` merged), run `/gsd-plan-phase 1`.
-3. Continue down the critical path; once Phase 2 lands, dispatch Phases 3 / 4 / 5 / 7 in parallel via separate worktrees per `parallelization: true`.
+1. Run `/gsd-plan-phase 00.1` — Agent Team & Skills (inserted meta phase; directory `.planning/phases/00.1-agent-team-skills/` exists but is empty).
+2. Merge `phase-0-setup` → `master` when convenient (squash PR per AGENTS.md; branch also holds Phase 0 code-review fixes).
+3. Then `/gsd-discuss-phase 1` / `/gsd-plan-phase 1` and continue down the critical path; after Phase 2, dispatch Phases 3 / 4 / 5 / 7 in parallel per `parallelization: true`.
 
 **Resume anchor:** this file plus `.planning/ROADMAP.md` are enough to recover the full project state. Branch names map 1:1 to phase IDs.
+
+## Decisions
+
+- [Phase 00]: Approved @biomejs/biome build script in pnpm-workspace.yaml allowBuilds — pnpm 12 hard-fails install otherwise
+- [Phase 00]: sanity.test.ts imports vitest APIs explicitly — locked vitest.config.ts omits globals:true
+- [Phase 00]: Husky commit gate chain proven live: Phase 0 commits themselves passed lint-staged + commitlint; astro check stays in AGENTS.md gate only (D3)

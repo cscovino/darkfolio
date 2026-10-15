@@ -70,7 +70,7 @@ Deployment
 
 ## Context
 
-- Repo state: brand-new Astro 7.3.5 install on `master`, no commits yet, single `src/pages/index.astro` stub
+- Repo state: Phase 0 landed on `phase-0-setup` — toolchain live (Biome/Husky/lint-staged/commitlint/Vitest), `pnpm install && pnpm test && pnpm build` green on a clean clone; `src/pages/index.astro` stub and `public/` assets still untracked (Phase 1 owner commits them)
 - Aesthetic: 16-bit pixel art, "Darkwood gritty" palette (browns `#4A3729`/`#6B4E3D`/`#8B6F5E`, grays `#2A2A2A`/`#3D3D3D`/`#555555`, muted greens `#3A4A3A`/`#4A5A4A`, accents warm yellow `#FFA500` / cold blue)
 - Dialog tone: humorous / meta, breaks the fourth wall
 - Game mechanics: Phaser 4.2.1 + Arcade Physics, 60 fps target, 16x16 tiles, 32x32 character
@@ -101,6 +101,9 @@ Deployment
 | `astro check` in AGENTS.md gate, not in husky hooks | Keeps hooks fast; pre-push stays test + build | Pending |
 | Vitest tests for non-trivial pure logic (TDD-lite) | Phaser scenes are render-coupled; visual deferred to browser | Good |
 | Skip research phase in `gsd-new-project` | Tech/scope already locked in darkfolio-plan.md | Good |
+| commitlint script carries no `--edit`; hook body passes it | pnpm appends hook args to the script — duplicated `--edit` silently validated COMMIT_EDITMSG instead of `$1` (gate bypass, found in Phase 0 code review, fixed + pinned by test) | Good |
+| `allowBuilds` pnpm-workspace entry for @biomejs/biome | pnpm 12 hard-fails unapproved postinstall builds; install was blocked otherwise | Good |
+| tsconfig include `src/**/*` (not `src/**`) | TS5010 rejects trailing recursive wildcards; `astro check` was vacuously green at `Result (0 files)` | Good |
 
 ## Evolution
 
@@ -120,4 +123,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-10-15 after initial GSD init*
+*Last updated: 2026-10-15 after Phase 0*
