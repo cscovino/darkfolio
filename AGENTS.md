@@ -1,35 +1,19 @@
 # AGENTS.md — Darkfolio
 
-> 16-bit Darkwood-inspired portfolio. Astro 7.3.5 + Phaser 4.2.1 + TypeScript ^5.
-> Operational rules for the coding agent. Source of truth for project philosophy: `.planning/PROJECT.md`, `.planning/PLAN.md`, `.planning/ROADMAP.md`.
+Operational rules for the coding agent. Project philosophy canon: `.planning/PROJECT.md` · `PLAN.md` · `ROADMAP.md`.
 
 ## Project
 
-Darkfolio is a 16-bit RPG-style portfolio: visitors explore a 3-room dark house and discover content (projects, skills, contact) via CRT-overlay screens triggered by interactable objects. Astro 7.3.5 pages host a Phaser 4 game; Astro content pages also render inside the in-game CRT overlay.
+16-bit RPG-style portfolio (Astro 7.3.5 + Phaser 4.2.1 + TypeScript ^5): visitors explore a 3-room dark house and discover content (projects, skills, contact) via CRT-overlay screens triggered by interactable objects. Astro pages host the Phaser game and also render inside the in-game overlay.
 
 ## Repo layout
 
 ```
-.planning/                 # project canon (committed) — PROJECT.md · config.json ·
-                           # REQUIREMENTS.md · ROADMAP.md · STATE.md · PLAN.md
-src/
-  components/              # GameCanvas, GameOverlay, LoadingScreen, MobileWarning
-  layouts/
-  pages/                   # index.astro, projects.astro, skills.astro, contact.astro
-  styles/
-  content/                 # Markdown projects / skills / contact
-  game/
-    main.ts, config.ts
-    scenes/                # Boot, Preload, Title, LivingRoom, Office, Bedroom
-    objects/               # Player, Interactable, Computer, Bookshelf, Phone, ...
-    systems/               # Dialog, Overlay, Lighting, Audio, Save
-    data/                  # dialog content
-public/
-  assets/                  # sprites/, tilesets/, audio/, maps/  (PNG + OGG)
-.github/
-  PULL_REQUEST_TEMPLATE.md
-astro.config.mjs · biome.json · tsconfig.json · package.json
-.opencode/                 # harness state — gitignored
+src/            # components/ layouts/ pages/ styles/ content/ + game/ (scenes, objects, systems, data)
+public/assets/  # sprites/, tilesets/, audio/, maps/ (PNG + OGG)
+.planning/      # project canon (committed): PROJECT · PLAN · ROADMAP · STATE · REQUIREMENTS · config
+.github/        # PULL_REQUEST_TEMPLATE.md
+.opencode/      # harness state — gitignored
 ```
 
 ## Working directories
@@ -50,14 +34,11 @@ Format: `<emoji> <type>(<scope>): <subject>` — emoji table in `.planning/PLAN.
 - Types: feat · fix · refactor · perf · test · docs · style · chore · build · ci.
 - Scope = top-level source dir the diff touches. Standard set: `game`, `pages`, `layouts`, `components`, `styles`, `content`, `config`, `deps`, `tests`, `hooks`, `ci`, `planning`. Single-file change: file's directory.
 
-Examples:
-- `✨ feat(game): add player movement in src/game/objects/Player.ts`
-- `🔧 chore(config): write .planning/config.json`
-- `📝 docs(plan): replace phase 0 detail in .planning/PLAN.md`
+Example: `✨ feat(game): add player movement in src/game/objects/Player.ts`
 
 ## Squash discipline
 
-After every feature or fix lands, the agent checks: can the recent commits be one commit and still be reviewable? Squash toward minimum count without losing reviewability.
+After every feature, fix, OR plan completion, the agent checks: can the recent commits be one commit and still be reviewable? Squash toward the fewest number of commits possible — but evaluate every fold from the reviewer's seat: fewer commits is the goal only when the reviewer can still follow the change in one read.
 
 **Squash when:**
 - Multiple commits touch the same directory/scope and form one logical change — e.g. three small edits inside `game/Player.ts`.
@@ -77,8 +58,7 @@ When in doubt: keep separate. Over-fragmented is cheaper than under-fragmented.
 ## Branches & PRs
 
 - Trunk: `master`. Work on a dedicated branch.
-- Phase branches: `phase-N-<slug>` (e.g. `phase-1-core-loop`).
-- Ad-hoc branches: `fix-<slug>` or `chore-<slug>`.
+- Branch names carry the INTENT/FEATURE, never the plan/phase machinery — no `phase-N`, plan numbers, or GSD terminology. Use `feat-<slug>` (e.g. `feat-player-movement`, `feat-crt-overlay`), `fix-<slug>`, or `chore-<slug>`. A phase/sub-phase may span multiple intent branches; the roadmap in `.planning/` owns phase↔branch bookkeeping, not the branch name.
 - Open a PR to master. PR title = commit subject. Squash-merge.
 - PR uses `.github/PULL_REQUEST_TEMPLATE.md`.
 
@@ -99,7 +79,6 @@ After every feature OR fix passes the gate, run the **ponytail audit** on the di
 
 ## Always
 
-- Reference code directly in commit subjects.
 - Use path aliases (`@/game/...`) per `.planning/PLAN.md` §"Path Aliases".
 - Add new deps from §"Tech Stack" only — surface anything new to the user first.
 
@@ -123,7 +102,6 @@ This repo runs the GSD (Get-Shit-Done) workflow on top of the operational rules 
 - `/gsd-plan-phase N` — decompose a phase into executable plans.
 - `/gsd-execute-phase` — run plans in parallel waves.
 - `/gsd-verify-work` — validate after execution.
-- `/gsd-transition` — update PROJECT / REQUIREMENTS state after each phase.
 - `/gsd-complete-milestone` — archive and reset at milestone boundaries.
 
 Quick reference lives in `.opencode/skills/gsd-*`. Always read `.planning/STATE.md` first to recover session context.

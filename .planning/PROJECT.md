@@ -70,7 +70,7 @@ Deployment
 
 ## Context
 
-- Repo state: Phase 0 landed on `phase-0-setup` — toolchain live (Biome/Husky/lint-staged/commitlint/Vitest), `pnpm install && pnpm test && pnpm build` green on a clean clone; `src/pages/index.astro` stub and `public/` assets still untracked (Phase 1 owner commits them)
+- Repo state: Phase 0 landed on `chore-toolchain-foundation` — toolchain live (Biome/Husky/lint-staged/commitlint/Vitest), `pnpm install && pnpm test && pnpm build` green on a clean clone; `src/pages/index.astro` stub and `public/` assets still untracked (Phase 1 owner commits them)
 - Aesthetic: 16-bit pixel art, "Darkwood gritty" palette (browns `#4A3729`/`#6B4E3D`/`#8B6F5E`, grays `#2A2A2A`/`#3D3D3D`/`#555555`, muted greens `#3A4A3A`/`#4A5A4A`, accents warm yellow `#FFA500` / cold blue)
 - Dialog tone: humorous / meta, breaks the fourth wall
 - Game mechanics: Phaser 4.2.1 + Arcade Physics, 60 fps target, 16x16 tiles, 32x32 character

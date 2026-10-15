@@ -23,7 +23,7 @@ current_phase: 1
 
 **Project:** Darkfolio — 16-bit RPG-style portfolio (Astro 7.3.5 + Phaser 4.2.1 + TypeScript ^5)
 **Core Value:** The portfolio is the experience — observable behavior (walking, interacting, opening overlays) IS the deliverable, not a decoration around it.
-**Repo:** `/home/jetson/github/darkfolio` (toolchain live on `phase-0-setup`; see `.planning/PROJECT.md`)
+**Repo:** `/home/jetson/github/darkfolio` (toolchain live on `chore-toolchain-foundation`; see `.planning/PROJECT.md`)
 **Mode:** mvp (vertical slices — every phase delivers a runnable, end-to-end capability)
 **Granularity:** standard (per `.planning/config.json`)
 
@@ -32,7 +32,7 @@ current_phase: 1
 - **Current phase:** 00.1 (Agent Team & Skills — inserted, not yet planned)
 - **Current plan / step:** not started
 - **Status:** ✅ Phase 0 complete (verified 6/6, `/gsd-execute-phase 0` done) — ready to plan Phase 00.1
-- **Active branch:** `phase-0-setup` (merge to `master` via PR per AGENTS.md when convenient)
+- **Active branch:** `chore-toolchain-foundation` (merge to `master` via PR per AGENTS.md when convenient)
 - **Last completed phase:** 00 — Setup (Foundation), 2026-10-15
 - **Next action:** `/gsd-plan-phase 00.1` (CLI `phase.complete` derived next=1 — decimal phase 00.1 precedes 1 in ROADMAP order)
 
@@ -40,15 +40,15 @@ current_phase: 1
 
 | Phase | Branch              | Status               | Plans | Notes |
 |-------|---------------------|----------------------|-------|-------|
-| 0 — Setup (Foundation)        | `phase-0-setup`           | ✅ Complete (2026-10-15) | 1/1 | Foundation — no v1 reqs; enables every other phase |
-| 1 — Core Game Loop            | `phase-1-core-loop`       | ⏳ Pending            | 0/? | GAME-01, GAME-02, GAME-03 |
-| 2 — Multi-Room                | `phase-2-multi-room`      | ⏳ Pending            | 0/? | GAME-04, ROOM-01, ROOM-02 — gateway to parallel branches |
-| 3 — Interaction               | `phase-3-interaction`     | ⏳ Pending            | 0/? | INTR-01..05 |
-| 4 — Lighting                  | `phase-4-lighting`        | ⏳ Pending            | 0/? | LITE-01..03 |
-| 5 — Audio                     | `phase-5-audio`           | ⏳ Pending            | 0/? | AUD-01..03 |
-| 6 — Content Integration       | `phase-6-content`         | ⏳ Pending            | 0/? | CONT-01..03 — depends on Phase 3 |
-| 7 — Custom Assets             | `phase-7-assets`          | ⏳ Pending            | 0/? | No v1 reqs — Aseprite sprites, parallel-safe |
-| 8 — Polish & Deploy           | `phase-8-polish`          | ⏳ Pending            | 0/? | LAND-01..03, DEPL-01..03 — depends on everything |
+| 0 — Setup (Foundation)        | `chore-toolchain-foundation`           | ✅ Complete (2026-10-15) | 1/1 | Foundation — no v1 reqs; enables every other phase |
+| 1 — Core Game Loop            | `feat-core-loop`       | ⏳ Pending            | 0/? | GAME-01, GAME-02, GAME-03 |
+| 2 — Multi-Room                | `feat-multi-room`      | ⏳ Pending            | 0/? | GAME-04, ROOM-01, ROOM-02 — gateway to parallel branches |
+| 3 — Interaction               | `feat-interaction`     | ⏳ Pending            | 0/? | INTR-01..05 |
+| 4 — Lighting                  | `feat-lighting`        | ⏳ Pending            | 0/? | LITE-01..03 |
+| 5 — Audio                     | `feat-audio`           | ⏳ Pending            | 0/? | AUD-01..03 |
+| 6 — Content Integration       | `feat-content-integration`         | ⏳ Pending            | 0/? | CONT-01..03 — depends on Phase 3 |
+| 7 — Custom Assets             | `feat-custom-assets`          | ⏳ Pending            | 0/? | No v1 reqs — Aseprite sprites, parallel-safe |
+| 8 — Polish & Deploy           | `feat-polish-deploy`          | ⏳ Pending            | 0/? | LAND-01..03, DEPL-01..03 — depends on everything |
 
 ## Dependency Diagram
 
@@ -111,10 +111,10 @@ current_phase: 1
 **Next session resume:**
 
 1. Run `/gsd-plan-phase 00.1` — Agent Team & Skills (inserted meta phase; directory `.planning/phases/00.1-agent-team-skills/` exists but is empty).
-2. Merge `phase-0-setup` → `master` when convenient (squash PR per AGENTS.md; branch also holds Phase 0 code-review fixes).
+2. Merge `chore-toolchain-foundation` → `master` when convenient (squash PR per AGENTS.md; branch also holds Phase 0 code-review fixes).
 3. Then `/gsd-discuss-phase 1` / `/gsd-plan-phase 1` and continue down the critical path; after Phase 2, dispatch Phases 3 / 4 / 5 / 7 in parallel per `parallelization: true`.
 
-**Resume anchor:** this file plus `.planning/ROADMAP.md` are enough to recover the full project state. Branch names map 1:1 to phase IDs.
+**Resume anchor:** this file plus `.planning/ROADMAP.md` are enough to recover the full project state. Branches are named by intent/feature (AGENTS.md §"Branches & PRs") — this table's Branch column is the phase↔branch bookkeeping.
 
 ## Decisions
 

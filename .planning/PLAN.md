@@ -363,7 +363,7 @@ Interaction         Lighting           Audio              Custom Assets
 - `.astro` template formatting — biome skips `.astro`; add `prettier-plugin-astro` only if actual formatting debt shows up
 - Vitest coverage gate — no `vitest --coverage` script yet; add when a coverage floor is wanted
 
-**Branch:** `phase-0-setup`
+**Branch:** `chore-toolchain-foundation`
 
 ---
 
@@ -397,7 +397,7 @@ Interaction         Lighting           Audio              Custom Assets
 - Camera follows player when moving
 - No console errors
 
-**Branch:** `phase-1-core-loop`
+**Branch:** `feat-core-loop`
 
 ---
 
@@ -425,7 +425,7 @@ Interaction         Lighting           Audio              Custom Assets
 - Collision works in all 3 rooms
 - Camera works in all 3 rooms
 
-**Branch:** `phase-2-multi-room`
+**Branch:** `feat-multi-room`
 
 ---
 
@@ -462,7 +462,7 @@ Interaction         Lighting           Audio              Custom Assets
 - Try TV/Bed/Lamp → flavor dialog only
 - Revisit objects → different dialog variant
 
-**Branch:** `phase-3-interaction`
+**Branch:** `feat-interaction`
 
 ---
 
@@ -495,7 +495,7 @@ Interaction         Lighting           Audio              Custom Assets
 - TV light flickers subtly
 - Flicker is subtle, not distracting
 
-**Branch:** `phase-4-lighting`
+**Branch:** `feat-lighting`
 
 ---
 
@@ -530,7 +530,7 @@ Interaction         Lighting           Audio              Custom Assets
 - Mute button toggles all audio
 - Mute state persists across reloads
 
-**Branch:** `phase-5-audio`
+**Branch:** `feat-audio`
 
 ---
 
@@ -566,7 +566,7 @@ Interaction         Lighting           Audio              Custom Assets
 - Close overlay, revisit object → dialog shows "already seen" variant
 - Save state: reload page → visited objects show different dialog
 
-**Branch:** `phase-6-content`
+**Branch:** `feat-content-integration`
 
 ---
 
@@ -600,7 +600,7 @@ Interaction         Lighting           Audio              Custom Assets
 - No visual glitches or missing assets
 - Performance still 60fps with custom assets
 
-**Branch:** `phase-7-assets`
+**Branch:** `feat-custom-assets`
 
 ---
 
@@ -642,7 +642,7 @@ Interaction         Lighting           Audio              Custom Assets
 - 60fps on deployed site
 - No console errors
 
-**Branch:** `phase-8-polish`
+**Branch:** `feat-polish-deploy`
 
 ---
 
@@ -674,15 +674,15 @@ Phase 6 includes full flow test:
 ## Git Workflow
 
 ### Branch Naming
-- `phase-0-setup`
-- `phase-1-core-loop`
-- `phase-2-multi-room`
-- `phase-3-interaction`
-- `phase-4-lighting`
-- `phase-5-audio`
-- `phase-6-content`
-- `phase-7-assets`
-- `phase-8-polish`
+- `chore-toolchain-foundation`
+- `feat-core-loop`
+- `feat-multi-room`
+- `feat-interaction`
+- `feat-lighting`
+- `feat-audio`
+- `feat-content-integration`
+- `feat-custom-assets`
+- `feat-polish-deploy`
 
 ### Commit Format
 ```
