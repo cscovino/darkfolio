@@ -1,6 +1,6 @@
 ---
 name: game-lead
-description: Planning and delegation lead: scopes phases, reviews artifacts, routes work — Spawned by the GSD orchestrator.
+description: "Planning and delegation lead: scopes phases, reviews artifacts, routes work — Spawned by the GSD orchestrator."
 mode: subagent
 model: opencode-go/qwen3.8-max
 steps: 25

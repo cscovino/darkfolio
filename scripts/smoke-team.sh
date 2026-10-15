@@ -4,6 +4,7 @@
 # and assert exit 0 + non-empty output + per-agent keyword (D-12/D-13).
 set -u
 
+cd "$(git rev-parse --show-toplevel)" || { echo "FAIL cwd — not inside a git repo"; exit 1; }
 mkdir -p .verify
 
 # name|model|toy task|keyword regex (last field keeps its pipes via read's last-var)
@@ -21,7 +22,15 @@ want_all=1
 declare -A subset
 if (( $# > 0 )); then
   want_all=0
-  for a in "$@"; do subset["$a"]=1; done
+  for row in "${AGENTS[@]}"; do
+    IFS='|' read -r known_name _rest <<<"$row"
+    for a in "$@"; do
+      [[ "$a" != "$known_name" ]] || subset["$a"]=1
+    done
+  done
+  for a in "$@"; do
+    [[ -n "${subset[$a]+set}" ]] || { echo "FAIL unknown agent '$a' — not in roster"; exit 1; }
+  done
 fi
 
 fail() { echo "FAIL $1 $2"; exit 1; }
