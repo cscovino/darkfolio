@@ -10,6 +10,7 @@
 ## Phases
 
 - [ ] **Phase 0: Setup (Foundation)** — Toolchain, git hooks, Astro config, path aliases — ready for `pnpm install` / `pnpm test` / `pnpm build`
+- [ ] **Phase 00.1: Agent Team & Skills** (INSERTED) — 7 specialist agents with per-role models, Phaser/Astro/pixel-art skills, near-autonomous execution
 - [ ] **Phase 1: Core Game Loop** — Player walks the Living Room with movement, collision, and camera follow
 - [ ] **Phase 2: Multi-Room** — Three 20×15 rooms (Living, Office, Bedroom) connected by slide-transition doors
 - [ ] **Phase 3: Interaction** — E-key prompts, typewriter dialog, CRT overlays (Projects/Skills/Contact), revisit variants
@@ -63,6 +64,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 **Requirements**: (none — foundation; unblocks all subsequent phases)
 
 **Success Criteria** (what must be TRUE):
+
   1. `astro.config.mjs` exists with `base: '/darkfolio/'` and `output: 'static'`
   2. `tsconfig.json` declares `strict: true` and the path aliases (`@/*` → `src/*`)
   3. Pre-commit hook runs Biome format + lint on staged files
@@ -72,6 +74,27 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 **Plans**: 1
 
 - [ ] 00-PLAN.md — full toolchain foundation: devDeps + configs + husky hooks + gate verification (4 tasks, wave 1)
+
+---
+
+### Phase 00.1: Agent Team & Skills (INSERTED)
+
+**Goal**: A specialist agent team exists in `.opencode/agents/` — 7 domain agents with per-role models, permission guardrails, and step limits — Phaser/Astro/pixel-art Agent Skills are installed under `.opencode/skills/`, every agent passes a dispatch smoke test, and subsequent phases can run near-autonomously via `/gsd-autonomous`.
+
+**Mode:** mvp
+
+**Depends on**: Phase 0
+
+**Requirements**: (none — meta/workflow phase; enables agentic execution of all subsequent phases)
+
+**Success Criteria** (what must be TRUE):
+  1. `.opencode/agents/team/` contains 7 agents (game-lead, phaser-specialist, gameplay-dev, qa, pixel-artist, designer, scribe), each declaring an explicit `model`, `mode: subagent`, permission guardrails on `edit`, and a `steps` limit
+  2. Phaser official skills (28 + v3-to-v4-migration) and pixel-art + Astro skills are installed as `.opencode/skills/*/SKILL.md` and loadable
+  3. Each agent, when dispatched a smoke-test task, returns useful output on its configured model (routing + model wiring proven)
+  4. AGENTS.md documents the roster and when GSD commands should route work to each agent
+  5. `/gsd-autonomous` plans and executes Phase 1+ unattended with the team available as subagents
+
+**Plans**: TBD (run /gsd-plan-phase 00.1 to break down)
 
 ---
 
@@ -86,6 +109,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 **Requirements**: GAME-01, GAME-02, GAME-03
 
 **Success Criteria** (what must be TRUE):
+
   1. Landing page (`/`) mounts a Phaser game canvas in place of any scroll-first portfolio
   2. Player moves at 120 px/s in response to WASD or arrow keys
   3. Player is blocked by walls and furniture (cannot walk through them)
@@ -107,6 +131,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 **Requirements**: GAME-04, ROOM-01, ROOM-02
 
 **Success Criteria** (what must be TRUE):
+
   1. Living Room, Office, and Bedroom each exist as a 20×15 tile scene
   2. Walking through the Living Room north door slides the camera into the Office
   3. Walking through the Living Room west door slides into the Bedroom
@@ -129,6 +154,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 **Requirements**: INTR-01, INTR-02, INTR-03, INTR-04, INTR-05
 
 **Success Criteria** (what must be TRUE):
+
   1. Standing within the interaction radius of an interactable shows a "Press E" prompt
   2. Pressing E opens a typewriter dialog box anchored to the bottom of the screen
   3. The Computer interactable slides the Projects overlay up; Bookshelf opens Skills; Phone opens Contact
@@ -150,6 +176,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 **Requirements**: LITE-01, LITE-02, LITE-03
 
 **Success Criteria** (what must be TRUE):
+
   1. Rooms render 70% dark with room shapes faintly visible at the edges
   2. Player carries a 4-tile radius warm-yellow (`#FFA500`) light that follows movement
   3. Lamps render warm-yellow light, computer renders cold-blue, TV renders cold-blue
@@ -171,6 +198,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 **Requirements**: AUD-01, AUD-02, AUD-03
 
 **Success Criteria** (what must be TRUE):
+
   1. House drone + wind ambient loops begin playing the moment the game boots
   2. Footstep, door, computer-boot, phone-ring, lamp toggle, and TV-static SFX fire on their trigger events
   3. The corner mute button and the M key both silence all audio instantly
@@ -192,6 +220,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 **Requirements**: CONT-01, CONT-02, CONT-03
 
 **Success Criteria** (what must be TRUE):
+
   1. `/projects` lists 3 or more projects as Markdown content-collection entries (title + description + link)
   2. `/skills` lists 10 or more skills as Markdown entries
   3. `/contact` displays an email address, GitHub URL, and LinkedIn URL
@@ -216,6 +245,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 **Requirements**: (none — internal visual-quality phase; replaces placeholders)
 
 **Success Criteria** (what must be TRUE):
+
   1. Hooded-character player sprite (32×32, 4-direction animation) replaces the placeholder square
   2. Darkwood tileset (16×16 tile grid) replaces the placeholder colored rectangles
   3. Furniture and object sprites (sofa, TV, bookshelf, desk, computer, bed, nightstand, phone, lamp, door) replace their placeholders
@@ -237,6 +267,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 **Requirements**: LAND-01, LAND-02, LAND-03, DEPL-01, DEPL-02, DEPL-03
 
 **Success Criteria** (what must be TRUE):
+
   1. Landing page renders a game canvas with no scroll-first portfolio fallback
   2. Game reaches an interactive first frame within 5 seconds on a desktop browser
   3. Mobile visitors (UA-sniffed or viewport-sniffed) see a blocking "play on desktop" overlay and cannot enter the game
@@ -255,6 +286,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 | Phase | Plans Complete | Status   | Completed |
 |-------|----------------|----------|-----------|
 | 0. Setup (Foundation)        | 0/1 | Planned              | - |
+| 00.1. Agent Team & Skills (INSERTED) | 0/? | Not started            | - |
 | 1. Core Game Loop            | 0/? | Not started            | - |
 | 2. Multi-Room                | 0/? | Not started            | - |
 | 3. Interaction               | 0/? | Not started            | - |

@@ -1,3 +1,17 @@
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+current_phase: 00.1
+status: executing
+last_updated: "2026-10-15T19:04:16.508Z"
+progress:
+  total_phases: 1
+  completed_phases: 0
+  total_plans: 1
+  completed_plans: 0
+---
+
 # State: Darkfolio
 
 *Last updated: 2026-10-15 after initial GSD roadmap creation*
@@ -12,7 +26,7 @@
 
 ## Current Position
 
-- **Current phase:** Phase 0 — Setup (Foundation)
+- **Current phase:** 00.1
 - **Current plan / step:** planning complete — 1 plan (`00-PLAN.md`, 4 tasks, wave 1) ready for execution
 - **Status:** ✅ Planned (Ready to execute)
 - **Active branch:** `phase-0-setup` (per `.gsd/plans/darkfolio-plan.md` §"Git Workflow")
@@ -59,6 +73,7 @@
 ## Accumulated Context
 
 ### Decisions captured for this roadmap
+
 - **GAME-04 → Phase 2** (not Phase 1): the "three rooms exist and are reachable" behavior is observable only after the doors/transition work lands. Phase 1 ships Living-Room-only.
 - **LAND-* → Phase 8** (not Phase 1): the game-canvas requirement is technically met earlier, but the title screen + loading bar + mobile-blocking overlay that turn the page into a portfolio are explicitly Phase 8 work per the prior plan.
 - **DEPL-* → Phase 8**: deployment config / build pipeline / SEO are the explicit Phase 8 scope, not split out.
@@ -66,16 +81,23 @@
 - **Phase 7 carries no v1 reqs** — internal visual-quality phase; concrete deliverables are Aseprite sprites.
 
 ### Pending (will be addressed by downstream agents)
+
 - Site base path is `/darkfolio/` per `.planning/PROJECT.md` and prior plan — Phase 0 must set `base: '/darkfolio/'` on `astro.config.mjs`.
 - Phaser 4 lighting system specifics (Phase 4) — defer to phase planning.
 - Audio asset sources (Phase 5) — defer — freesound.org / opengameart.org / tabletaopaudio.com are the documented sources per prior plan.
 
 ### Constraints / blockers
+
 - None yet.
+
+### Roadmap Evolution
+
+- Phase 00.1 inserted after Phase 0: Agent Team & Skills — 7 specialist agents with per-role models, Phaser/Astro/pixel-art skills, near-autonomous execution
 
 ## Session Continuity
 
 **Next session resume:**
+
 1. Run `/gsd-plan-phase 0` to decompose Phase 0 success criteria into executable plans.
 2. After Phase 0 ships (`phase-0-setup` merged), run `/gsd-plan-phase 1`.
 3. Continue down the critical path; once Phase 2 lands, dispatch Phases 3 / 4 / 5 / 7 in parallel via separate worktrees per `parallelization: true`.
