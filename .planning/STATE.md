@@ -2,17 +2,17 @@
 gsd_state_version: "1.0"
 milestone: v1.0
 status: executing
-stopped_at: Phase 00.1 context gathered
-last_updated: "2026-10-15T21:24:48.708Z"
-state_head: bf6f0b2f13e92cd8b0b3c5f8e6cb5085265f602a
+stopped_at: Completed 00.1-01-PLAN.md
+last_updated: "2026-10-15T22:05:16.559Z"
+state_head: 2f412cab98b204be6c71ef28737b01da5ebe0dd2
 progress:
   total_phases: 8
   completed_phases: 1
   total_plans: 0
   completed_plans: 1
 milestone_name: milestone
-current_phase_name: agent-team-skills
 current_phase: 1
+current_phase_name: agent-team-skills
 ---
 
 # State: Darkfolio
@@ -77,6 +77,7 @@ current_phase: 1
 | Plan | Duration | Tasks | Files |
 |------|----------|-------|-------|
 | Phase 00 P01 | 9min | 4 tasks | 16 files |
+| Phase 00.1 P01 | 13min | 2 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -104,9 +105,9 @@ current_phase: 1
 
 ## Session Continuity
 
-**Last session:** 2026-10-15T20:40:50.744Z
-**Stopped at:** Phase 00.1 context gathered
-**Resume file:** .planning/phases/00.1-agent-team-skills/00.1-CONTEXT.md
+**Last session:** 2026-10-15T22:05:16.418Z
+**Stopped at:** Completed 00.1-01-PLAN.md
+**Resume file:** None
 
 **Next session resume:**
 
@@ -121,3 +122,6 @@ current_phase: 1
 - [Phase 00]: Approved @biomejs/biome build script in pnpm-workspace.yaml allowBuilds — pnpm 12 hard-fails install otherwise
 - [Phase 00]: sanity.test.ts imports vitest APIs explicitly — locked vitest.config.ts omits globals:true
 - [Phase 00]: Husky commit gate chain proven live: Phase 0 commits themselves passed lint-staged + commitlint; astro check stays in AGENTS.md gate only (D3)
+- [Phase 00.1]: OpenCode 2.0.29 does not discover agents nested under subdirs — team agents live flat in .opencode/agents/ (00.1-01 fallback fired; 00.1-02 places the six beside scribe.md)
+- [Phase 00.1]: opencode run ignores agent frontmatter model in 2.0.29 (uses session default free model) — CLI dispatch must pass --model explicitly; smoke-team.sh (00.1-04) needs per-agent --model
+- [Phase 00.1]: D-11 gitignore shape: gsd-* re-ignore lines instead of the literal !.opencode/skills/phaser*/ glob (phaser* matches zero upstream skill dirs)

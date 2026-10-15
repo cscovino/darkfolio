@@ -94,9 +94,9 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
   4. AGENTS.md documents the roster and when GSD commands should route work to each agent
   5. `/gsd-autonomous` plans and executes Phase 1+ unattended with the team available as subagents
 
-**Plans**: 4 plans
+**Plans**: 1/4 plans executed
 **Wave 1**
-- [ ] 00.1-01-PLAN.md — tracer: .gitignore tracking unwind + scribe agent + single dispatch proof (wave 1)
+- [x] 00.1-01-PLAN.md — tracer: .gitignore tracking unwind + scribe agent + single dispatch proof (wave 1)
 
 **Wave 2** *(blocked on Wave 1 completion)*
 - [ ] 00.1-02-PLAN.md — remaining 6 team agents + AGENTS.md roster/routing docs (wave 2)
@@ -295,7 +295,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 | Phase | Plans Complete | Status   | Completed |
 |-------|----------------|----------|-----------|
 | 0. Setup (Foundation)        | 1/1 | Complete    | 2026-10-15 |
-| 00.1. Agent Team & Skills (INSERTED) | 0/? | Not started            | - |
+| 00.1. Agent Team & Skills (INSERTED) | 1/4 | In Progress | - |
 | 1. Core Game Loop            | 0/? | Not started            | - |
 | 2. Multi-Room                | 0/? | Not started            | - |
 | 3. Interaction               | 0/? | Not started            | - |
