@@ -93,6 +93,32 @@ After every feature OR fix passes the gate, run the **ponytail audit** on the di
 - Add configuration for things that cannot change at runtime.
 - Edit `AGENTS.md`, `.planning/`, `.opencode/`, `.codegraph/`, `pnpm-lock.yaml` without asking.
 
+## Agent team roster
+
+Seven specialist subagents live under `.opencode/agents/` (OpenCode 2.0.29 discovers only flat files, not nested `team/`), dispatched by the GSD orchestrator or `opencode run --agent <name>`; the team exists so `/gsd-autonomous` can run Phases 1+ near-autonomously.
+
+| Agent | Model | steps | edit | bash | web |
+|---|---|---|---|---|---|
+| game-lead | `opencode-go/qwen3.8-max` | 25 | deny | deny | deny |
+| phaser-specialist | `opencode-go/kimi-k2.7-code` | 60 | allow | allow-list | allow |
+| gameplay-dev | `opencode-go/glm-5.3` | 60 | allow | allow-list | deny |
+| qa | `opencode-go/deepseek-v4-pro` | 60 | deny | allow-list | deny |
+| pixel-artist | `opencode-go/mimo-v2.5-pro` | 25 | allow | deny | deny |
+| designer | `opencode-go/kimi-k3` | 25 | allow | deny | allow |
+| scribe | `opencode-go/qwen3.8-flash` | 25 | allow | deny | deny |
+
+Routing rules (when GSD commands dispatch whom):
+
+- Phaser 4 API question → phaser-specialist
+- scene/object/system implementation → gameplay-dev
+- movement feel / gameplay review → qa (findings only, dev applies fixes)
+- sprite/palette/asset conventions → pixel-artist
+- UI/design contracts → designer
+- docs/summaries/markdown → scribe
+- phase planning/delegation → game-lead
+
+Guardrails: all 7 are leaves (`task: deny` — the GSD orchestrator owns dispatch); bash allow-list applies to the three coders only; these maps are asserted by the smoke harness. Cadence (D-14): `pnpm smoke:team` re-proves dispatch after model/plan changes — runs once at authoring and on demand, never wired into pre-push or CI (real model calls burn the monthly quota).
+
 ## GSD workflow
 
 This repo runs the GSD (Get-Shit-Done) workflow on top of the operational rules above.

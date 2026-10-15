@@ -2,9 +2,9 @@
 gsd_state_version: "1.0"
 milestone: v1.0
 status: executing
-stopped_at: Completed 00.1-01-PLAN.md
-last_updated: "2026-10-15T22:05:16.559Z"
-state_head: 2f412cab98b204be6c71ef28737b01da5ebe0dd2
+stopped_at: Completed 00.1-02-PLAN.md
+last_updated: "2026-10-16T00:15:00.000Z"
+state_head: 15f647ca82c9ee74dd4a18f36849fe2dbf8f1b07
 progress:
   total_phases: 8
   completed_phases: 1
@@ -78,6 +78,7 @@ current_phase_name: agent-team-skills
 |------|----------|-------|-------|
 | Phase 00 P01 | 9min | 4 tasks | 16 files |
 | Phase 00.1 P01 | 13min | 2 tasks | 4 files |
+| Phase 00.1 P02 | 10min | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -105,8 +106,8 @@ current_phase_name: agent-team-skills
 
 ## Session Continuity
 
-**Last session:** 2026-10-15T22:05:16.418Z
-**Stopped at:** Completed 00.1-01-PLAN.md
+**Last session:** 2026-10-16T00:15:00.000Z
+**Stopped at:** Completed 00.1-02-PLAN.md
 **Resume file:** None
 
 **Next session resume:**
@@ -125,3 +126,4 @@ current_phase_name: agent-team-skills
 - [Phase 00.1]: OpenCode 2.0.29 does not discover agents nested under subdirs — team agents live flat in .opencode/agents/ (00.1-01 fallback fired; 00.1-02 places the six beside scribe.md)
 - [Phase 00.1]: opencode run ignores agent frontmatter model in 2.0.29 (uses session default free model) — CLI dispatch must pass --model explicitly; smoke-team.sh (00.1-04) needs per-agent --model
 - [Phase 00.1]: D-11 gitignore shape: gsd-* re-ignore lines instead of the literal !.opencode/skills/phaser*/ glob (phaser* matches zero upstream skill dirs)
+- [Phase 00.1]: Full 7-agent roster committed flat (00.1-02) with D-03 models grounded verbatim; AGENTS.md roster+routing section mirrors frontmatter (SC#4)
