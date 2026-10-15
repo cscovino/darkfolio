@@ -1,19 +1,19 @@
 ---
-gsd_state_version: "1.0"
+gsd_state_version: 1.0
 milestone: v1.0
+milestone_name: milestone
+current_phase: 00.1 (Agent Team & Skills — inserted, not yet planned)
 current_plan: 4
 status: executing
-stopped_at: Completed 00.1-03-PLAN.md
-last_updated: "2026-10-15T22:27:26.178Z"
-state_head: b4792295ea3269422a45d6600fbd0339d54d16f5
+stopped_at: Completed 00.1-04-PLAN.md
+last_updated: "2026-10-15T23:09:18.060Z"
 progress:
-  total_phases: 8
-  completed_phases: 1
-  total_plans: 0
-  completed_plans: 1
-milestone_name: milestone
-current_phase: 1
+  total_phases: 2
+  completed_phases: 2
+  total_plans: 5
+  completed_plans: 5
 current_phase_name: agent-team-skills
+state_head: b4792295ea3269422a45d6600fbd0339d54d16f5
 ---
 
 # State: Darkfolio
@@ -34,6 +34,7 @@ current_phase_name: agent-team-skills
 
 **Current Plan:** 4
 **Total Plans in Phase:** 4
+
 - **Status:** ✅ Phase 0 complete (verified 6/6, `/gsd-execute-phase 0` done) — ready to plan Phase 00.1
 - **Active branch:** `chore-toolchain-foundation` (merge to `master` via PR per AGENTS.md when convenient)
 - **Last completed phase:** 00 — Setup (Foundation), 2026-10-15
@@ -83,6 +84,7 @@ current_phase_name: agent-team-skills
 | Phase 00.1 P01 | 13min | 2 tasks | 4 files |
 | Phase 00.1 P02 | 10min | 2 tasks | 7 files |
 | Phase 00.1 P03 | 20 | 2 tasks | 39 files |
+| Phase 00.1 P04 | 15min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -110,8 +112,8 @@ current_phase_name: agent-team-skills
 
 ## Session Continuity
 
-**Last session:** 2026-10-15T22:27:22.766Z
-**Stopped at:** Completed 00.1-03-PLAN.md
+**Last session:** 2026-10-15T23:09:17.982Z
+**Stopped at:** Completed 00.1-04-PLAN.md
 **Resume file:** None
 
 **Next session resume:**
@@ -132,3 +134,4 @@ current_phase_name: agent-team-skills
 - [Phase 00.1]: D-11 gitignore shape: gsd-* re-ignore lines instead of the literal !.opencode/skills/phaser*/ glob (phaser* matches zero upstream skill dirs)
 - [Phase 00.1]: Full 7-agent roster committed flat (00.1-02) with D-03 models grounded verbatim; AGENTS.md roster+routing section mirrors frontmatter (SC#4)
 - [Phase 00.1]: Vendored 28 Phaser skills from pinned snapshot 02d893... + 2 hand-authored skills (astro, pixel-art)
+- [Phase 00.1]: qa smoke dispatch substituted qwen3.8-max for locked deepseek-v4-pro (D-13 environment gate)

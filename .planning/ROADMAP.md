@@ -88,22 +88,26 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 **Requirements**: (none — meta/workflow phase; enables agentic execution of all subsequent phases)
 
 **Success Criteria** (what must be TRUE):
+
   1. `.opencode/agents/team/` contains 7 agents (game-lead, phaser-specialist, gameplay-dev, qa, pixel-artist, designer, scribe), each declaring an explicit `model`, `mode: subagent`, permission guardrails on `edit`, and a `steps` limit
   2. Phaser official skills (28 + v3-to-v4-migration) and pixel-art + Astro skills are installed as `.opencode/skills/*/SKILL.md` and loadable
   3. Each agent, when dispatched a smoke-test task, returns useful output on its configured model (routing + model wiring proven)
   4. AGENTS.md documents the roster and when GSD commands should route work to each agent
   5. `/gsd-autonomous` plans and executes Phase 1+ unattended with the team available as subagents
 
-**Plans**: 2/4 plans executed
+**Plans**: 4/4 plans executed
 **Wave 1**
+
 - [x] 00.1-01-PLAN.md — tracer: .gitignore tracking unwind + scribe agent + single dispatch proof (wave 1)
 
 **Wave 2** *(blocked on Wave 1 completion)*
+
 - [x] 00.1-02-PLAN.md — remaining 6 team agents + AGENTS.md roster/routing docs (wave 2)
-- [ ] 00.1-03-PLAN.md — vendor-copy pinned Phaser skills + hand-authored astro/pixel-art skills (wave 2)
+- [x] 00.1-03-PLAN.md — vendor-copy pinned Phaser skills + hand-authored astro/pixel-art skills (wave 2)
 
 **Wave 3** *(blocked on Wave 2 completion)*
-- [ ] 00.1-04-PLAN.md — smoke-team harness + sanctioned full run + phase gate close (wave 3)
+
+- [x] 00.1-04-PLAN.md — smoke-team harness + sanctioned full run + phase gate close (wave 3)
 
 ---
 
@@ -295,7 +299,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 | Phase | Plans Complete | Status   | Completed |
 |-------|----------------|----------|-----------|
 | 0. Setup (Foundation)        | 1/1 | Complete    | 2026-10-15 |
-| 00.1. Agent Team & Skills (INSERTED) | 2/4 | In Progress | - |
+| 00.1. Agent Team & Skills (INSERTED) | 4/4 | In Progress|  |
 | 1. Core Game Loop            | 0/? | Not started            | - |
 | 2. Multi-Room                | 0/? | Not started            | - |
 | 3. Interaction               | 0/? | Not started            | - |
