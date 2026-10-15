@@ -94,7 +94,16 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
   4. AGENTS.md documents the roster and when GSD commands should route work to each agent
   5. `/gsd-autonomous` plans and executes Phase 1+ unattended with the team available as subagents
 
-**Plans**: TBD (run /gsd-plan-phase 00.1 to break down)
+**Plans**: 4 plans
+**Wave 1**
+- [ ] 00.1-01-PLAN.md — tracer: .gitignore tracking unwind + scribe agent + single dispatch proof (wave 1)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 00.1-02-PLAN.md — remaining 6 team agents + AGENTS.md roster/routing docs (wave 2)
+- [ ] 00.1-03-PLAN.md — vendor-copy pinned Phaser skills + hand-authored astro/pixel-art skills (wave 2)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+- [ ] 00.1-04-PLAN.md — smoke-team harness + sanctioned full run + phase gate close (wave 3)
 
 ---
 
