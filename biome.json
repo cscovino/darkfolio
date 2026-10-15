@@ -37,6 +37,7 @@
     ],
     "ignore": [
       ".astro/**",
+      ".planning/**",
       "dist/**",
       "node_modules/**",
       ".opencode/**",

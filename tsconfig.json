@@ -15,5 +15,5 @@
       "@/pages/*": ["src/pages/*"]
     }
   },
-  "include": ["src/**", "tests/**"]
+  "include": ["src/**/*", "tests/**/*"]
 }
