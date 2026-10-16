@@ -57,9 +57,9 @@ When in doubt: keep separate. Over-fragmented is cheaper than under-fragmented.
 
 ## Branches & PRs
 
-- Trunk: `master`. Work on a dedicated branch.
+- Trunk: `main`. Work on a dedicated branch.
 - Branch names carry the INTENT/FEATURE, never the plan/phase machinery — no `phase-N`, plan numbers, or GSD terminology. Use `feat-<slug>` (e.g. `feat-player-movement`, `feat-crt-overlay`), `fix-<slug>`, or `chore-<slug>`. A phase/sub-phase may span multiple intent branches; the roadmap in `.planning/` owns phase↔branch bookkeeping, not the branch name.
-- Open a PR to master. PR title = commit subject. Squash-merge.
+- Open a PR to main. PR title = commit subject. Squash-merge.
 - PR uses `.github/PULL_REQUEST_TEMPLATE.md`.
 
 ## Pre-commit gate
