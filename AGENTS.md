@@ -40,6 +40,8 @@ Example: `✨ feat(game): add player movement in src/game/objects/Player.ts`
 
 After every feature, fix, OR plan completion, the agent checks: can the recent commits be one commit and still be reviewable? Squash toward the fewest number of commits possible — but evaluate every fold from the reviewer's seat: fewer commits is the goal only when the reviewer can still follow the change in one read.
 
+**Before opening any PR** (rule): treat `git log --oneline main..HEAD` as draft state — trim it to the fewest reviewable commits, grouped per subsystem, before the PR exists. Reviewers read branch history, so the trim is a PR-creation prerequisite, not post-review cleanup.
+
 **Squash when:**
 - Multiple commits touch the same directory/scope and form one logical change — e.g. three small edits inside `game/Player.ts`.
 - A commit only reverts or fixes the previous one — use `git commit --fixup=<sha>` so rebase auto-folds.
@@ -54,6 +56,12 @@ After every feature, fix, OR plan completion, the agent checks: can the recent c
 **Practical:** `git log --oneline -10` to inspect, then `git rebase -i HEAD~N` (interactive) or `git reset --soft HEAD~N && git commit` for a clean re-squash. The rewritten message keeps the conventional+gitmoji+code-only rule.
 
 When in doubt: keep separate. Over-fragmented is cheaper than under-fragmented.
+
+## Code comments
+
+- Only when truly necessary and super concise — the code itself must be self-explanatory.
+- JSDoc where it adds value (exported/non-obvious functions); skip trivial signatures.
+- Comments reference code only: never name plugins or tooling, never plan numbers, never phase names.
 
 ## Branches & PRs
 
@@ -90,7 +98,7 @@ After every feature OR fix passes the gate, run the **ponytail audit** on the di
 - Write "what"-comments. Comments only when the *why* is non-obvious.
 - Abstract single-use code.
 - Add error handling for impossible scenarios.
-- Write tests for trivial functions (pure getters, type re-exports). Tag with `ponytail:` if skipping.
+- Write tests for trivial functions (pure getters, type re-exports).
 - Add configuration for things that cannot change at runtime.
 - Edit `AGENTS.md`, `.planning/`, `.opencode/`, `.codegraph/`, `pnpm-lock.yaml` without asking.
 
