@@ -1,6 +1,4 @@
 #!/usr/bin/env bash
-# qa row uses qwen3.8-max, not the rostered deepseek-v4-pro: that model needs a
-# Global privacy region not configured on this account.
 # Dispatch smoke harness: run each team agent once on a closed-domain toy task
 # and assert exit 0 + non-empty output + per-agent keyword.
 set -u
@@ -12,10 +10,10 @@ mkdir -p .verify
 AGENTS=(
   "game-lead|opencode-go/qwen3.8-max|Name the phase that follows Phase 00.1 in the Darkfolio roadmap and its one-line goal.|phase 1|core game loop"
   "phaser-specialist|opencode-go/kimi-k2.7-code|Which skills directory in this project covers Phaser arcade physics?|physics-arcade"
-  "gameplay-dev|opencode-go/glm-5.3|Write the one-line TypeScript type annotation for a 2D velocity vector with x and y numbers.|interface|type|velocity"
-  "qa|opencode-go/qwen3.8-max|List two things you would check in a PR that changes player movement speed.|speed|movement|test|check"
-  "pixel-artist|opencode-go/mimo-v2.5-pro|Suggest a Darkwood-style shadow color as a six-digit hex code.|#[0-9a-fA-F]{6}"
-  "designer|opencode-go/kimi-k3|One sentence: how bright should a CRT overlay dim read against the room art?|contrast|dim|overlay"
+  "gameplay-dev|opencode-go/claude-haiku-5-5|Write the one-line TypeScript type annotation for a 2D velocity vector with x and y numbers.|interface|type|velocity"
+  "qa|opencode-go/claude-haiku-5-5|List two things you would check in a PR that changes player movement speed.|speed|movement|test|check"
+  "pixel-artist|opencode-go/mimo-v2.6-pro|Suggest a Darkwood-style shadow color as a six-digit hex code.|#[0-9a-fA-F]{6}"
+  "designer|opencode-go/gpt-6-luna|One sentence: how bright should a CRT overlay dim read against the room art?|contrast|dim|overlay"
   "scribe|opencode-go/qwen3.8-flash|In one markdown sentence, describe what the qa agent does.|qa|review"
 )
 

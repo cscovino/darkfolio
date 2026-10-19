@@ -110,10 +110,10 @@ Seven specialist subagents live under `.opencode/agents/` (OpenCode 2.0.29 disco
 |---|---|---|---|---|---|
 | game-lead | `opencode-go/qwen3.8-max` | 25 | deny | deny | deny |
 | phaser-specialist | `opencode-go/kimi-k2.7-code` | 60 | allow | allow-list | allow |
-| gameplay-dev | `opencode-go/glm-5.3` | 60 | allow | allow-list | deny |
-| qa | `opencode-go/deepseek-v4-pro` | 60 | deny | allow-list | deny |
-| pixel-artist | `opencode-go/mimo-v2.5-pro` | 25 | allow | deny | deny |
-| designer | `opencode-go/kimi-k3` | 25 | allow | deny | allow |
+| gameplay-dev | `opencode-go/claude-haiku-5-5` | 60 | allow | allow-list | deny |
+| qa | `opencode-go/claude-haiku-5-5` | 60 | deny | allow-list | deny |
+| pixel-artist | `opencode-go/mimo-v2.6-pro` | 25 | allow | deny | deny |
+| designer | `opencode-go/gpt-6-luna` | 25 | allow | deny | allow |
 | scribe | `opencode-go/qwen3.8-flash` | 25 | allow | deny | deny |
 
 Routing rules (when GSD commands dispatch whom):

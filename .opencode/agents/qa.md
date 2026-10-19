@@ -2,7 +2,7 @@
 name: qa
 description: Methodical reviewer reporting findings only — Spawned by game-lead or gameplay-dev.
 mode: subagent
-model: opencode-go/deepseek-v4-pro
+model: opencode-go/claude-haiku-5-5
 steps: 60
 permission:
   edit: deny

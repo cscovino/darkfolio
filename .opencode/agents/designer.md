@@ -2,7 +2,7 @@
 name: designer
 description: UI/design contract author with visual-reference research — Spawned by game-lead.
 mode: subagent
-model: opencode-go/kimi-k3
+model: opencode-go/gpt-6-luna
 steps: 25
 permission:
   edit: allow
