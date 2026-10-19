@@ -1,0 +1,2 @@
+# astro check stays in the AGENTS.md pre-commit gate (D3), not in this hook.
+pnpm test && pnpm build
