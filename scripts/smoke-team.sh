@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
-# qa row model substituted from locked deepseek-v4-pro -> qwen3.8-max: locked model requires Global privacy region not configured on this account (D-13 evidence run, AGENTS.md roster + agent file unchanged).
+# qa row uses qwen3.8-max, not the rostered deepseek-v4-pro: that model needs a
+# Global privacy region not configured on this account.
 # Dispatch smoke harness: run each team agent once on a closed-domain toy task
-# and assert exit 0 + non-empty output + per-agent keyword (D-12/D-13).
+# and assert exit 0 + non-empty output + per-agent keyword.
 set -u
 
 cd "$(git rev-parse --show-toplevel)" || { echo "FAIL cwd — not inside a git repo"; exit 1; }

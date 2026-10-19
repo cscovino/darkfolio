@@ -1,4 +1,4 @@
-// ponytail: zero-test config is documented; replace when Phase 1 ships game logic
+// Runner sanity spec — replace with real specs as game code lands.
 import { describe, expect, it } from 'vitest';
 
 describe('toolchain sanity', () => {

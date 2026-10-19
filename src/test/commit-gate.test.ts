@@ -3,17 +3,16 @@ import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import config from '../../commitlint.config.js';
 
-// ponytail: the SC#5 gate was probed only ephemerally during planning (inline
-// node check + /tmp fixtures). This pins it so a future edit that moves
-// headerPattern back to top level (dead config in commitlint 19) or drops a
-// gitmoji class fails `pnpm test` — which every pre-push runs — instead of
-// silently un-enforcing the commit format.
+// Pins the commit-format gate: a future edit that moves headerPattern back to
+// top level (dead config in commitlint 19) or drops a gitmoji class must fail
+// `pnpm test` — which every pre-push runs — instead of silently un-enforcing
+// the format.
 const parserOpts = config.parserPreset?.parserOpts as {
   headerPattern?: string;
 };
 const pattern = parserOpts.headerPattern as string;
 
-// Every class of the PLAN.md §"Commit Format" locked table: BMP ✨, astral 🐛,
+// Every emoji class the pattern must accept: BMP ✨, astral 🐛,
 // VS-16 ♻️, bare ♻, astral 🚀.
 const good = [
   '✨ feat(game): add player movement',
@@ -62,7 +61,7 @@ describe('commit-msg gate', () => {
     ]);
   });
 
-  // CR-01 regression: `pnpm commitlint --edit "$1"` appends the hook's args to
+  // `pnpm commitlint --edit "$1"` appends the hook's args to
   // the package script; a script that already carries --edit composes a second
   // one, and commitlint 19 then validates COMMIT_EDITMSG instead of $1 — a
   // silent gate bypass on merge commits. Pin the composition.
