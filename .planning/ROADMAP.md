@@ -129,7 +129,16 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
   4. Camera follows the player with smooth lerp (no snap)
   5. No console errors on boot
 
-**Plans**: TBD
+**Plans**: 3
+
+**Wave 1**
+
+- [ ] 01-01-PLAN.md — tracer: phaser dep (behind blocking-human legitimacy gate) + TDD movement system + walkable-room slice page → canvas → scene → physics → camera (GAME-01/02/03)
+
+**Wave 2** *(blocked on Wave 1 completion; 01-02 and 01-03 run parallel — zero file overlap)*
+
+- [ ] 01-02-PLAN.md — D-14 boot chain + press-any-key GateScene (UI-SPEC copy contract) + STATE.md housekeeping tracking (GAME-01)
+- [ ] 01-03-PLAN.md — Living Room element map: checkerboard floor, D-01 furniture in `solids`, D-02-locked door gaps + D-08 player outline/notch (GAME-02)
 
 ---
 
@@ -300,7 +309,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 |-------|----------------|----------|-----------|
 | 0. Setup (Foundation)        | 1/1 | Complete    | 2026-10-15 |
 | 00.1. Agent Team & Skills (INSERTED) | 4/4 | Complete    | 2026-10-16 |
-| 1. Core Game Loop            | 0/? | Not started            | - |
+| 1. Core Game Loop            | 0/3 | Not started            | - |
 | 2. Multi-Room                | 0/? | Not started            | - |
 | 3. Interaction               | 0/? | Not started            | - |
 | 4. Lighting                  | 0/? | Not started            | - |

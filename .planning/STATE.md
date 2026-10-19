@@ -3,17 +3,17 @@ gsd_state_version: "1.0"
 milestone: v1.0
 current_plan: Not started
 status: executing
-stopped_at: Phase 00.1 complete, ready to plan Phase 1
-last_updated: "2026-10-15T23:46:00.874Z"
-state_head: 31dac225adee318bef183914c253bfb206f25630
+stopped_at: Phase 1 UI-SPEC approved
+last_updated: "2026-10-20T06:55:57.650Z"
+state_head: c4293fd0cdee08f8277d148dbf7302f3dd45d348
 progress:
   total_phases: 8
   completed_phases: 2
-  total_plans: 0
+  total_plans: 3
   completed_plans: 5
 milestone_name: milestone
-current_phase: 1
 current_phase_name: Core Game Loop
+current_phase: 1
 ---
 
 # State: Darkfolio
@@ -34,7 +34,7 @@ current_phase_name: Core Game Loop
 - **Current phase:** 1 (Core Game Loop)
 
 **Current Plan:** Not started
-**Total Plans in Phase:** TBD (plan-phase 1 will set)
+**Total Plans in Phase:** 3
 
 - **Status:** ✅ Phase 00.1 complete (UAT 1/1 passed, VERIFICATION flipped to passed, SECURITY threats_open: 0, NYQUIST-compliant) — ready to plan Phase 1
 - **Active branch:** `chore-toolchain-foundation` (merge to `master` via PR per AGENTS.md when convenient)
@@ -101,6 +101,7 @@ current_phase_name: Core Game Loop
 ### Pending (will be addressed by downstream agents)
 
 - Commit the untracked `src/pages/index.astro` stub + `public/` assets (Phase 1 owner) — clean-clone build is green but emits 0 pages until then.
+- Commit root project config `opencode.jsonc` (Phase 1 owner, housekeeping) — teammate-shared harness setup, tracked in git alongside the stub commit.
 - Phaser 4 lighting system specifics (Phase 4) — defer to phase planning.
 - Audio asset sources (Phase 5) — defer — freesound.org / opengameart.org / tabletaopaudio.com are the documented sources per prior plan.
 
@@ -114,9 +115,9 @@ current_phase_name: Core Game Loop
 
 ## Session Continuity
 
-**Last session:** 2026-10-16
-**Stopped at:** Phase 00.1 complete, ready to plan Phase 1
-**Resume file:** None
+**Last session:** 2026-10-19T20:23:53.812Z
+**Stopped at:** Phase 1 UI-SPEC approved
+**Resume file:** .planning/phases/01-core-game-loop/01-UI-SPEC.md
 
 **Next session resume:**
 
