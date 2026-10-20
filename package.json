@@ -32,7 +32,8 @@
   "packageManager": "pnpm@12.9.1",
   "type": "module",
   "dependencies": {
-    "astro": "^7.3.5"
+    "astro": "^7.3.5",
+    "phaser": "4.2.1"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.10",
