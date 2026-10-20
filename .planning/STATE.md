@@ -1,19 +1,19 @@
 ---
 gsd_state_version: "1.0"
 milestone: v1.0
-current_plan: Not started
+current_plan: 3
 status: executing
-stopped_at: Phase 1 UI-SPEC approved
-last_updated: "2026-10-20T06:55:57.650Z"
-state_head: c4293fd0cdee08f8277d148dbf7302f3dd45d348
+stopped_at: Completed 01-03-PLAN.md
+last_updated: "2026-10-20T07:25:09.984Z"
+state_head: ac4e82b71f5aa736606314f8ac5c2d393869cc03
 progress:
   total_phases: 8
   completed_phases: 2
   total_plans: 3
   completed_plans: 5
 milestone_name: milestone
-current_phase_name: Core Game Loop
 current_phase: 1
+current_phase_name: Core Game Loop
 ---
 
 # State: Darkfolio
@@ -27,13 +27,13 @@ current_phase: 1
 **Repo:** `/home/jetson/github/darkfolio` (toolchain live on `chore-toolchain-foundation`; see `.planning/PROJECT.md`)
 **Mode:** mvp (vertical slices — every phase delivers a runnable, end-to-end capability)
 **Granularity:** standard (per `.planning/config.json`)
-**Current focus:** Phase 1 — Core Game Loop
+**Current focus:** Phase 01 — Core Game Loop
 
 ## Current Position
 
 - **Current phase:** 1 (Core Game Loop)
 
-**Current Plan:** Not started
+**Current Plan:** 3
 **Total Plans in Phase:** 3
 
 - **Status:** ✅ Phase 00.1 complete (UAT 1/1 passed, VERIFICATION flipped to passed, SECURITY threats_open: 0, NYQUIST-compliant) — ready to plan Phase 1
@@ -87,6 +87,9 @@ current_phase: 1
 | Phase 00.1 P02 | 10min | 2 tasks | 7 files |
 | Phase 00.1 P03 | 20 | 2 tasks | 39 files |
 | Phase 00.1 P04 | 15min | 2 tasks | 2 files |
+| Phase 01 P01-01 | 40min | 2 tasks | 9 files |
+| Phase 01 P02 | ~15min | 2 tasks | 6 files |
+| Phase 01 P03 | 20min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -115,9 +118,9 @@ current_phase: 1
 
 ## Session Continuity
 
-**Last session:** 2026-10-19T20:23:53.812Z
-**Stopped at:** Phase 1 UI-SPEC approved
-**Resume file:** .planning/phases/01-core-game-loop/01-UI-SPEC.md
+**Last session:** 2026-10-20T07:25:09.786Z
+**Stopped at:** Completed 01-03-PLAN.md
+**Resume file:** None
 
 **Next session resume:**
 
@@ -138,3 +141,6 @@ current_phase: 1
 - [Phase 00.1]: Full 7-agent roster committed flat (00.1-02) with D-03 models grounded verbatim; AGENTS.md roster+routing section mirrors frontmatter (SC#4)
 - [Phase 00.1]: Vendored 28 Phaser skills from pinned snapshot 02d893... + 2 hand-authored skills (astro, pixel-art)
 - [Phase 00.1]: qa smoke dispatch substituted qwen3.8-max for locked deepseek-v4-pro (D-13 environment gate)
+- [Phase 01]: phaser pinned exactly 4.2.1; Player uses handleInput; zoom 4 on scene camera
+- [Phase 01]: Gate listener uses keyboard.once('keydown'); GateScene reads no movement keys and never sets zoom
+- [Phase 01]: Player facing notch via four baked directional textures; diagonal facing is vertical-first
