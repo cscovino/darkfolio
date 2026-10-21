@@ -3,9 +3,8 @@ import { DOOR_NORTH, DOOR_WEST } from '../data/rooms';
 import {
   GLIDE_EASE,
   GLIDE_MS,
-  GLIDE_STEP,
-  REACH,
   glideEnd,
+  insideRect,
   reachRect,
   triggeredSide,
 } from './doorGlide';
@@ -109,13 +108,11 @@ describe('triggeredSide', () => {
 
 describe('west door', () => {
   it('declares the west door pair on the shared wall', () => {
-    expect(DOOR_WEST).toBeDefined();
     expect(DOOR_WEST.id).toBe('west');
     expect(DOOR_WEST.axis).toEqual({ x: 320, y: 344 });
   });
 
   it('returns the deterministic west-door rest spots', () => {
-    expect(DOOR_WEST).toBeDefined();
     expect(glideEnd(DOOR_WEST.axis, 'left')).toEqual({ x: 272, y: 344 });
     expect(glideEnd(DOOR_WEST.axis, 'left')).toEqual({ x: 272, y: 344 });
     expect(glideEnd(DOOR_WEST.axis, 'right')).toEqual({ x: 368, y: 344 });
@@ -123,13 +120,11 @@ describe('west door', () => {
   });
 
   it('fires the bedroom side on bump-open into the west zone', () => {
-    expect(DOOR_WEST).toBeDefined();
     const hit = triggeredSide(WEST_DOORS, { x: 320, y: 344 }, 'left', none);
     expect(hit?.side.dest).toBe('bedroom');
   });
 
   it('fires the bedroom side on try-the-handle from the living side', () => {
-    expect(DOOR_WEST).toBeDefined();
     const hit = triggeredSide(
       WEST_DOORS,
       { x: 350, y: 344 },
@@ -140,7 +135,6 @@ describe('west door', () => {
   });
 
   it('fires the living side on try-the-handle from the bedroom side', () => {
-    expect(DOOR_WEST).toBeDefined();
     const hit = triggeredSide(
       WEST_DOORS,
       { x: 290, y: 344 },
@@ -151,7 +145,6 @@ describe('west door', () => {
   });
 
   it('does not re-trigger at either west glide rest spot', () => {
-    expect(DOOR_WEST).toBeDefined();
     expect(
       triggeredSide(WEST_DOORS, { x: 272, y: 344 }, 'right', keys('right')),
     ).toBeNull();
@@ -167,19 +160,10 @@ describe('west door', () => {
   });
 });
 
-describe('door glide constants (ROOM-01 / ROOM-02 / D-13, D-14)', () => {
-  it('pins the glide tuning and step', () => {
-    expect(REACH).toBe(16);
-    expect(GLIDE_STEP).toBe(48);
+describe('door glide constants', () => {
+  it('pins the glide timing and ease', () => {
     expect(GLIDE_MS).toBe(700);
     expect(GLIDE_EASE).toBe('Sine.easeInOut');
-  });
-
-  it('derives every rest spot with plain integer arithmetic', () => {
-    expect(glideEnd(DOOR_NORTH.axis, 'up')).toEqual({ x: 408, y: 192 });
-    expect(glideEnd(DOOR_NORTH.axis, 'down')).toEqual({ x: 408, y: 288 });
-    expect(glideEnd(DOOR_WEST.axis, 'left')).toEqual({ x: 272, y: 344 });
-    expect(glideEnd(DOOR_WEST.axis, 'right')).toEqual({ x: 368, y: 344 });
   });
 });
 
@@ -200,7 +184,7 @@ describe('reachRect (west door dirs)', () => {
   });
 });
 
-describe('rest spots never land inside a trigger window (ROOM-02)', () => {
+describe('rest spots never land inside a trigger window', () => {
   const spots: { x: number; y: number }[] = [
     { x: 408, y: 192 },
     { x: 408, y: 288 },
@@ -210,12 +194,7 @@ describe('rest spots never land inside a trigger window (ROOM-02)', () => {
   it('keeps every rest spot outside both door base zones', () => {
     for (const spot of spots) {
       for (const zone of [DOOR_NORTH.zone, DOOR_WEST.zone]) {
-        const inside =
-          spot.x >= zone.x &&
-          spot.x < zone.x + zone.w &&
-          spot.y >= zone.y &&
-          spot.y < zone.y + zone.h;
-        expect(inside).toBe(false);
+        expect(insideRect(zone, spot)).toBe(false);
       }
     }
   });

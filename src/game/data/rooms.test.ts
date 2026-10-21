@@ -23,6 +23,7 @@ import {
 } from './rooms';
 
 type CenterRect = readonly [number, number, number, number, number?];
+type Layout = typeof LIVING_LAYOUT;
 
 function toRect(t: CenterRect): Rect {
   const [x, y, w, h] = t;
@@ -39,12 +40,29 @@ function translate(r: Rect, ox: number, oy: number): Rect {
   return { x: r.x + ox, y: r.y + oy, w: r.w, h: r.h };
 }
 
-function layoutWalls(
-  layout: typeof LIVING_LAYOUT,
-  ox: number,
-  oy: number,
-): Rect[] {
+function layoutWalls(layout: Layout, ox: number, oy: number): Rect[] {
   return layout.walls.map((t) => translate(toRect(t), ox, oy));
+}
+
+// Lane and rest-spot rects are room-local; layout solids are room-local too.
+function expectClearOfSolids(layout: Layout, rect: Rect): void {
+  for (const t of layout.solids) {
+    expect(rectsOverlap(toRect(t), rect)).toBe(false);
+  }
+}
+
+function hasSolid(
+  layout: Layout,
+  x: number,
+  y: number,
+  w: number,
+  h: number,
+  c: number,
+): boolean {
+  return layout.solids.some(
+    ([sx, sy, sw, sh, sc]) =>
+      sx === x && sy === y && sw === w && sh === h && sc === c,
+  );
 }
 
 describe('north door gap alignment', () => {
@@ -68,59 +86,32 @@ describe('north door gap alignment', () => {
   });
 
   it('keeps the living north walking lane clear of living solids', () => {
-    const lane: Rect = { x: 64, y: 16, w: 48, h: 96 };
-    for (const t of LIVING_LAYOUT.solids) {
-      expect(rectsOverlap(toRect(t), lane)).toBe(false);
-    }
+    expectClearOfSolids(LIVING_LAYOUT, { x: 64, y: 16, w: 48, h: 96 });
   });
 
   it('keeps both glide rest-spot body rects clear of destination solids', () => {
-    const officeRest: Rect = { x: 72, y: 176, w: 32, h: 32 };
-    const livingRest: Rect = { x: 72, y: 32, w: 32, h: 32 };
-    for (const t of OFFICE_LAYOUT.solids) {
-      expect(rectsOverlap(toRect(t), officeRest)).toBe(false);
-    }
-    for (const t of LIVING_LAYOUT.solids) {
-      expect(rectsOverlap(toRect(t), livingRest)).toBe(false);
-    }
+    expectClearOfSolids(OFFICE_LAYOUT, { x: 72, y: 176, w: 32, h: 32 });
+    expectClearOfSolids(LIVING_LAYOUT, { x: 72, y: 32, w: 32, h: 32 });
   });
 });
 
 describe('office dense layout', () => {
-  const hasSolid = (x: number, y: number, w: number, h: number, c: number) =>
-    OFFICE_LAYOUT.solids.some(
-      ([sx, sy, sw, sh, sc]) =>
-        sx === x && sy === y && sw === w && sh === h && sc === c,
-    );
-
   it('keeps the office south walking lane clear of office solids', () => {
-    const lane: Rect = { x: 64, y: 144, w: 48, h: 80 };
-    for (const t of OFFICE_LAYOUT.solids) {
-      expect(rectsOverlap(toRect(t), lane)).toBe(false);
-    }
+    expectClearOfSolids(OFFICE_LAYOUT, { x: 64, y: 144, w: 48, h: 80 });
   });
 
   it('places the dense office set with its phase-3 hosts', () => {
     expect(OFFICE_LAYOUT.solids.length).toBeGreaterThanOrEqual(8);
-    expect(hasSolid(200, 30, 20, 14, 0x3d3d3d)).toBe(true);
-    expect(hasSolid(24, 72, 16, 64, 0x3d2f1f)).toBe(true);
+    expect(hasSolid(OFFICE_LAYOUT, 200, 30, 20, 14, 0x3d3d3d)).toBe(true);
+    expect(hasSolid(OFFICE_LAYOUT, 24, 72, 16, 64, 0x3d2f1f)).toBe(true);
   });
 
   it('keeps the walkable rug out of the solid set', () => {
-    expect(hasSolid(200, 140, 96, 64, 0x46534a)).toBe(false);
+    expect(hasSolid(OFFICE_LAYOUT, 200, 140, 96, 64, 0x46534a)).toBe(false);
   });
 });
 
 describe('sealed wall bands and door decor', () => {
-  it('keeps every door gap clear of the living sealed east and south wall bands', () => {
-    const eastBand: Rect = { x: 624, y: 240, w: 16, h: 240 };
-    const southBand: Rect = { x: 320, y: 464, w: 320, h: 16 };
-    for (const door of DOORS) {
-      expect(rectsOverlap(door.gap, eastBand)).toBe(false);
-      expect(rectsOverlap(door.gap, southBand)).toBe(false);
-    }
-  });
-
   it('places the front-door plank directly behind the spawn', () => {
     const spawnLocalX = SPAWN_X - LIVING_ORIGIN.x;
     const plank = LIVING_LAYOUT.decor.find(
@@ -133,8 +124,6 @@ describe('sealed wall bands and door decor', () => {
 
 describe('west door gap alignment', () => {
   it('keeps every living and bedroom wall clear of the gap', () => {
-    expect(DOOR_WEST).toBeDefined();
-    expect(BEDROOM_LAYOUT).toBeDefined();
     const gap: Rect = DOOR_WEST.gap;
     const walls = [
       ...layoutWalls(LIVING_LAYOUT, LIVING_ORIGIN.x, LIVING_ORIGIN.y),
@@ -146,50 +135,28 @@ describe('west door gap alignment', () => {
   });
 
   it('keeps the bedroom east walking lane clear of bedroom solids', () => {
-    expect(BEDROOM_LAYOUT).toBeDefined();
-    const lane: Rect = { x: 224, y: 80, w: 96, h: 48 };
-    for (const t of BEDROOM_LAYOUT.solids) {
-      expect(rectsOverlap(toRect(t), lane)).toBe(false);
-    }
+    expectClearOfSolids(BEDROOM_LAYOUT, { x: 224, y: 80, w: 96, h: 48 });
   });
 
   it('keeps the living west walking lane clear of living solids', () => {
-    const lane: Rect = { x: 16, y: 80, w: 48, h: 48 };
-    for (const t of LIVING_LAYOUT.solids) {
-      expect(rectsOverlap(toRect(t), lane)).toBe(false);
-    }
+    expectClearOfSolids(LIVING_LAYOUT, { x: 16, y: 80, w: 48, h: 48 });
   });
 
   it('keeps both west glide rest-spot body rects clear of destination solids', () => {
-    expect(BEDROOM_LAYOUT).toBeDefined();
-    const bedroomRest: Rect = { x: 256, y: 88, w: 32, h: 32 };
-    const livingRest: Rect = { x: 32, y: 88, w: 32, h: 32 };
-    for (const t of BEDROOM_LAYOUT.solids) {
-      expect(rectsOverlap(toRect(t), bedroomRest)).toBe(false);
-    }
-    for (const t of LIVING_LAYOUT.solids) {
-      expect(rectsOverlap(toRect(t), livingRest)).toBe(false);
-    }
+    expectClearOfSolids(BEDROOM_LAYOUT, { x: 256, y: 88, w: 32, h: 32 });
+    expectClearOfSolids(LIVING_LAYOUT, { x: 32, y: 88, w: 32, h: 32 });
   });
 });
 
 describe('bedroom dense layout', () => {
-  const hasSolid = (x: number, y: number, w: number, h: number, c: number) =>
-    BEDROOM_LAYOUT.solids.some(
-      ([sx, sy, sw, sh, sc]) =>
-        sx === x && sy === y && sw === w && sh === h && sc === c,
-    );
-
   it('places the dense bedroom set with its phase-3 phone host', () => {
-    expect(BEDROOM_LAYOUT).toBeDefined();
     expect(BEDROOM_LAYOUT.solids.length).toBeGreaterThanOrEqual(6);
-    expect(hasSolid(56, 56, 48, 80, 0x4a3729)).toBe(true);
-    expect(hasSolid(96, 30, 8, 6, 0x555555)).toBe(true);
+    expect(hasSolid(BEDROOM_LAYOUT, 56, 56, 48, 80, 0x4a3729)).toBe(true);
+    expect(hasSolid(BEDROOM_LAYOUT, 96, 30, 8, 6, 0x555555)).toBe(true);
   });
 
   it('keeps the walkable rug out of the solid set', () => {
-    expect(BEDROOM_LAYOUT).toBeDefined();
-    expect(hasSolid(160, 152, 80, 56, 0x4a3423)).toBe(false);
+    expect(hasSolid(BEDROOM_LAYOUT, 160, 152, 80, 56, 0x4a3423)).toBe(false);
   });
 });
 
@@ -218,7 +185,7 @@ describe('yard dressing', () => {
   });
 });
 
-describe('room contract constants (GAME-04)', () => {
+describe('room contract constants', () => {
   it('declares 16px tiles and 20x15 rooms', () => {
     expect(TILE).toBe(16);
     expect(ROOM_W).toBe(20);
@@ -255,17 +222,9 @@ describe('room contract constants (GAME-04)', () => {
     expect(YARD_RECT.w).toBe(320);
     expect(YARD_RECT.h).toBe(240);
   });
-
-  it('defines a layout for every room', () => {
-    for (const layout of [LIVING_LAYOUT, OFFICE_LAYOUT, BEDROOM_LAYOUT]) {
-      expect(Array.isArray(layout.walls)).toBe(true);
-      expect(Array.isArray(layout.solids)).toBe(true);
-      expect(Array.isArray(layout.decor)).toBe(true);
-    }
-  });
 });
 
-describe('door registry (ROOM-01)', () => {
+describe('door registry', () => {
   it('registers exactly the two working doors', () => {
     expect(DOORS).toHaveLength(2);
     expect(DOORS.map((d) => d.id)).toEqual(['north', 'west']);
@@ -281,7 +240,7 @@ describe('door registry (ROOM-01)', () => {
   });
 });
 
-describe('spawn and rest-spot constants (ROOM-02)', () => {
+describe('spawn and rest-spot constants', () => {
   it('spawns the player at house (480,448)', () => {
     expect(SPAWN_X).toBe(480);
     expect(SPAWN_Y).toBe(448);

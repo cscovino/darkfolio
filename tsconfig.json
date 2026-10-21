@@ -9,10 +9,7 @@
       "@/systems/*": ["src/game/systems/*"],
       "@/scenes/*": ["src/game/scenes/*"],
       "@/objects/*": ["src/game/objects/*"],
-      "@/data/*": ["src/game/data/*"],
-      "@/styles/*": ["src/styles/*"],
-      "@/layouts/*": ["src/layouts/*"],
-      "@/pages/*": ["src/pages/*"]
+      "@/data/*": ["src/game/data/*"]
     }
   },
   "include": ["src/**/*", "tests/**/*"]

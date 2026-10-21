@@ -133,7 +133,7 @@ export const BEDROOM_LAYOUT: RoomLayout = {
   ],
 };
 
-export type YardLayout = {
+type YardLayout = {
   ground: [number, number, number, number, number];
   patches: [number, number, number, number, number][];
   props: [number, number, number, number, number][];

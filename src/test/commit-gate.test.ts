@@ -11,6 +11,8 @@ const parserOpts = config.parserPreset?.parserOpts as {
   headerPattern?: string;
 };
 const pattern = parserOpts.headerPattern as string;
+const RE = new RegExp(pattern);
+const RE_U = new RegExp(pattern, 'u');
 
 // Every emoji class the pattern must accept: BMP ✨, astral 🐛,
 // VS-16 ♻️, bare ♻, astral 🚀.
@@ -29,7 +31,6 @@ const bad = [
 
 describe('commit-msg gate', () => {
   it('wires headerPattern under parserPreset.parserOpts, not top level', () => {
-    expect(pattern).toBeDefined();
     expect((config as Record<string, unknown>).headerPattern).toBeUndefined();
   });
 
@@ -39,20 +40,20 @@ describe('commit-msg gate', () => {
 
   it('accepts every emoji class of the locked gitmoji table in both flag modes', () => {
     for (const header of good) {
-      expect(new RegExp(pattern).test(header)).toBe(true);
-      expect(new RegExp(pattern, 'u').test(header)).toBe(true);
+      expect(RE.test(header)).toBe(true);
+      expect(RE_U.test(header)).toBe(true);
     }
   });
 
   it('rejects no-emoji, bad-type, and garbage headers in both flag modes', () => {
     for (const header of bad) {
-      expect(new RegExp(pattern).test(header)).toBe(false);
-      expect(new RegExp(pattern, 'u').test(header)).toBe(false);
+      expect(RE.test(header)).toBe(false);
+      expect(RE_U.test(header)).toBe(false);
     }
   });
 
   it('yields type/scope/subject as capture groups 1-3', () => {
-    const m = new RegExp(pattern).exec('✨ feat(game): add player movement');
+    const m = RE.exec('✨ feat(game): add player movement');
     expect(m).not.toBeNull();
     expect([m?.[1], m?.[2], m?.[3]]).toEqual([
       'feat',

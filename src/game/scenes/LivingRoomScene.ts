@@ -16,6 +16,7 @@ import { setCurrentRoom, setCurrentRoomFrom } from '@/game/state/currentRoom';
 import { Player, ensurePlayerTexture } from '@/objects/Player';
 import { buildBedroom } from '@/scenes/BedroomScene';
 import { buildOffice } from '@/scenes/OfficeScene';
+import { buildRoom } from '@/scenes/buildRoom';
 import { roomAt } from '@/systems/currentRoom';
 import {
   GLIDE_EASE,
@@ -44,7 +45,7 @@ export class LivingRoomScene extends Phaser.Scene {
 
     this.solids = this.physics.add.staticGroup();
     this.drawYard();
-    this.buildLiving();
+    buildRoom(this, this.solids, LIVING_LAYOUT, LIVING_ORIGIN);
     buildOffice(this, this.solids);
     buildBedroom(this, this.solids);
 
@@ -100,48 +101,6 @@ export class LivingRoomScene extends Phaser.Scene {
     }
     for (const [x, y, w, h, color] of YARD_LAYOUT.props) {
       this.add.rectangle(x, y, w, h, color);
-    }
-  }
-
-  private buildLiving(): void {
-    const g = this.add.graphics();
-    for (let row = 0; row < ROOM_H; row++) {
-      for (let col = 0; col < ROOM_W; col++) {
-        g.fillStyle(
-          (row + col) % 2 === 0 ? LIVING_LAYOUT.floorA : LIVING_LAYOUT.floorB,
-        );
-        g.fillRect(
-          LIVING_ORIGIN.x + col * TILE,
-          LIVING_ORIGIN.y + row * TILE,
-          TILE,
-          TILE,
-        );
-      }
-    }
-    for (const [x, y, w, h] of LIVING_LAYOUT.walls) {
-      this.solids.add(
-        this.add.rectangle(
-          LIVING_ORIGIN.x + x,
-          LIVING_ORIGIN.y + y,
-          w,
-          h,
-          LIVING_LAYOUT.wall,
-        ),
-      );
-    }
-    for (const [x, y, w, h, color] of LIVING_LAYOUT.solids) {
-      this.solids.add(
-        this.add.rectangle(
-          LIVING_ORIGIN.x + x,
-          LIVING_ORIGIN.y + y,
-          w,
-          h,
-          color,
-        ),
-      );
-    }
-    for (const [x, y, w, h, color] of LIVING_LAYOUT.decor) {
-      this.add.rectangle(LIVING_ORIGIN.x + x, LIVING_ORIGIN.y + y, w, h, color);
     }
   }
 

@@ -15,7 +15,7 @@ export const GLIDE_STEP = 48;
 export const GLIDE_MS = 700;
 export const GLIDE_EASE = 'Sine.easeInOut';
 
-function inside(rect: Rect, p: Vec): boolean {
+export function insideRect(rect: Rect, p: Vec): boolean {
   return (
     p.x >= rect.x &&
     p.x < rect.x + rect.w &&
@@ -58,12 +58,13 @@ export function triggeredSide(
 ): { door: DoorDef; side: DoorSide } | null {
   for (const door of doors) {
     for (const side of door.sides) {
-      if (side.dir === facing && inside(door.zone, pos)) return { door, side };
+      if (side.dir === facing && insideRect(door.zone, pos))
+        return { door, side };
     }
   }
   for (const door of doors) {
     for (const side of door.sides) {
-      if (keys[side.dir] && inside(reachRect(door.zone, side.dir), pos)) {
+      if (keys[side.dir] && insideRect(reachRect(door.zone, side.dir), pos)) {
         return { door, side };
       }
     }

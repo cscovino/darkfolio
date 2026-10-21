@@ -11,7 +11,7 @@
     {
       "number": "2",
       "name": "Multi-Room",
-      "status": "pending"
+      "status": "in_progress"
     },
     {
       "number": "3",
@@ -49,5 +49,5 @@
     "label": "Advance to the next step",
     "reason": "Phase 4 of 10 · executing"
   },
-  "updated_at": "2026-10-21T08:41:32.228Z"
+  "updated_at": "2026-10-21T11:00:28.603Z"
 }

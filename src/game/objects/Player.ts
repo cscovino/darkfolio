@@ -4,7 +4,7 @@ import Phaser from 'phaser';
 
 const PLAYER_TEX = '__PLAYER__';
 
-type Facing = 'up' | 'down' | 'left' | 'right';
+export type Facing = 'up' | 'down' | 'left' | 'right';
 
 const FACINGS: readonly Facing[] = ['up', 'down', 'left', 'right'];
 const NOTCH: Record<Facing, [number, number]> = {

@@ -109,10 +109,7 @@ Agents must NOT:
       "@/systems/*": ["src/game/systems/*"],
       "@/scenes/*": ["src/game/scenes/*"],
       "@/objects/*": ["src/game/objects/*"],
-      "@/data/*": ["src/game/data/*"],
-      "@/styles/*": ["src/styles/*"],
-      "@/layouts/*": ["src/layouts/*"],
-      "@/pages/*": ["src/pages/*"]
+      "@/data/*": ["src/game/data/*"]
     }
   }
 }
@@ -333,11 +330,11 @@ Interaction         Lighting           Audio              Custom Assets
 
 **Agent Instructions:**
 - `astro.config.mjs` → `base: '/darkfolio' · output: 'static' · server.host: true`
-- `tsconfig.json` → extends `astro/tsconfigs/strict`; the 10 path aliases per §"Path Aliases"; `include: [src/**, tests/**]`
+- `tsconfig.json` → extends `astro/tsconfigs/strict`; the 7 path aliases per §"Path Aliases"; `include: [src/**, tests/**]`
 - `biome.json` → 5 lint rules (no-console, no-unused-imports, no-unused-variables, no-unused-function-parameters, no-duplicate-imports); formatter LF / single-quote / semicolons-always
 - `commitlint.config.js` → extends `@commitlint/config-conventional` with custom `headerPattern` accepting leading gitmoji (`✨ 🐛 ♻️ 📝 🎨 ⚡ ✅ 🔧 🚀` …)
 - `lint-staged.config.mjs` → `*.{ts,tsx,js,jsx,mjs,cjs,json}: ['biome check --write']`
-- `vitest.config.ts` → `environment: 'happy-dom'`, `include: ['src/**/*.test.ts']`
+- `vitest.config.ts` → `include: ['src/**/*.test.ts']`; default node environment (the suite is pure logic — no DOM, no Phaser)
 - `.gitignore` → Node/Astro standard; **gitignore `.opencode/` only** (`.planning/` stays committed)
 - `.nvmrc` → `22`
 - `README.md` → one-line purpose, command list, link to `.planning/PLAN.md`
