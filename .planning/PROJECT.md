@@ -15,6 +15,9 @@ The portfolio is the experience — observable behavior (walking, interacting, o
 - ✓ **GAME-01**: Player can move (WASD / arrow keys) at 120 px/s — Phase 1
 - ✓ **GAME-02**: Player collides with walls and furniture — Phase 1
 - ✓ **GAME-03**: Camera follows the player (lerp, not snap) — Phase 1
+- ✓ **GAME-04**: Three rooms (Living Room, Office, Bedroom), each 20x15 tiles — Phase 2
+- ✓ **ROOM-01**: Doors trigger slide transitions between rooms — Phase 2
+- ✓ **ROOM-02**: Player spawns at the correct tile on entry — Phase 2
 
 ### Active
 
@@ -22,13 +25,6 @@ Landing & shell
 - [ ] **LAND-01**: Visitor sees a game canvas on the landing page (no scroll-first portfolio)
 - [ ] **LAND-02**: Game loads within 5 seconds on a desktop browser
 - [ ] **LAND-03**: Mobile visitors see a blocking "play on desktop" overlay
-
-Game core
-- [ ] **GAME-04**: Three rooms (Living Room, Office, Bedroom), each 20x15 tiles
-
-Rooms & transitions
-- [ ] **ROOM-01**: Doors trigger slide transitions between rooms
-- [ ] **ROOM-02**: Player spawns at the correct tile on entry
 
 Interaction
 - [ ] **INTR-01**: Player can press E near an interactable to trigger dialog
@@ -69,7 +65,7 @@ Deployment
 
 ## Context
 
-- Repo state: Phase 1 (Core Game Loop) complete on `feat/core-game-loop` — Phaser 4.2.1 live, BootScene→PreloadScene→GateScene→LivingRoomScene chain running, 120 px/s movement + wall/furniture collision + lerped camera UAT-verified (3/3). `src/pages/index.astro` mounts the game via `GameCanvas.astro`.
+- Repo state: Phase 2 (Multi-Room) complete on `feat/multi-room` — three 20x15 rooms (Living, Office, Bedroom) in one continuous 640x480 L-world, both door pairs data-driven through the same generic glide/store loop, yard dressing non-walkable; UAT-verified 3/3 (walk, entry-tile determinism, sealed doors + yard readability). `src/pages/index.astro` mounts the game via `GameCanvas.astro`.
 - Aesthetic: 16-bit pixel art, "Darkwood gritty" palette (browns `#4A3729`/`#6B4E3D`/`#8B6F5E`, grays `#2A2A2A`/`#3D3D3D`/`#555555`, muted greens `#3A4A3A`/`#4A5A4A`, accents warm yellow `#FFA500` / cold blue)
 - Dialog tone: humorous / meta, breaks the fourth wall
 - Game mechanics: Phaser 4.2.1 + Arcade Physics, 60 fps target, 16x16 tiles, 32x32 character
@@ -110,6 +106,9 @@ Deployment
 | Living Room geometry hand-placed rectangles, no tilemap until Phase 2; scene constants (TILE/ROOM_W/H/WORLD_W/H/SPAWN_X/Y) are the coordinate contract | Cheap to iterate; Phase 2 rooms reuse the contract | Good (Phase 1) |
 | Player facing notch via four baked directional textures swapped on facing change; diagonal facing vertical-first | No per-frame Graphics redraw; placeholder art until Phase 7 | Good (Phase 1) |
 | Camera zoom 4 on the scene camera (not game config); `startFollow(…, 0.05, 0.05)` lerp | UI-SPEC canvas framing; smooth trail confirmed in UAT | Good (Phase 1) |
+| One shared `buildRoom` builder for all three rooms; room layouts are data tuples in `rooms.ts` | Three rooms × three layouts — one builder, no per-room scene class | Good (Phase 2) |
+| `DOORS` is a data registry (`DoorDef[]`), one generic glide/store loop handles every pair | Adding a door pair is data, not code — Phase 3 attaches hosts to the same registry | Good (Phase 2) |
+| Door gaps 48px (32px body + 8px slack per side, D-02); `GLIDE_STEP=48` per D-14 | Zero-clearance gaps snagged in Phase 1; 48px clears the corner snag | Good (Phase 2) |
 
 ## Evolution
 
@@ -129,4 +128,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-10-20 after Phase 1*
+*Last updated: 2026-10-21 after Phase 2*
