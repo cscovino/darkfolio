@@ -10,9 +10,14 @@ import {
   LIVING_ORIGIN,
   OFFICE_LAYOUT,
   OFFICE_ORIGIN,
+  ROOM_H,
+  ROOM_W,
   ROOM_ZONES,
   SPAWN_X,
   SPAWN_Y,
+  TILE,
+  WORLD_H,
+  WORLD_W,
   YARD_LAYOUT,
   YARD_RECT,
 } from './rooms';
@@ -210,5 +215,75 @@ describe('yard dressing', () => {
         expect(rectsOverlap(t, zone)).toBe(false);
       }
     }
+  });
+});
+
+describe('room contract constants (GAME-04)', () => {
+  it('declares 16px tiles and 20x15 rooms', () => {
+    expect(TILE).toBe(16);
+    expect(ROOM_W).toBe(20);
+    expect(ROOM_H).toBe(15);
+  });
+
+  it('promotes the world box to the 640x480 L-house', () => {
+    expect(WORLD_W).toBe(640);
+    expect(WORLD_H).toBe(480);
+  });
+
+  it('tiles the L with exactly three 20x15 zones', () => {
+    expect(ROOM_ZONES).toHaveLength(3);
+    expect(ROOM_ZONES.map((z) => z.id)).toEqual([
+      'living',
+      'office',
+      'bedroom',
+    ]);
+    for (const zone of ROOM_ZONES) {
+      expect(zone.w).toBe(ROOM_W * TILE);
+      expect(zone.h).toBe(ROOM_H * TILE);
+    }
+  });
+
+  it('places the three room origins in the L', () => {
+    expect(LIVING_ORIGIN).toEqual({ x: 320, y: 240 });
+    expect(OFFICE_ORIGIN).toEqual({ x: 320, y: 0 });
+    expect(BEDROOM_ORIGIN).toEqual({ x: 0, y: 240 });
+  });
+
+  it('keeps the yard rect inside the house box', () => {
+    expect(YARD_RECT.x).toBe(0);
+    expect(YARD_RECT.y).toBe(0);
+    expect(YARD_RECT.w).toBe(320);
+    expect(YARD_RECT.h).toBe(240);
+  });
+
+  it('defines a layout for every room', () => {
+    for (const layout of [LIVING_LAYOUT, OFFICE_LAYOUT, BEDROOM_LAYOUT]) {
+      expect(Array.isArray(layout.walls)).toBe(true);
+      expect(Array.isArray(layout.solids)).toBe(true);
+      expect(Array.isArray(layout.decor)).toBe(true);
+    }
+  });
+});
+
+describe('door registry (ROOM-01)', () => {
+  it('registers exactly the two working doors', () => {
+    expect(DOORS).toHaveLength(2);
+    expect(DOORS.map((d) => d.id)).toEqual(['north', 'west']);
+  });
+
+  it('keeps each door gap clear of the sealed east and south wall bands', () => {
+    const eastBand: Rect = { x: 624, y: 240, w: 16, h: 240 };
+    const southBand: Rect = { x: 320, y: 464, w: 320, h: 16 };
+    for (const door of DOORS) {
+      expect(rectsOverlap(door.gap, eastBand)).toBe(false);
+      expect(rectsOverlap(door.gap, southBand)).toBe(false);
+    }
+  });
+});
+
+describe('spawn and rest-spot constants (ROOM-02)', () => {
+  it('spawns the player at house (480,448)', () => {
+    expect(SPAWN_X).toBe(480);
+    expect(SPAWN_Y).toBe(448);
   });
 });

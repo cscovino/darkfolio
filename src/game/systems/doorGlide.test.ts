@@ -1,6 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { DOOR_NORTH, DOOR_WEST } from '../data/rooms';
-import { glideEnd, reachRect, triggeredSide } from './doorGlide';
+import {
+  GLIDE_EASE,
+  GLIDE_MS,
+  GLIDE_STEP,
+  REACH,
+  glideEnd,
+  reachRect,
+  triggeredSide,
+} from './doorGlide';
 import type { Dir, DoorDef } from './doorGlide';
 
 const DOORS: DoorDef[] = [DOOR_NORTH];
@@ -156,5 +164,59 @@ describe('west door', () => {
     expect(
       triggeredSide(WEST_DOORS, { x: 368, y: 344 }, 'right', keys('right')),
     ).toBeNull();
+  });
+});
+
+describe('door glide constants (ROOM-01 / ROOM-02 / D-13, D-14)', () => {
+  it('pins the glide tuning and step', () => {
+    expect(REACH).toBe(16);
+    expect(GLIDE_STEP).toBe(48);
+    expect(GLIDE_MS).toBe(700);
+    expect(GLIDE_EASE).toBe('Sine.easeInOut');
+  });
+
+  it('derives every rest spot with plain integer arithmetic', () => {
+    expect(glideEnd(DOOR_NORTH.axis, 'up')).toEqual({ x: 408, y: 192 });
+    expect(glideEnd(DOOR_NORTH.axis, 'down')).toEqual({ x: 408, y: 288 });
+    expect(glideEnd(DOOR_WEST.axis, 'left')).toEqual({ x: 272, y: 344 });
+    expect(glideEnd(DOOR_WEST.axis, 'right')).toEqual({ x: 368, y: 344 });
+  });
+});
+
+describe('reachRect (west door dirs)', () => {
+  it('grows the approached side for left and right', () => {
+    expect(reachRect(DOOR_WEST.zone, 'left')).toEqual({
+      x: 296,
+      y: 320,
+      w: 64,
+      h: 48,
+    });
+    expect(reachRect(DOOR_WEST.zone, 'right')).toEqual({
+      x: 280,
+      y: 320,
+      w: 64,
+      h: 48,
+    });
+  });
+});
+
+describe('rest spots never land inside a trigger window (ROOM-02)', () => {
+  const spots: { x: number; y: number }[] = [
+    { x: 408, y: 192 },
+    { x: 408, y: 288 },
+    { x: 272, y: 344 },
+    { x: 368, y: 344 },
+  ];
+  it('keeps every rest spot outside both door base zones', () => {
+    for (const spot of spots) {
+      for (const zone of [DOOR_NORTH.zone, DOOR_WEST.zone]) {
+        const inside =
+          spot.x >= zone.x &&
+          spot.x < zone.x + zone.w &&
+          spot.y >= zone.y &&
+          spot.y < zone.y + zone.h;
+        expect(inside).toBe(false);
+      }
+    }
   });
 });

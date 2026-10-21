@@ -51,3 +51,33 @@ describe('setCurrentRoomFrom', () => {
     expect(getCurrentRoom()).toBe('bedroom');
   });
 });
+
+describe('currentRoom store defaults (ROOM-02 / D-11)', () => {
+  afterEach(() => setCurrentRoom('living'));
+
+  it('defaults to living on first read', () => {
+    // reset to a known state then read; store is a module singleton
+    setCurrentRoom('living');
+    expect(getCurrentRoom()).toBe('living');
+  });
+
+  it('round-trips setCurrentRoom for every room id', () => {
+    for (const id of ['living', 'office', 'bedroom'] as const) {
+      setCurrentRoom(id);
+      expect(getCurrentRoom()).toBe(id);
+    }
+  });
+});
+
+describe('roomAt half-open edges', () => {
+  it('excludes a point on the right/bottom edge of a zone', () => {
+    // living zone: x 320..640, y 240..480
+    expect(roomAt(ZONES, { x: 640, y: 360 })).not.toBe('living');
+    expect(roomAt(ZONES, { x: 480, y: 480 })).not.toBe('living');
+  });
+
+  it('returns the first match in declaration order', () => {
+    // point inside living (first) wins even if listed again later — sanity on order
+    expect(roomAt(ZONES, { x: 480, y: 360 })).toBe('living');
+  });
+});

@@ -1,19 +1,19 @@
 ---
-gsd_state_version: 1.0
+gsd_state_version: "1.0"
 milestone: v1.0
-milestone_name: milestone
-current_phase: 2 (Multi-Room)
 current_plan: 2
 status: executing
-stopped_at: Completed 02-01-PLAN.md
-last_updated: "2026-10-21T10:19:47.030Z"
+stopped_at: Completed 02-02-PLAN.md
+last_updated: "2026-10-21T11:00:32.370Z"
+state_head: 66ea82e94081f94a7cf52bf28b574ef063ad04af
 progress:
-  total_phases: 4
+  total_phases: 8
   completed_phases: 3
-  total_plans: 10
+  total_plans: 5
   completed_plans: 9
+milestone_name: milestone
+current_phase: 2 (Multi-Room)
 current_phase_name: Multi-Room
-state_head: 6414cec325463d4149be2c21dcb21a50518013d4
 ---
 
 # State: Darkfolio
@@ -91,6 +91,7 @@ state_head: 6414cec325463d4149be2c21dcb21a50518013d4
 | Phase 01 P02 | ~15min | 2 tasks | 6 files |
 | Phase 01 P03 | 20min | 2 tasks | 2 files |
 | Phase 02 P01 | 10min | 3 tasks | 10 files |
+| Phase 02 P02 | 25min | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -117,8 +118,8 @@ state_head: 6414cec325463d4149be2c21dcb21a50518013d4
 
 ## Session Continuity
 
-**Last session:** 2026-10-21T10:19:46.945Z
-**Stopped at:** Completed 02-01-PLAN.md
+**Last session:** 2026-10-21T11:00:32.065Z
+**Stopped at:** Completed 02-02-PLAN.md
 **Resume file:** None
 
 **Next session resume:**
@@ -143,3 +144,4 @@ state_head: 6414cec325463d4149be2c21dcb21a50518013d4
 - [Phase 01]: phaser pinned exactly 4.2.1; Player uses handleInput; zoom 4 on scene camera
 - [Phase 01]: Gate listener uses keyboard.once('keydown'); GateScene reads no movement keys and never sets zoom
 - [Phase 01]: Player facing notch via four baked directional textures; diagonal facing is vertical-first
+- [Phase 02]: Plan 02 complete: west door pair, dense Bedroom, yard dressing; GAME-04/ROOM-01/ROOM-02 delivered
