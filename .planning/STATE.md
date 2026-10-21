@@ -3,43 +3,44 @@ gsd_state_version: "1.0"
 milestone: v1.0
 current_plan: Not started
 status: executing
-stopped_at: Phase 00.1 complete, ready to plan Phase 1
-last_updated: "2026-10-15T23:46:00.874Z"
-state_head: 31dac225adee318bef183914c253bfb206f25630
+stopped_at: Phase 1 complete, ready to plan Phase 2
+last_updated: "2026-10-20T08:50:55.354Z"
+state_head: b0e28535e1f3d4a789d15b7d7ef58b994d3ebbc4
 progress:
   total_phases: 8
   completed_phases: 2
-  total_plans: 0
+  total_plans: 3
   completed_plans: 5
+  percent: 13
 milestone_name: milestone
-current_phase: 1
-current_phase_name: Core Game Loop
+current_phase: 2
+current_phase_name: Multi-Room
 ---
 
 # State: Darkfolio
 
-*Last updated: 2026-10-16 after Phase 00.1 completion + transition*
+*Last updated: 2026-10-20 after Phase 1 completion + transition*
 
 ## Project Reference
 
 **Project:** Darkfolio — 16-bit RPG-style portfolio (Astro 7.3.5 + Phaser 4.2.1 + TypeScript ^5)
 **Core Value:** The portfolio is the experience — observable behavior (walking, interacting, opening overlays) IS the deliverable, not a decoration around it.
-**Repo:** `/home/jetson/github/darkfolio` (toolchain live on `chore-toolchain-foundation`; see `.planning/PROJECT.md`)
+**Repo:** `/home/jetson/github/darkfolio` (Phase 1 live on `feat/core-game-loop`; see `.planning/PROJECT.md`)
 **Mode:** mvp (vertical slices — every phase delivers a runnable, end-to-end capability)
 **Granularity:** standard (per `.planning/config.json`)
-**Current focus:** Phase 1 — Core Game Loop
+**Current focus:** Phase 02 — Multi-Room
 
 ## Current Position
 
-- **Current phase:** 1 (Core Game Loop)
+- **Current phase:** 2 (Multi-Room)
 
 **Current Plan:** Not started
-**Total Plans in Phase:** TBD (plan-phase 1 will set)
+**Total Plans in Phase:** TBD
 
-- **Status:** ✅ Phase 00.1 complete (UAT 1/1 passed, VERIFICATION flipped to passed, SECURITY threats_open: 0, NYQUIST-compliant) — ready to plan Phase 1
-- **Active branch:** `chore-toolchain-foundation` (merge to `master` via PR per AGENTS.md when convenient)
-- **Last completed phase:** 00.1 — Agent Team & Skills, 2026-10-16
-- **Next action:** `/gsd-discuss-phase 1` (CONTEXT.md absent) then `/gsd-plan-phase 1`
+- **Status:** ✅ Phase 1 complete (UAT 3/3 passed, VERIFICATION flipped to passed, SECURITY threats_open: 0) — ready to plan Phase 2
+- **Active branch:** `feat/core-game-loop` (Phase 1; PR to trunk per AGENTS.md)
+- **Last completed phase:** 1 — Core Game Loop, 2026-10-20
+- **Next action:** `/gsd-discuss-phase 2` (CONTEXT.md absent) then `/gsd-plan-phase 2`
 
 ## Phase Status
 
@@ -47,8 +48,8 @@ current_phase_name: Core Game Loop
 |-------|---------------------|----------------------|-------|-------|
 | 0 — Setup (Foundation)        | `chore-toolchain-foundation`           | ✅ Complete (2026-10-15) | 1/1 | Foundation — no v1 reqs; enables every other phase |
 | 00.1 — Agent Team & Skills    | `chore-toolchain-foundation`           | ✅ Complete (2026-10-16) | 4/4 | Meta — no v1 reqs; UAT 1/1, SECURITY 0 open, Nyquist-compliant |
-| 1 — Core Game Loop            | `feat-core-loop`       | ▶ Next                  | 0/? | GAME-01, GAME-02, GAME-03 |
-| 2 — Multi-Room                | `feat-multi-room`      | ⏳ Pending            | 0/? | GAME-04, ROOM-01, ROOM-02 — gateway to parallel branches |
+| 1 — Core Game Loop            | `feat/core-game-loop`       | ✅ Complete (2026-10-20) | 3/3 | GAME-01, GAME-02, GAME-03 — UAT 3/3, SECURITY 0 open |
+| 2 — Multi-Room                | `feat/multi-room`      | ▶ Next            | 0/? | GAME-04, ROOM-01, ROOM-02 — gateway to parallel branches |
 | 3 — Interaction               | `feat-interaction`     | ⏳ Pending            | 0/? | INTR-01..05 |
 | 4 — Lighting                  | `feat-lighting`        | ⏳ Pending            | 0/? | LITE-01..03 |
 | 5 — Audio                     | `feat-audio`           | ⏳ Pending            | 0/? | AUD-01..03 |
@@ -87,6 +88,9 @@ current_phase_name: Core Game Loop
 | Phase 00.1 P02 | 10min | 2 tasks | 7 files |
 | Phase 00.1 P03 | 20 | 2 tasks | 39 files |
 | Phase 00.1 P04 | 15min | 2 tasks | 2 files |
+| Phase 01 P01-01 | 40min | 2 tasks | 9 files |
+| Phase 01 P02 | ~15min | 2 tasks | 6 files |
+| Phase 01 P03 | 20min | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -100,13 +104,12 @@ current_phase_name: Core Game Loop
 
 ### Pending (will be addressed by downstream agents)
 
-- Commit the untracked `src/pages/index.astro` stub + `public/` assets (Phase 1 owner) — clean-clone build is green but emits 0 pages until then.
 - Phaser 4 lighting system specifics (Phase 4) — defer to phase planning.
 - Audio asset sources (Phase 5) — defer — freesound.org / opengameart.org / tabletaopaudio.com are the documented sources per prior plan.
 
 ### Constraints / blockers
 
-- None. (Phase 0 resolved the `base: '/darkfolio/'` pending item; astro.config.mjs verified in SC#1.)
+- ⚠️ [Phase 2] Living Room door gaps are zero-clearance (32 px gap, 32 px body) — room transitions must account for corner snagging; widen gaps or shrink bodies if door-trigger tiles prove unreliable (from 01 UAT Test 2 / W-2).
 
 ### Roadmap Evolution
 
@@ -114,14 +117,14 @@ current_phase_name: Core Game Loop
 
 ## Session Continuity
 
-**Last session:** 2026-10-16
-**Stopped at:** Phase 00.1 complete, ready to plan Phase 1
+**Last session:** 2026-10-20T08:55:00.000Z
+**Stopped at:** Phase 1 complete, ready to plan Phase 2
 **Resume file:** None
 
 **Next session resume:**
 
-1. Merge `chore-toolchain-foundation` → `master` when convenient (squash PR per AGENTS.md; branch also holds Phase 0 + 00.1 work).
-2. Run `/gsd-discuss-phase 1` (no CONTEXT.md yet) then `/gsd-plan-phase 1` — Core Game Loop; owner also commits the untracked `src/pages/index.astro` stub + `public/` assets.
+1. Open a PR for `feat/core-game-loop` → trunk (squash per AGENTS.md §"Squash discipline" — review `git log --oneline main..HEAD` first).
+2. Run `/gsd-discuss-phase 2` (no CONTEXT.md yet) then `/gsd-plan-phase 2` — Multi-Room; honor the Phase 1 coordinate contract (TILE/ROOM_*/WORLD_*/SPAWN_* exports) and the door-gap blocker above.
 3. Continue down the critical path; after Phase 2, dispatch Phases 3 / 4 / 5 / 7 in parallel per `parallelization: true`. The 7-agent team + `pnpm smoke:team` harness are live for dispatch (AGENTS.md §"Agent team roster").
 
 **Resume anchor:** this file plus `.planning/ROADMAP.md` are enough to recover the full project state. Branches are named by intent/feature (AGENTS.md §"Branches & PRs") — this table's Branch column is the phase↔branch bookkeeping.
@@ -137,3 +140,6 @@ current_phase_name: Core Game Loop
 - [Phase 00.1]: Full 7-agent roster committed flat (00.1-02) with D-03 models grounded verbatim; AGENTS.md roster+routing section mirrors frontmatter (SC#4)
 - [Phase 00.1]: Vendored 28 Phaser skills from pinned snapshot 02d893... + 2 hand-authored skills (astro, pixel-art)
 - [Phase 00.1]: qa smoke dispatch substituted qwen3.8-max for locked deepseek-v4-pro (D-13 environment gate)
+- [Phase 01]: phaser pinned exactly 4.2.1; Player uses handleInput; zoom 4 on scene camera
+- [Phase 01]: Gate listener uses keyboard.once('keydown'); GateScene reads no movement keys and never sets zoom
+- [Phase 01]: Player facing notch via four baked directional textures; diagonal facing is vertical-first

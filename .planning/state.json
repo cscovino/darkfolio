@@ -1,0 +1,53 @@
+{
+  "contract": "1.0.0",
+  "flavor": "core",
+  "milestone": "v1.0",
+  "phases": [
+    {
+      "number": "1",
+      "name": "Core Game Loop",
+      "status": "complete"
+    },
+    {
+      "number": "2",
+      "name": "Multi-Room",
+      "status": "pending"
+    },
+    {
+      "number": "3",
+      "name": "Interaction",
+      "status": "pending"
+    },
+    {
+      "number": "4",
+      "name": "Lighting",
+      "status": "pending"
+    },
+    {
+      "number": "5",
+      "name": "Audio",
+      "status": "pending"
+    },
+    {
+      "number": "6",
+      "name": "Content Integration",
+      "status": "pending"
+    },
+    {
+      "number": "7",
+      "name": "Custom Assets",
+      "status": "pending"
+    },
+    {
+      "number": "8",
+      "name": "Polish & Deploy",
+      "status": "pending"
+    }
+  ],
+  "next": {
+    "command": "/gsd-progress --next",
+    "label": "Advance to the next step",
+    "reason": "Phase 4 of 10 · 13% · executing"
+  },
+  "updated_at": "2026-10-20T08:50:55.397Z"
+}

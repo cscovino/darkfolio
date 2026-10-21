@@ -12,7 +12,9 @@ The portfolio is the experience — observable behavior (walking, interacting, o
 
 ### Validated
 
-(None yet — ship to validate)
+- ✓ **GAME-01**: Player can move (WASD / arrow keys) at 120 px/s — Phase 1
+- ✓ **GAME-02**: Player collides with walls and furniture — Phase 1
+- ✓ **GAME-03**: Camera follows the player (lerp, not snap) — Phase 1
 
 ### Active
 
@@ -22,9 +24,6 @@ Landing & shell
 - [ ] **LAND-03**: Mobile visitors see a blocking "play on desktop" overlay
 
 Game core
-- [ ] **GAME-01**: Player can move (WASD / arrow keys) at 120 px/s
-- [ ] **GAME-02**: Player collides with walls and furniture
-- [ ] **GAME-03**: Camera follows the player (lerp, not snap)
 - [ ] **GAME-04**: Three rooms (Living Room, Office, Bedroom), each 20x15 tiles
 
 Rooms & transitions
@@ -70,7 +69,7 @@ Deployment
 
 ## Context
 
-- Repo state: Phase 0 landed on `chore-toolchain-foundation` — toolchain live (Biome/Husky/lint-staged/commitlint/Vitest), `pnpm install && pnpm test && pnpm build` green on a clean clone; `src/pages/index.astro` stub and `public/` assets still untracked (Phase 1 owner commits them)
+- Repo state: Phase 1 (Core Game Loop) complete on `feat/core-game-loop` — Phaser 4.2.1 live, BootScene→PreloadScene→GateScene→LivingRoomScene chain running, 120 px/s movement + wall/furniture collision + lerped camera UAT-verified (3/3). `src/pages/index.astro` mounts the game via `GameCanvas.astro`.
 - Aesthetic: 16-bit pixel art, "Darkwood gritty" palette (browns `#4A3729`/`#6B4E3D`/`#8B6F5E`, grays `#2A2A2A`/`#3D3D3D`/`#555555`, muted greens `#3A4A3A`/`#4A5A4A`, accents warm yellow `#FFA500` / cold blue)
 - Dialog tone: humorous / meta, breaks the fourth wall
 - Game mechanics: Phaser 4.2.1 + Arcade Physics, 60 fps target, 16x16 tiles, 32x32 character
@@ -107,6 +106,10 @@ Deployment
 | Team agents flat in `.opencode/agents/` + `task: deny` leaves | OpenCode 2.0.29 doesn't discover nested `team/` agents; leaves prevent subagent sprawl during `/gsd-autonomous` | Good (Phase 00.1) |
 | CLI dispatch passes `--model` explicitly (never rely on agent frontmatter model) | 2.0.29 `opencode run` silently ignores frontmatter model — smoke proof in `.verify/smoke-*.log` | Good (Phase 00.1) |
 | Phaser skills vendored from pinned `phaserjs/phaser` snapshot, no auto-update | Provenance + supply-chain control (T-00.1-08); `PHASER-SNAPSHOT.md` is authoritative | Good (Phase 00.1) |
+| Movement math as pure framework-free helper (`velocityFromKeys`) unit-tested before the Phaser layer | Keeps collision/camera code thin; diagonals normalized centrally | Good (Phase 1) |
+| Living Room geometry hand-placed rectangles, no tilemap until Phase 2; scene constants (TILE/ROOM_W/H/WORLD_W/H/SPAWN_X/Y) are the coordinate contract | Cheap to iterate; Phase 2 rooms reuse the contract | Good (Phase 1) |
+| Player facing notch via four baked directional textures swapped on facing change; diagonal facing vertical-first | No per-frame Graphics redraw; placeholder art until Phase 7 | Good (Phase 1) |
+| Camera zoom 4 on the scene camera (not game config); `startFollow(…, 0.05, 0.05)` lerp | UI-SPEC canvas framing; smooth trail confirmed in UAT | Good (Phase 1) |
 
 ## Evolution
 
@@ -126,4 +129,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-10-16 after Phase 00.1*
+*Last updated: 2026-10-20 after Phase 1*

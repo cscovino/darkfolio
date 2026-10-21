@@ -1,0 +1,24 @@
+<div id="game-frame" class="frame">
+  <div id="game-root"></div>
+</div>
+
+<script>
+  import { createGame } from '@/game/main';
+  createGame('game-root');
+</script>
+
+<style>
+  .frame {
+    width: 640px;
+    height: 480px;
+    max-width: calc(100vw - 40px);
+    max-height: calc(100dvh - 40px);
+    border: 4px solid #4a3729;
+    box-sizing: content-box;
+  }
+
+  #game-root {
+    width: 100%;
+    height: 100%;
+  }
+</style>

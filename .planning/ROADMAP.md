@@ -11,7 +11,7 @@
 
 - [x] **Phase 0: Setup (Foundation)** — Toolchain, git hooks, Astro config, path aliases — ready for `pnpm install` / `pnpm test` / `pnpm build` (completed 2026-10-15)
 - [x] **Phase 00.1: Agent Team & Skills** (INSERTED) — 7 specialist agents with per-role models, Phaser/Astro/pixel-art skills, near-autonomous execution (completed 2026-10-16)
-- [ ] **Phase 1: Core Game Loop** — Player walks the Living Room with movement, collision, and camera follow
+- [x] **Phase 1: Core Game Loop** — Player walks the Living Room with movement, collision, and camera follow (completed 2026-10-20)
 - [ ] **Phase 2: Multi-Room** — Three 20×15 rooms (Living, Office, Bedroom) connected by slide-transition doors
 - [ ] **Phase 3: Interaction** — E-key prompts, typewriter dialog, CRT overlays (Projects/Skills/Contact), revisit variants
 - [ ] **Phase 4: Lighting** — 70% darkness, player torch, colored lamp / computer / TV lights, subtle flicker
@@ -129,7 +129,16 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
   4. Camera follows the player with smooth lerp (no snap)
   5. No console errors on boot
 
-**Plans**: TBD
+**Plans**: 3
+
+**Wave 1**
+
+- [x] 01-01-PLAN.md — tracer: phaser dep (behind blocking-human legitimacy gate) + TDD movement system + walkable-room slice page → canvas → scene → physics → camera (GAME-01/02/03)
+
+**Wave 2** *(blocked on Wave 1 completion; 01-02 and 01-03 run parallel — zero file overlap)*
+
+- [x] 01-02-PLAN.md — D-14 boot chain + press-any-key GateScene (UI-SPEC copy contract) + STATE.md housekeeping tracking (GAME-01)
+- [x] 01-03-PLAN.md — Living Room element map: checkerboard floor, D-01 furniture in `solids`, D-02-locked door gaps + D-08 player outline/notch (GAME-02)
 
 ---
 
@@ -292,6 +301,8 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 
 **UI hint**: yes (title screen + loading progress + mobile-blocking overlay)
 
+**Follow-ups from Phase 1 UAT**: Phaser lib itself loads slowly — show loading progress during bundle boot, not just asset preload (deferred 2026-10-20, source: 01-UAT.md Test 1)
+
 ---
 
 ## Progress
@@ -300,7 +311,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 |-------|----------------|----------|-----------|
 | 0. Setup (Foundation)        | 1/1 | Complete    | 2026-10-15 |
 | 00.1. Agent Team & Skills (INSERTED) | 4/4 | Complete    | 2026-10-16 |
-| 1. Core Game Loop            | 0/? | Not started            | - |
+| 1. Core Game Loop            | 3/3 | Complete    | 2026-10-20 |
 | 2. Multi-Room                | 0/? | Not started            | - |
 | 3. Interaction               | 0/? | Not started            | - |
 | 4. Lighting                  | 0/? | Not started            | - |

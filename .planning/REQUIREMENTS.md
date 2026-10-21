@@ -13,9 +13,9 @@
 
 ### Game core
 
-- [ ] **GAME-01**: Player can move (WASD / arrow keys) at 120 px/s
-- [ ] **GAME-02**: Player collides with walls and furniture
-- [ ] **GAME-03**: Camera follows the player (lerp, not snap)
+- [x] **GAME-01**: Player can move (WASD / arrow keys) at 120 px/s
+- [x] **GAME-02**: Player collides with walls and furniture
+- [x] **GAME-03**: Camera follows the player (lerp, not snap)
 - [ ] **GAME-04**: Three rooms (Living Room, Office, Bedroom), each 20x15 tiles
 
 ### Rooms & transitions
@@ -97,9 +97,9 @@ Roadmap-confirmed mapping. Every v1 requirement below maps to exactly one phase;
 
 | Requirement | Phase              | Status |
 |-------------|--------------------|--------|
-| GAME-01     | Phase 1 — Core Game Loop      | Pending |
-| GAME-02     | Phase 1 — Core Game Loop      | Pending |
-| GAME-03     | Phase 1 — Core Game Loop      | Pending |
+| GAME-01     | Phase 1 — Core Game Loop      | Complete |
+| GAME-02     | Phase 1 — Core Game Loop      | Complete |
+| GAME-03     | Phase 1 — Core Game Loop      | Complete |
 | GAME-04     | Phase 2 — Multi-Room          | Pending |
 | ROOM-01     | Phase 2 — Multi-Room          | Pending |
 | ROOM-02     | Phase 2 — Multi-Room          | Pending |
