@@ -161,7 +161,10 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
   5. Player enters each room at the correct tile (the door they just came through)
   6. Collision and camera follow continue to work in all three rooms
 
-**Plans**: TBD
+**Plans**: 1/2 plans executed
+
+- [x] 02-01-PLAN.md
+- [ ] 02-02-PLAN.md
 
 ---
 
@@ -312,7 +315,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 | 0. Setup (Foundation)        | 1/1 | Complete    | 2026-10-15 |
 | 00.1. Agent Team & Skills (INSERTED) | 4/4 | Complete    | 2026-10-16 |
 | 1. Core Game Loop            | 3/3 | Complete    | 2026-10-20 |
-| 2. Multi-Room                | 0/? | Not started            | - |
+| 2. Multi-Room                | 1/2 | In Progress|  |
 | 3. Interaction               | 0/? | Not started            | - |
 | 4. Lighting                  | 0/? | Not started            | - |
 | 5. Audio                     | 0/? | Not started            | - |

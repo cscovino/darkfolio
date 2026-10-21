@@ -65,4 +65,13 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
       this.setTexture(texKey(next));
     }
   }
+
+  setFacing(f: Facing): void {
+    this.facing = f;
+    this.setTexture(texKey(f));
+  }
+
+  getFacing(): Facing {
+    return this.facing;
+  }
 }
