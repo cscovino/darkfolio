@@ -86,6 +86,18 @@ For pure logic (= systems, data, helpers): **TDD-lite** — write the failing vi
 
 After every feature OR fix passes the gate, run the **ponytail audit** on the diff and apply its simplifications before declaring done.
 
+## Pre-verification hook (always)
+
+Before the **first** `/gsd-verify-work {phase}` of a phase (not on a resume), the branch must be trimmed to its final shape — so the verification report is generated against the code that actually ships, and its digest stays fresh.
+
+1. **Audit** — run the **ponytail audit** on the whole tree (not a diff).
+2. **Apply** — apply the findings. Anything that would break a locked decision (D-xx), a canonical file list in `.planning/PLAN.md`, or an already-verified artifact is **skipped with a one-line reason and surfaced to the user** — never silently dropped, never silently applied.
+3. **Gate** — re-run the §"Pre-commit gate" after the changes.
+4. **Squash** — trim `main..HEAD` to the fewest reviewable commits, grouped per subsystem, per §"Squash discipline". Do this *before* the verification artifacts exist, so no report has to be regenerated afterwards.
+5. **Verify** — only then run `/gsd-verify-work {phase}`.
+
+Skipping steps 1–3 leaves the report covering code that no longer exists (`verification.status` → `stale`, route `execute-phase`). Skipping step 4 hands the reviewer a 40-commit branch instead of a readable one.
+
 ## Always
 
 - Use path aliases (`@/game/...`) per `.planning/PLAN.md` §"Path Aliases".
@@ -136,7 +148,7 @@ This repo runs the GSD (Get-Shit-Done) workflow on top of the operational rules 
 - `/gsd-discuss-phase N` — clarify approach for phase N before planning.
 - `/gsd-plan-phase N` — decompose a phase into executable plans.
 - `/gsd-execute-phase` — run plans in parallel waves.
-- `/gsd-verify-work` — validate after execution.
+- `/gsd-verify-work` — validate after execution. Run the §"Pre-verification hook" first (audit → apply → gate → squash).
 - `/gsd-complete-milestone` — archive and reset at milestone boundaries.
 
 Quick reference lives in `.opencode/skills/gsd-*`. Always read `.planning/STATE.md` first to recover session context.
