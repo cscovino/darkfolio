@@ -13,6 +13,7 @@ import {
   ROOM_H,
   ROOM_W,
   ROOM_ZONES,
+  type RoomLayout,
   SPAWN_X,
   SPAWN_Y,
   TILE,
@@ -23,7 +24,6 @@ import {
 } from './rooms';
 
 type CenterRect = readonly [number, number, number, number, number?];
-type Layout = typeof LIVING_LAYOUT;
 
 function toRect(t: CenterRect): Rect {
   const [x, y, w, h] = t;
@@ -40,19 +40,19 @@ function translate(r: Rect, ox: number, oy: number): Rect {
   return { x: r.x + ox, y: r.y + oy, w: r.w, h: r.h };
 }
 
-function layoutWalls(layout: Layout, ox: number, oy: number): Rect[] {
+function layoutWalls(layout: RoomLayout, ox: number, oy: number): Rect[] {
   return layout.walls.map((t) => translate(toRect(t), ox, oy));
 }
 
 // Lane and rest-spot rects are room-local; layout solids are room-local too.
-function expectClearOfSolids(layout: Layout, rect: Rect): void {
+function expectClearOfSolids(layout: RoomLayout, rect: Rect): void {
   for (const t of layout.solids) {
     expect(rectsOverlap(toRect(t), rect)).toBe(false);
   }
 }
 
 function hasSolid(
-  layout: Layout,
+  layout: RoomLayout,
   x: number,
   y: number,
   w: number,

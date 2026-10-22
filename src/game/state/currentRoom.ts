@@ -9,7 +9,3 @@ export function getCurrentRoom(): RoomId {
 export function setCurrentRoom(room: RoomId): void {
   currentRoom = room;
 }
-
-export function setCurrentRoomFrom(room: RoomId | null): void {
-  if (room !== null) setCurrentRoom(room);
-}

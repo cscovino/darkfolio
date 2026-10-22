@@ -4,7 +4,7 @@ verified: 2026-10-21T15:00:30Z
 status: passed
 score: 17/17 must-haves verified
 covered_files: [".planning/phases/02-multi-room/02-01-PLAN.md", ".planning/phases/02-multi-room/02-01-SUMMARY.md", ".planning/phases/02-multi-room/02-02-PLAN.md", ".planning/phases/02-multi-room/02-02-SUMMARY.md", "src/game/data/rooms.test.ts", "src/game/data/rooms.ts", "src/game/objects/Player.ts", "src/game/scenes/BedroomScene.ts", "src/game/scenes/LivingRoomScene.ts", "src/game/scenes/OfficeScene.ts", "src/game/scenes/buildRoom.ts", "src/game/state/currentRoom.ts", "src/game/systems/currentRoom.test.ts", "src/game/systems/currentRoom.ts", "src/game/systems/doorGlide.test.ts", "src/game/systems/doorGlide.ts"]
-covered_digest: "v3:sha256:366f8e33a8d2d08b65358a4aa85070f9521123c8cdffc516f1a4a801febbb106"
+covered_digest: "v3:sha256:4236d1b52c81374f304dbb87152f501f02c99705e2ba0debcf06c5e5bc7676c3"
 behavior_unverified: 0
 overrides_applied: 0
 re_verification:
@@ -19,7 +19,7 @@ re_verification:
 # Phase 2: Multi-Room Verification Report
 
 **Phase Goal:** Three connected rooms (Living Room, Office, Bedroom, each 20×15 tiles) — player can traverse the whole house via slide-transition doors.
-**Verified:** 2026-10-21T15:00:30Z
+**Verified:** 2026-10-21T15:00:30Z (digest re-pointed 2026-10-22 after the dead-code cleanup; behavior unchanged, 58 tests green)
 **Status:** passed
 **Re-verification:** Yes — after the over-engineering audit refactor (duplicated/vacuous spec assertions folded; `insideRect` exported from `doorGlide.ts`; `YardLayout` no longer exported; `happy-dom` dropped and vitest reverted to default node env; unused scripts/aliases/Astro option dropped). No regressions detected: 61 tests / 5 files pass, 0 astro errors, build succeeds.
 

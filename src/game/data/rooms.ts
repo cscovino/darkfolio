@@ -169,8 +169,8 @@ export const DOOR_NORTH: DoorDef = {
   gap: { x: 384, y: 224, w: 48, h: 32 },
   axis: { x: 408, y: 240 },
   sides: [
-    { from: 'living', dir: 'up', dest: 'office' },
-    { from: 'office', dir: 'down', dest: 'living' },
+    { dir: 'up', dest: 'office' },
+    { dir: 'down', dest: 'living' },
   ],
 };
 
@@ -180,8 +180,8 @@ export const DOOR_WEST: DoorDef = {
   gap: { x: 304, y: 320, w: 32, h: 48 },
   axis: { x: 320, y: 344 },
   sides: [
-    { from: 'living', dir: 'left', dest: 'bedroom' },
-    { from: 'bedroom', dir: 'right', dest: 'living' },
+    { dir: 'left', dest: 'bedroom' },
+    { dir: 'right', dest: 'living' },
   ],
 };
 

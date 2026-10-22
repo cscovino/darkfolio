@@ -1,21 +1,19 @@
+import type { Dir } from '@/systems/doorGlide';
 import type { KeyState } from '@/systems/movement';
 import { velocityFromKeys } from '@/systems/movement';
 import Phaser from 'phaser';
 
 const PLAYER_TEX = '__PLAYER__';
 
-export type Facing = 'up' | 'down' | 'left' | 'right';
-
-const FACINGS: readonly Facing[] = ['up', 'down', 'left', 'right'];
-const NOTCH: Record<Facing, [number, number]> = {
+const FACINGS: readonly Dir[] = ['up', 'down', 'left', 'right'];
+const NOTCH: Record<Dir, [number, number]> = {
   up: [12, 4],
   down: [12, 20],
   left: [4, 12],
   right: [20, 12],
 };
 
-const texKey = (facing: Facing): string =>
-  `${PLAYER_TEX}_${facing.toUpperCase()}`;
+const texKey = (facing: Dir): string => `${PLAYER_TEX}_${facing.toUpperCase()}`;
 
 export function ensurePlayerTexture(scene: Phaser.Scene): void {
   for (const facing of FACINGS) {
@@ -38,7 +36,7 @@ export function ensurePlayerTexture(scene: Phaser.Scene): void {
 
 export class Player extends Phaser.Physics.Arcade.Sprite {
   static readonly SPEED = 120;
-  private facing: Facing = 'up';
+  private facing: Dir = 'up';
 
   constructor(scene: Phaser.Scene, x: number, y: number) {
     super(scene, x, y, texKey('up'));
@@ -50,7 +48,7 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
   handleInput(keys: KeyState): void {
     const v = velocityFromKeys(keys, Player.SPEED);
     this.setVelocity(v.x, v.y);
-    const next: Facing =
+    const next: Dir =
       v.y < 0
         ? 'up'
         : v.y > 0
@@ -66,12 +64,12 @@ export class Player extends Phaser.Physics.Arcade.Sprite {
     }
   }
 
-  setFacing(f: Facing): void {
+  setFacing(f: Dir): void {
     this.facing = f;
     this.setTexture(texKey(f));
   }
 
-  getFacing(): Facing {
+  getFacing(): Dir {
     return this.facing;
   }
 }

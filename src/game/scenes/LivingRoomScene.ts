@@ -12,7 +12,7 @@ import {
   WORLD_W,
   YARD_LAYOUT,
 } from '@/data/rooms';
-import { setCurrentRoom, setCurrentRoomFrom } from '@/game/state/currentRoom';
+import { setCurrentRoom } from '@/game/state/currentRoom';
 import { Player, ensurePlayerTexture } from '@/objects/Player';
 import { buildBedroom } from '@/scenes/BedroomScene';
 import { buildOffice } from '@/scenes/OfficeScene';
@@ -85,9 +85,8 @@ export class LivingRoomScene extends Phaser.Scene {
       this.startGlide(hit.door, hit.side);
       return;
     }
-    setCurrentRoomFrom(
-      roomAt(ROOM_ZONES, { x: this.player.x, y: this.player.y }),
-    );
+    const room = roomAt(ROOM_ZONES, { x: this.player.x, y: this.player.y });
+    if (room) setCurrentRoom(room);
   }
 
   private drawYard(): void {

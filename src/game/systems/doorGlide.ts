@@ -1,7 +1,7 @@
 import type { Rect, RoomId, Vec } from './currentRoom';
 
 export type Dir = 'up' | 'down' | 'left' | 'right';
-export type DoorSide = { from: RoomId; dir: Dir; dest: RoomId };
+export type DoorSide = { dir: Dir; dest: RoomId };
 export type DoorDef = {
   id: string;
   zone: Rect;
@@ -10,12 +10,12 @@ export type DoorDef = {
   sides: DoorSide[];
 };
 
-export const REACH = 16;
-export const GLIDE_STEP = 48;
+const REACH = 16;
+const GLIDE_STEP = 48;
 export const GLIDE_MS = 700;
 export const GLIDE_EASE = 'Sine.easeInOut';
 
-export function insideRect(rect: Rect, p: Vec): boolean {
+function insideRect(rect: Rect, p: Vec): boolean {
   return (
     p.x >= rect.x &&
     p.x < rect.x + rect.w &&
@@ -24,16 +24,16 @@ export function insideRect(rect: Rect, p: Vec): boolean {
   );
 }
 
-export function reachRect(zone: Rect, dir: Dir, reach = REACH): Rect {
+export function reachRect(zone: Rect, dir: Dir): Rect {
   switch (dir) {
     case 'up':
-      return { ...zone, h: zone.h + reach };
+      return { ...zone, h: zone.h + REACH };
     case 'down':
-      return { ...zone, y: zone.y - reach, h: zone.h + reach };
+      return { ...zone, y: zone.y - REACH, h: zone.h + REACH };
     case 'left':
-      return { ...zone, w: zone.w + reach };
+      return { ...zone, w: zone.w + REACH };
     case 'right':
-      return { ...zone, x: zone.x - reach, w: zone.w + reach };
+      return { ...zone, x: zone.x - REACH, w: zone.w + REACH };
   }
 }
 

@@ -1,15 +1,14 @@
 import { ROOM_H, ROOM_W, TILE } from '@/data/rooms';
 import type { RoomLayout } from '@/data/rooms';
+import type { Vec } from '@/systems/currentRoom';
 import type Phaser from 'phaser';
-
-type Origin = { x: number; y: number };
 
 /** Draws one room's floor grid, walls, solids and decor at a house origin. */
 export function buildRoom(
   scene: Phaser.Scene,
   solids: Phaser.Physics.Arcade.StaticGroup,
   layout: RoomLayout,
-  origin: Origin,
+  origin: Vec,
 ): void {
   const g = scene.add.graphics();
   for (let row = 0; row < ROOM_H; row++) {

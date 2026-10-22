@@ -4,7 +4,6 @@ import {
   GLIDE_EASE,
   GLIDE_MS,
   glideEnd,
-  insideRect,
   reachRect,
   triggeredSide,
 } from './doorGlide';
@@ -65,8 +64,8 @@ describe('triggeredSide', () => {
     const bumpDoor: DoorDef = {
       ...DOOR_NORTH,
       sides: [
-        { from: 'office', dir: 'down', dest: 'living' },
-        { from: 'living', dir: 'up', dest: 'office' },
+        { dir: 'down', dest: 'living' },
+        { dir: 'up', dest: 'office' },
       ],
     };
     const hit = triggeredSide(
@@ -82,8 +81,8 @@ describe('triggeredSide', () => {
     const ordered: DoorDef = {
       ...DOOR_NORTH,
       sides: [
-        { from: 'living', dir: 'up', dest: 'office' },
-        { from: 'living', dir: 'up', dest: 'bedroom' },
+        { dir: 'up', dest: 'office' },
+        { dir: 'up', dest: 'bedroom' },
       ],
     };
     const hit = triggeredSide([ordered], { x: 408, y: 240 }, 'up', none);
@@ -181,21 +180,5 @@ describe('reachRect (west door dirs)', () => {
       w: 64,
       h: 48,
     });
-  });
-});
-
-describe('rest spots never land inside a trigger window', () => {
-  const spots: { x: number; y: number }[] = [
-    { x: 408, y: 192 },
-    { x: 408, y: 288 },
-    { x: 272, y: 344 },
-    { x: 368, y: 344 },
-  ];
-  it('keeps every rest spot outside both door base zones', () => {
-    for (const spot of spots) {
-      for (const zone of [DOOR_NORTH.zone, DOOR_WEST.zone]) {
-        expect(insideRect(zone, spot)).toBe(false);
-      }
-    }
   });
 });

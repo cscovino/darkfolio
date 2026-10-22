@@ -2,8 +2,6 @@
   "name": "darkfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -17,9 +15,6 @@
     "prepare": "husky",
     "smoke:team": "bash scripts/smoke-team.sh"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
