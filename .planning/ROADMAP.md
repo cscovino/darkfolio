@@ -12,7 +12,7 @@
 - [x] **Phase 0: Setup (Foundation)** — Toolchain, git hooks, Astro config, path aliases — ready for `pnpm install` / `pnpm test` / `pnpm build` (completed 2026-10-15)
 - [x] **Phase 00.1: Agent Team & Skills** (INSERTED) — 7 specialist agents with per-role models, Phaser/Astro/pixel-art skills, near-autonomous execution (completed 2026-10-16)
 - [x] **Phase 1: Core Game Loop** — Player walks the Living Room with movement, collision, and camera follow (completed 2026-10-20)
-- [ ] **Phase 2: Multi-Room** — Three 20×15 rooms (Living, Office, Bedroom) connected by slide-transition doors
+- [x] **Phase 2: Multi-Room** — Three 20×15 rooms (Living, Office, Bedroom) connected by slide-transition doors (completed 2026-10-21)
 - [ ] **Phase 3: Interaction** — E-key prompts, typewriter dialog, CRT overlays (Projects/Skills/Contact), revisit variants
 - [ ] **Phase 4: Lighting** — 70% darkness, player torch, colored lamp / computer / TV lights, subtle flicker
 - [ ] **Phase 5: Audio** — Ambient loops, contextual SFX, mute toggle (corner button + M key) persisting across reloads
@@ -161,7 +161,10 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
   5. Player enters each room at the correct tile (the door they just came through)
   6. Collision and camera follow continue to work in all three rooms
 
-**Plans**: TBD
+**Plans**: 2/2 plans complete
+
+- [x] 02-01-PLAN.md
+- [x] 02-02-PLAN.md
 
 ---
 
@@ -312,7 +315,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 | 0. Setup (Foundation)        | 1/1 | Complete    | 2026-10-15 |
 | 00.1. Agent Team & Skills (INSERTED) | 4/4 | Complete    | 2026-10-16 |
 | 1. Core Game Loop            | 3/3 | Complete    | 2026-10-20 |
-| 2. Multi-Room                | 0/? | Not started            | - |
+| 2. Multi-Room                | 2/2 | Complete    | 2026-10-21 |
 | 3. Interaction               | 0/? | Not started            | - |
 | 4. Lighting                  | 0/? | Not started            | - |
 | 5. Audio                     | 0/? | Not started            | - |

@@ -2,8 +2,6 @@
   "name": "darkfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
@@ -11,17 +9,12 @@
     "format": "biome format --write .",
     "format:check": "biome format .",
     "lint": "biome check .",
-    "check:biome": "biome check .",
-    "astro:check": "astro check",
     "test": "vitest run",
     "test:watch": "vitest",
     "commitlint": "commitlint",
     "prepare": "husky",
     "smoke:team": "bash scripts/smoke-team.sh"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "devEngines": {
     "packageManager": {
       "name": "pnpm",
@@ -40,7 +33,6 @@
     "@biomejs/biome": "^1.9.4",
     "@commitlint/cli": "^19.8.1",
     "@commitlint/config-conventional": "^19.8.1",
-    "happy-dom": "^15.11.7",
     "husky": "^9.1.7",
     "lint-staged": "^15.5.2",
     "typescript": "^5.9.3",

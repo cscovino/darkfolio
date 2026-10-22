@@ -16,12 +16,12 @@
 - [x] **GAME-01**: Player can move (WASD / arrow keys) at 120 px/s
 - [x] **GAME-02**: Player collides with walls and furniture
 - [x] **GAME-03**: Camera follows the player (lerp, not snap)
-- [ ] **GAME-04**: Three rooms (Living Room, Office, Bedroom), each 20x15 tiles
+- [x] **GAME-04**: Three rooms (Living Room, Office, Bedroom), each 20x15 tiles
 
 ### Rooms & transitions
 
-- [ ] **ROOM-01**: Doors trigger slide transitions between rooms
-- [ ] **ROOM-02**: Player spawns at the correct tile on entry
+- [x] **ROOM-01**: Doors trigger slide transitions between rooms
+- [x] **ROOM-02**: Player spawns at the correct tile on entry
 
 ### Interaction
 
@@ -100,9 +100,9 @@ Roadmap-confirmed mapping. Every v1 requirement below maps to exactly one phase;
 | GAME-01     | Phase 1 — Core Game Loop      | Complete |
 | GAME-02     | Phase 1 — Core Game Loop      | Complete |
 | GAME-03     | Phase 1 — Core Game Loop      | Complete |
-| GAME-04     | Phase 2 — Multi-Room          | Pending |
-| ROOM-01     | Phase 2 — Multi-Room          | Pending |
-| ROOM-02     | Phase 2 — Multi-Room          | Pending |
+| GAME-04     | Phase 2 — Multi-Room          | Complete |
+| ROOM-01     | Phase 2 — Multi-Room          | Complete |
+| ROOM-02     | Phase 2 — Multi-Room          | Complete |
 | INTR-01     | Phase 3 — Interaction         | Pending |
 | INTR-02     | Phase 3 — Interaction         | Pending |
 | INTR-03     | Phase 3 — Interaction         | Pending |
