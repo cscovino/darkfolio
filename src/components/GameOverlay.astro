@@ -1,0 +1,249 @@
+---
+import { CONTACT_NOTE, contacts, projects, skills } from '@/content/entries';
+import ContentList from './ContentList.astro';
+---
+<div id="game-overlay" class="panel" tabindex="-1" aria-hidden="true">
+  <div class="titlebar"><span id="overlay-title" class="title"></span></div>
+  <div id="overlay-status" class="status"></div>
+  <div class="content" tabindex="0">
+    <div data-page="projects" hidden>
+      <ContentList entries={projects} />
+    </div>
+    <div data-page="skills" hidden>
+      <ContentList entries={skills} />
+    </div>
+    <div data-page="contact" hidden>
+      <ContentList entries={contacts} note={CONTACT_NOTE} />
+    </div>
+    <div id="overlay-error" class="error" hidden>
+      <p class="error-heading">SIGNAL LOST</p>
+      <p>This screen failed to load. Press E to close the overlay and try again.</p>
+    </div>
+  </div>
+  <div class="footer">[E] or [ESC] to close</div>
+</div>
+
+<script>
+  import { SLIDE_IN_MS } from '@/systems/dialog';
+
+  const panel = document.getElementById('game-overlay');
+  const titleEl = document.getElementById('overlay-title');
+  const statusEl = document.getElementById('overlay-status');
+  const errorEl = document.getElementById('overlay-error');
+  const content = panel?.querySelector<HTMLElement>('.content') ?? null;
+
+  const SCROLL_KEYS = new Set([
+    'ArrowUp',
+    'ArrowDown',
+    'ArrowLeft',
+    'ArrowRight',
+    'PageUp',
+    'PageDown',
+    'Home',
+    'End',
+  ]);
+
+  // Ignore keys until the slide-in completes: a double-tap would otherwise
+  // close the just-opened panel and deadlock the scene's mode gate.
+  let ready = false;
+
+  function closePanel(): void {
+    content?.blur();
+    panel?.classList.remove('open');
+    panel?.setAttribute('aria-hidden', 'true');
+    window.dispatchEvent(new CustomEvent('darkfolio:overlay-close'));
+  }
+
+  if (panel && titleEl && statusEl) {
+    // The scene's SHUTDOWN handler can hide the panel without calling
+    // closePanel(); release focus so no focused descendant is left inside
+    // an aria-hidden panel.
+    const observer = new MutationObserver(() => {
+      if (
+        panel.getAttribute('aria-hidden') === 'true' &&
+        panel.contains(document.activeElement)
+      ) {
+        (document.activeElement as HTMLElement).blur();
+      }
+    });
+    observer.observe(panel, {
+      attributes: true,
+      attributeFilter: ['aria-hidden'],
+    });
+
+    // On document, not the panel: a click outside drops focus, and a
+    // panel-level listener would stop receiving E/Esc entirely.
+    document.addEventListener('keydown', (event) => {
+      if (!panel.classList.contains('open')) return;
+
+      // Scroll keys reach the browser, not Phaser's capture, so the focused
+      // .content scrolls natively.
+      if (SCROLL_KEYS.has(event.key)) {
+        event.stopPropagation();
+        return;
+      }
+
+      if (event.repeat || !ready) return;
+      if (event.key === 'e' || event.key === 'E' || event.key === 'Escape') {
+        // Stop the close press here so the scene never treats it as re-open.
+        event.stopPropagation();
+        closePanel();
+      }
+    });
+
+    // A click on the live room strip blurs the panel; refocus the scroller
+    // so keyboard focus stays inside the open panel.
+    panel.parentElement?.addEventListener('pointerdown', () => {
+      if (panel.classList.contains('open')) {
+        content?.focus({ preventScroll: true });
+      }
+    });
+
+    window.addEventListener('darkfolio:overlay', (event) => {
+      const detail = (
+        event as CustomEvent<{ page: string; statusLine: string }>
+      ).detail;
+      const key = detail.page.replace(/^\//, '');
+      ready = false;
+      window.setTimeout(() => {
+        ready = true;
+      }, SLIDE_IN_MS);
+      titleEl.textContent = key.toUpperCase();
+      statusEl.textContent = detail.statusLine;
+      let slot: HTMLElement | null = null;
+      panel.querySelectorAll<HTMLElement>('[data-page]').forEach((el) => {
+        if (el.dataset.page === key) slot = el;
+        el.hidden = el.dataset.page !== key;
+      });
+      // A missing slot renders SIGNAL LOST instead of retrying; E/Esc still
+      // close because the panel opens (and is focused) either way.
+      if (errorEl) errorEl.hidden = slot !== null;
+      if (content) content.scrollTop = 0;
+      panel.classList.add('open');
+      panel.setAttribute('aria-hidden', 'false');
+      content?.focus({ preventScroll: true });
+    });
+  }
+</script>
+
+<style>
+  .panel {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 43.333%;
+    box-sizing: border-box;
+    border: 2px solid #4a3729;
+    background-color: #2a2a2a;
+    background-image: linear-gradient(
+      rgba(74, 90, 74, 0.22),
+      rgba(74, 90, 74, 0.22)
+    );
+    display: flex;
+    flex-direction: column;
+    font-family: ui-monospace, 'Courier New', monospace;
+    transform: translateY(100%);
+    transition: transform 200ms ease-in;
+    outline: none;
+    z-index: 1;
+  }
+
+  .panel.open {
+    transform: translateY(0);
+    transition: transform 250ms ease-out;
+  }
+
+  .panel::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(0, 0, 0, 0.15) 0 1px,
+      transparent 1px 3px
+    );
+  }
+
+  .titlebar {
+    box-sizing: border-box;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    padding-left: 8px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  .title {
+    font-size: 3.125cqw;
+    font-weight: 700;
+    color: #e8dcc8;
+  }
+
+  .status {
+    box-sizing: border-box;
+    height: 20px;
+    padding-left: 8px;
+    font-size: 1.875cqw;
+    font-weight: 700;
+    line-height: 20px;
+    color: #ffa500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .content {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px;
+    font-size: 2.5cqw;
+    color: #e8dcc8;
+    scrollbar-width: thin;
+    scrollbar-color: #4a3729 transparent;
+    outline: none; /* the CRT frame is the focus affordance */
+  }
+
+  .content :global(::-webkit-scrollbar) {
+    width: 6px;
+  }
+
+  .content :global(::-webkit-scrollbar-thumb) {
+    background: #4a3729;
+  }
+
+  .error {
+    color: #e8dcc8;
+  }
+
+  .error p {
+    margin: 0;
+  }
+
+  .error p + p {
+    margin-top: 4px;
+  }
+
+  .error .error-heading {
+    font-weight: 700;
+  }
+
+  .footer {
+    box-sizing: border-box;
+    height: 18px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.875cqw;
+    color: #e8dcc8;
+    border-top: 1px solid rgba(0, 0, 0, 0.4);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .panel,
+    .panel.open {
+      transition-duration: 0ms;
+    }
+  }
+</style>

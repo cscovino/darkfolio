@@ -1,0 +1,8 @@
+---
+import ContentList from '@/components/ContentList.astro';
+import { projects } from '@/content/entries';
+import Page from '@/layouts/Page.astro';
+---
+<Page title="Projects — Darkfolio" heading="Projects">
+  <ContentList entries={projects} />
+</Page>

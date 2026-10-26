@@ -13,7 +13,7 @@
 - [x] **Phase 00.1: Agent Team & Skills** (INSERTED) — 7 specialist agents with per-role models, Phaser/Astro/pixel-art skills, near-autonomous execution (completed 2026-10-16)
 - [x] **Phase 1: Core Game Loop** — Player walks the Living Room with movement, collision, and camera follow (completed 2026-10-20)
 - [x] **Phase 2: Multi-Room** — Three 20×15 rooms (Living, Office, Bedroom) connected by slide-transition doors (completed 2026-10-21)
-- [ ] **Phase 3: Interaction** — E-key prompts, typewriter dialog, CRT overlays (Projects/Skills/Contact), revisit variants
+- [x] **Phase 3: Interaction** — E-key prompts, typewriter dialog, CRT overlays (Projects/Skills/Contact), revisit variants (completed 2026-10-26)
 - [ ] **Phase 4: Lighting** — 70% darkness, player torch, colored lamp / computer / TV lights, subtle flicker
 - [ ] **Phase 5: Audio** — Ambient loops, contextual SFX, mute toggle (corner button + M key) persisting across reloads
 - [ ] **Phase 6: Content Integration** — Projects / Skills / Contact pages wired into Astro content collections + in-game overlays
@@ -186,7 +186,21 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
   4. Pressing E or Esc closes the CRT overlay with a slide-down animation
   5. Revisiting any interactable after the first interaction shows a different dialog variant (selection persisted per object)
 
-**Plans**: TBD
+**Plans**: 5
+**Wave 1**
+- [x] 03-01-PLAN.md — tracer: E → typewriter dialog → CRT Projects overlay → close, one path on the Computer (proximity/dialog systems, zoom-1 UI, DOM bridge) (INTR-01, INTR-02, INTR-03, INTR-04)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [x] 03-02-PLAN.md — per-object revisit variant cycling + TV/lamp dialog-only flow with auto-dismiss (INTR-01, INTR-05)
+
+**Wave 3** *(blocked on Wave 2 completion)*
+- [x] 03-03-PLAN.md — Bookshelf/Phone overlays + /skills + /contact stub routes + WR-02 disposal + input-lock hardening (INTR-03, INTR-04)
+
+**Wave 4** *(gap closure)*
+- [x] 03-04-PLAN.md — host read-hold before the overlay handoff + reveal clock starts when the dialog lands (G-03-3) (INTR-02, INTR-03)
+
+**Wave 5** *(blocked on Wave 4 — both plans edit 03-UI-SPEC.md in disjoint rows, so 03-05 is serialized after 03-04)*
+- [x] 03-05-PLAN.md — document overflow removed at its source + overlay content owns keyboard scrolling (G-03-6) (INTR-03, INTR-04)
 
 ---
 
@@ -316,7 +330,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 | 00.1. Agent Team & Skills (INSERTED) | 4/4 | Complete    | 2026-10-16 |
 | 1. Core Game Loop            | 3/3 | Complete    | 2026-10-20 |
 | 2. Multi-Room                | 2/2 | Complete    | 2026-10-21 |
-| 3. Interaction               | 0/? | Not started            | - |
+| 3. Interaction               | 5/5 | Complete    | 2026-10-26 |
 | 4. Lighting                  | 0/? | Not started            | - |
 | 5. Audio                     | 0/? | Not started            | - |
 | 6. Content Integration       | 0/? | Not started            | - |
@@ -335,11 +349,11 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 | GAME-04 | Phase 2 | Pending |
 | ROOM-01 | Phase 2 | Pending |
 | ROOM-02 | Phase 2 | Pending |
-| INTR-01 | Phase 3 | Pending |
-| INTR-02 | Phase 3 | Pending |
-| INTR-03 | Phase 3 | Pending |
-| INTR-04 | Phase 3 | Pending |
-| INTR-05 | Phase 3 | Pending |
+| INTR-01 | Phase 3 | Complete |
+| INTR-02 | Phase 3 | Complete |
+| INTR-03 | Phase 3 | Complete |
+| INTR-04 | Phase 3 | Complete |
+| INTR-05 | Phase 3 | Complete |
 | LITE-01 | Phase 4 | Pending |
 | LITE-02 | Phase 4 | Pending |
 | LITE-03 | Phase 4 | Pending |

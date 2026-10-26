@@ -1,0 +1,77 @@
+---
+import type { Entry } from '@/content/entries';
+
+type Props = { entries: Entry[]; note?: string };
+
+const { entries, note } = Astro.props;
+---
+{entries.length === 0 ? (
+  <div class="empty">
+    <p class="heading">NOTHING HERE YET</p>
+    <p>No entries. Either the work is hiding or it was never done.</p>
+  </div>
+) : (
+  <ul class="entries">
+    {entries.map((entry) => (
+      <li>
+        {entry.href ? (
+          <a
+            href={entry.href}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <strong>{entry.title}</strong> — {entry.description}
+          </a>
+        ) : (
+          <>
+            <strong>{entry.title}</strong> — {entry.description}
+          </>
+        )}
+      </li>
+    ))}
+  </ul>
+)}
+{note ? <p class="note">{note}</p> : null}
+
+<style>
+  .entries {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color: #e8dcc8;
+  }
+
+  .entries li + li {
+    margin-top: 4px;
+  }
+
+  strong {
+    font-weight: 700;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+  }
+
+  .note {
+    margin: 4px 0 0;
+    color: #e8dcc8;
+  }
+
+  .empty {
+    color: #e8dcc8;
+  }
+
+  .empty p {
+    margin: 0;
+  }
+
+  .empty p + p {
+    margin-top: 4px;
+  }
+
+  .empty .heading {
+    font-weight: 700;
+  }
+</style>
