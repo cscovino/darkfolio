@@ -1,5 +1,9 @@
+---
+import GameOverlay from './GameOverlay.astro';
+---
 <div id="game-frame" class="frame">
   <div id="game-root"></div>
+  <GameOverlay />
 </div>
 
 <script>
@@ -9,12 +13,14 @@
 
 <style>
   .frame {
-    width: 640px;
-    height: 480px;
-    max-width: calc(100vw - 40px);
-    max-height: calc(100dvh - 40px);
+    position: relative;
+    overflow: hidden;
+    container-type: size;
+    box-sizing: border-box;
+    width: min(640px, calc(100vw - 40px), calc((100dvh - 40px) * 4 / 3));
+    aspect-ratio: 4 / 3;
+    height: auto;
     border: 4px solid #4a3729;
-    box-sizing: content-box;
   }
 
   #game-root {
