@@ -25,11 +25,11 @@
 
 ### Interaction
 
-- [ ] **INTR-01**: Player can press E near an interactable to trigger dialog
-- [ ] **INTR-02**: Dialog renders in a typewriter box at the bottom of the screen
-- [ ] **INTR-03**: Computer opens the Projects overlay; Bookshelf opens Skills; Phone opens Contact
-- [ ] **INTR-04**: Pressing E or Esc closes the CRT overlay
-- [ ] **INTR-05**: Revisiting an object after first interaction shows a different dialog variant
+- [x] **INTR-01**: Player can press E near an interactable to trigger dialog
+- [x] **INTR-02**: Dialog renders in a typewriter box at the bottom of the screen
+- [x] **INTR-03**: Computer opens the Projects overlay; Bookshelf opens Skills; Phone opens Contact
+- [x] **INTR-04**: Pressing E or Esc closes the CRT overlay
+- [x] **INTR-05**: Revisiting an object after first interaction shows a different dialog variant
 
 ### Lighting & atmosphere
 
@@ -103,11 +103,11 @@ Roadmap-confirmed mapping. Every v1 requirement below maps to exactly one phase;
 | GAME-04     | Phase 2 — Multi-Room          | Complete |
 | ROOM-01     | Phase 2 — Multi-Room          | Complete |
 | ROOM-02     | Phase 2 — Multi-Room          | Complete |
-| INTR-01     | Phase 3 — Interaction         | Pending |
-| INTR-02     | Phase 3 — Interaction         | Pending |
-| INTR-03     | Phase 3 — Interaction         | Pending |
-| INTR-04     | Phase 3 — Interaction         | Pending |
-| INTR-05     | Phase 3 — Interaction         | Pending |
+| INTR-01     | Phase 3 — Interaction         | Complete |
+| INTR-02     | Phase 3 — Interaction         | Complete |
+| INTR-03     | Phase 3 — Interaction         | Complete |
+| INTR-04     | Phase 3 — Interaction         | Complete |
+| INTR-05     | Phase 3 — Interaction         | Complete |
 | LITE-01     | Phase 4 — Lighting            | Pending |
 | LITE-02     | Phase 4 — Lighting            | Pending |
 | LITE-03     | Phase 4 — Lighting            | Pending |

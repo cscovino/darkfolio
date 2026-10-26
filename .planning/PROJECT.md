@@ -18,6 +18,11 @@ The portfolio is the experience — observable behavior (walking, interacting, o
 - ✓ **GAME-04**: Three rooms (Living Room, Office, Bedroom), each 20x15 tiles — Phase 2
 - ✓ **ROOM-01**: Doors trigger slide transitions between rooms — Phase 2
 - ✓ **ROOM-02**: Player spawns at the correct tile on entry — Phase 2
+- ✓ **INTR-01**: Player can press E near an interactable to trigger dialog — Phase 3
+- ✓ **INTR-02**: Dialog renders in a typewriter box at the bottom of the screen — Phase 3
+- ✓ **INTR-03**: Computer opens the Projects overlay; Bookshelf opens Skills; Phone opens Contact — Phase 3
+- ✓ **INTR-04**: Pressing E or Esc closes the CRT overlay — Phase 3
+- ✓ **INTR-05**: Revisiting an object after first interaction shows a different dialog variant — Phase 3
 
 ### Active
 
@@ -25,13 +30,6 @@ Landing & shell
 - [ ] **LAND-01**: Visitor sees a game canvas on the landing page (no scroll-first portfolio)
 - [ ] **LAND-02**: Game loads within 5 seconds on a desktop browser
 - [ ] **LAND-03**: Mobile visitors see a blocking "play on desktop" overlay
-
-Interaction
-- [ ] **INTR-01**: Player can press E near an interactable to trigger dialog
-- [ ] **INTR-02**: Dialog renders in a typewriter box at the bottom of the screen
-- [ ] **INTR-03**: Computer opens the Projects overlay; Bookshelf opens Skills; Phone opens Contact
-- [ ] **INTR-04**: Pressing E or Esc closes the CRT overlay
-- [ ] **INTR-05**: Revisiting an object after first interaction shows a different dialog variant
 
 Lighting & atmosphere
 - [ ] **LITE-01**: Rooms render 70% dark; player has a 4-tile radius warm-yellow light
@@ -109,6 +107,11 @@ Deployment
 | One shared `buildRoom` builder for all three rooms; room layouts are data tuples in `rooms.ts` | Three rooms × three layouts — one builder, no per-room scene class | Good (Phase 2) |
 | `DOORS` is a data registry (`DoorDef[]`), one generic glide/store loop handles every pair | Adding a door pair is data, not code — Phase 3 attaches hosts to the same registry | Good (Phase 2) |
 | Door gaps 48px (32px body + 8px slack per side, D-02); `GLIDE_STEP=48` per D-14 | Zero-clearance gaps snagged in Phase 1; 48px clears the corner snag | Good (Phase 2) |
+| Dialog as a pure state machine (`dialog.ts`) + scene glue; reveal clock starts at `-SLIDE_IN_MS` so nothing types during the box's slide-in | Readable-line guarantee (G-03-3) pinned by vitest, not by feel | Good (Phase 3) |
+| Host handoff holds `READ_HOLD_MS=1500` mirroring `AUTO_DISMISS_MS`; no text-length scaling | One settled beat for both dialog flows; extra timing rule rejected | Good (Phase 3) |
+| Overlay is a DOM component fed by `darkfolio:overlay` CustomEvents; key policy while open lives in the panel's own document listener (scroll-key guard precedes the ready gate) | Scene stays Phaser-only; close parity (D-30) and native list scrolling coexist | Good (Phase 3) |
+| Document overflow fixed at its source (`.page` border-box), not with an html/body scroll lock; `.content` (tabindex 0) is the native scroll target | Masks hide layout defects; the browser's own scroll does the work (G-03-6) | Good (Phase 3) |
+| Visit counters in-memory only, reset on reload (D-20) | No storage surface to tamper with; deterministic variant cycling under test | Good (Phase 3) |
 
 ## Evolution
 
@@ -128,4 +131,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-10-21 after Phase 2*
+*Last updated: 2026-10-26 after Phase 3*
