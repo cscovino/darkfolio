@@ -12,5 +12,5 @@
       "@/data/*": ["src/game/data/*"]
     }
   },
-  "include": ["src/**/*", "tests/**/*"]
+  "include": ["src/**/*"]
 }
