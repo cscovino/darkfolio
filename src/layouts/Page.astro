@@ -1,0 +1,54 @@
+---
+interface Props {
+  title: string;
+  heading: string;
+}
+
+const { title, heading } = Astro.props;
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <main class="page">
+      <a class="back" href={import.meta.env.BASE_URL}>← back to the house</a>
+      <h1>{heading}</h1>
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    background: #2a2a2a;
+  }
+
+  .page {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 32px 20px;
+    font-family: ui-monospace, 'Courier New', monospace;
+    font-size: 16px;
+    line-height: 1.5;
+    box-sizing: border-box;
+  }
+
+  .back {
+    font-size: 16px;
+    color: #8b6f5e;
+    text-decoration: none;
+  }
+
+  h1 {
+    font-size: 20px;
+    font-weight: 700;
+    color: #e8dcc8;
+    margin: 16px 0;
+  }
+</style>
