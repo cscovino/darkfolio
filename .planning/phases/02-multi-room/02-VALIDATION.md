@@ -11,6 +11,7 @@ created: "2026-10-21"
 
 > Per-phase validation contract for feedback sampling during execution.
 > Reconstructed post-execution by /gsd-validate-phase (State B — no VALIDATION.md seeded at plan time).
+> Audit result: **PARTIAL** — 3/3 requirements partially automated (pure-logic layer green); scene wiring routed to Manual-Only by the 2026-11-04 audit (E-1/E-2/E-3 carried + E-4 accepted as manual coverage; see Escalations).
 
 ---
 
@@ -127,7 +128,7 @@ Carried from Phase 01. `Graphics.generateTexture` (in `ensurePlayerTexture`) nee
 - [x] Feedback latency < 10s (~5s unit)
 - [ ] `nyquist_compliant: true` set in frontmatter — **not set** (scene gaps escalated)
 
-**Approval:** pending — escalations E-1, E-2, E-3 (carried) and E-4 require a user decision before this phase can be marked compliant.
+**Approval:** recorded 2026-11-04 — user chose *skip: mark manual-only*; E-1/E-2/E-3 (carried) and E-4 remain open as documented infrastructure gaps, and their coverage is carried by the Manual-Only UAT rows instead of automated tests. `nyquist_compliant` stays `false` (no new automated coverage).
 
 ---
 
@@ -145,3 +146,12 @@ Carried from Phase 01. `Graphics.generateTexture` (in `ensurePlayerTexture`) nee
 - `src/game/systems/currentRoom.test.ts`
 - `src/game/systems/doorGlide.test.ts`
 - `.planning/phases/02-multi-room/02-VALIDATION.md`
+
+## Validation Audit 2026-11-04
+
+| Metric | Count |
+|---|---|
+| Gaps found | 4 |
+| Resolved | 0 |
+| Escalated | 0 |
+| Routed to manual-only | 4 |

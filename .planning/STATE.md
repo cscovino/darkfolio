@@ -3,9 +3,9 @@ gsd_state_version: "1.0"
 milestone: v1.0
 current_plan: Not started
 status: executing
-stopped_at: Phase 03 complete, ready to plan Phase 4
-last_updated: "2026-10-26T08:57:29.733Z"
-state_head: d93ed4b841f90b65a3f5f991ee727d524615d825
+stopped_at: Phase 02 complete, ready to plan Phase 4
+last_updated: "2026-11-04T20:01:01.040Z"
+state_head: 4b62ead96f8bd4c921b3b2f82b9a6807e8737ce6
 progress:
   total_phases: 8
   completed_phases: 4
@@ -19,23 +19,23 @@ current_phase_name: Lighting
 
 # State: Darkfolio
 
-*Last updated: 2026-10-21 after Phase 2 completion + transition*
+*Last updated: 2026-11-04 after Phase 2 verification refresh*
 
 ## Project Reference
 
 **Project:** Darkfolio — 16-bit RPG-style portfolio (Astro 7.3.5 + Phaser 4.2.1 + TypeScript ^5)
 **Core Value:** The portfolio is the experience — observable behavior (walking, interacting, opening overlays) IS the deliverable, not a decoration around it.
-**Repo:** `/home/jetson/github/darkfolio` (Phase 2 live on `feat/multi-room`; see `.planning/PROJECT.md`)
+**Repo:** `/home/jetson/github/darkfolio` (see `.planning/PROJECT.md`)
 **Mode:** mvp (vertical slices — every phase delivers a runnable, end-to-end capability)
 **Granularity:** standard (per `.planning/config.json`)
-**Current focus:** Phase 03 — interaction
+**Current focus:** Phase 04 — Lighting
 
 ## Current Position
 
 - **Current phase:** 04
 
 **Current Plan:** Not started
-**Total Plans in Phase:** TBD at planning
+**Total Plans in Phase:** 2
 
 - **Status:** Ready to plan Phase 4 (Lighting)
 - **Active branch:** `feat/interaction` (Phase 3 complete — squash + PR per AGENTS.md)
@@ -117,8 +117,8 @@ current_phase_name: Lighting
 ### Constraints / blockers
 
 - ✅ [Phase 2] Resolved — Living Room door gaps are now 48px (32px body + 8px slack per side, D-02); the Phase 1 corner-snag blocker no longer applies.
-- ⚠️ [Phase 2] Two open code-review warnings carried into Phase 3: WR-01 — the door trigger can fire from a bump without confirming the player is on the entry side (and on net-zero opposite-key holds); WR-02 — a mid-glide teardown leaves the body disabled and `gliding=true` (no cleanup on tween/scene shutdown). Neither blocks Phase 2, but Phase 3 attaches interaction logic to the same door/host surfaces.
-- ⚠️ [Deferred 2026-10-26] Phase 1/2 verification refresh sweep still owed. Phase 3 closed (UAT 8/8, SECURITY 0 open) without it — the user ran `/gsd-verify-work 03` directly. Phase 1/2 VERIFICATION.md reports remain `stale` (Phase 3 edited their covered files); `/gsd-progress` may still route to Phase 1 (Route V). Refresh both (re-run `/gsd-execute-phase 01` / `/gsd-execute-phase 02`, regenerating each VERIFICATION.md + covered digest) before the milestone audit.
+- ✅ [Phase 2] Resolved 2026-11-04 (re-review) — WR-02 fixed by the Phase 3 scene SHUTDOWN teardown; WR-01 narrowed to a one-frame facing skew and deferred to the Phase 8 polish sweep per the Phase 3 rationale; new WR-03 (scene export contract) and IN-05 (seam test) accepted via verification overrides.
+- ✅ [Deferred 2026-10-26 → Resolved 2026-11-04] Phase 1/2 verification refresh sweep complete — Phase 01 `human_needed` (manual UAT items pending), Phase 02 `passed` (17/17, 2 accepted overrides).
 
 ### Roadmap Evolution
 
@@ -126,15 +126,14 @@ current_phase_name: Lighting
 
 ## Session Continuity
 
-**Last session:** 2026-10-26T07:53:56Z
-**Stopped at:** Phase 03 complete, ready to plan Phase 4
+**Last session:** 2026-11-04
+**Stopped at:** Phase 02 complete, ready to plan Phase 4
 **Resume file:** None
 
 **Next session resume:**
 
 1. `/gsd-discuss-phase 4` then `/gsd-plan-phase 4` (Lighting — LITE-01..03; no CONTEXT.md yet).
 2. Open a PR for `feat/interaction` → trunk (squash per AGENTS.md §"Squash discipline" — review `git log --oneline main..HEAD` first; 7 open code-review findings in `03-REVIEW-DISPOSITION.md` await triage).
-3. Phase 1/2 verification refresh sweep still owed (see Constraints / blockers).
 
 **Resume anchor:** this file plus `.planning/ROADMAP.md` are enough to recover the full project state. Branches are named by intent/feature (AGENTS.md §"Branches & PRs") — this table's Branch column is the phase↔branch bookkeeping.
 
@@ -171,3 +170,4 @@ current_phase_name: Lighting
 - [Phase 03]: Plan 05: keyboard scroll ownership is implemented by focusing the `.content` scroller and stopping propagation of the eight scroll keys on `document` before Phaser's window listener can `preventDefault` them
 - [Phase 03]: Plan 05: every hide path releases focus before `aria-hidden=true` — `closePanel()` blurs `.content`, and a `MutationObserver` covers the scene's SHUTDOWN sweep
 - [Phase 03]: Plan 05: user pre-approved the scoped 03-UI-SPEC.md Focus-row edit before writing
+- [Phase 02]: Verification refresh 2026-11-04 — Nyquist E-1..E-4 accepted as manual-only; contract drift accepted via overrides (scene export alias removed in ee6e8ab, setCurrentRoomFrom seam removed in 2d36f4d); report 17/17 `passed`
