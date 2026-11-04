@@ -49,3 +49,11 @@ status: secured
 ## Result
 
 All three declared threats are CLOSED. No blocking or non-blocking open threats. `threats_open: 0`.
+
+## Security Audit 2026-11-04
+
+| Metric | Count |
+|---|---|
+| Threats found | 3 |
+| Closed | 3 |
+| Open | 0 |

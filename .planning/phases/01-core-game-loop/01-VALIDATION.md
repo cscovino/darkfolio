@@ -11,7 +11,7 @@ created: "2026-10-20"
 # Phase 01 — Validation Strategy
 
 > Per-phase validation contract for feedback sampling during execution.
-> Audit result: **ESCALATED** — 0 of 3 requirements fully covered by automated tests; 1 partial (GAME-01 math only); 2 blocked by test-infrastructure gaps (see Escalations).
+> Audit result: **PARTIAL** — 1 of 3 requirements partially automated (GAME-01 math only); GAME-02/GAME-03 routed to Manual-Only by the 2026-11-04 audit (E-1/E-2/E-3 escalations accepted as manual coverage; see Escalations).
 
 ---
 
@@ -42,11 +42,11 @@ created: "2026-10-20"
 |---------|------|------|-------------|------------|-----------------|-----------|-------------------|-------------|--------|
 | 01-01-T1 | 01 | 1 | — (T-01-SC) | T-01-SC | phaser@4.2.1 legitimacy verified before install | manual (checkpoint) | — (approval recorded in 01-01-SUMMARY) | n/a | ✅ approved (manual) |
 | 01-01-T2 | 01 | 1 | GAME-01 | T-01-01 | Velocity bounded to SPEED; diagonals not faster | unit | `pnpm test` (`src/game/systems/movement.test.ts`) | ✅ | ⚠️ partial — math only |
-| 01-01-T2 | 01 | 1 | GAME-01 | T-01-01 | Key state → player velocity wiring at 120 px/s in scene | integration | — | ❌ W0 | ❌ escalated (E-1, E-2) |
-| 01-01-T2 | 01 | 1 | GAME-03 | — | Camera lerp 0.05 follows player, no snap | integration | — | ❌ W0 | ❌ escalated (E-1, E-2, E-3) |
-| 01-02-T1 | 02 | 2 | GAME-01 | T-01-02 | Gate is only pre-play screen; first keydown starts LivingRoomScene; listener removed | integration | — | ❌ W0 | ❌ escalated (E-1, E-2, E-3) |
+| 01-01-T2 | 01 | 1 | GAME-01 | T-01-01 | Key state → player velocity wiring at 120 px/s in scene | integration | — | ❌ W0 | ⬜ manual only (E-1, E-2) |
+| 01-01-T2 | 01 | 1 | GAME-03 | — | Camera lerp 0.05 follows player, no snap | integration | — | ❌ W0 | ⬜ manual only (E-1, E-2, E-3) |
+| 01-02-T1 | 02 | 2 | GAME-01 | T-01-02 | Gate is only pre-play screen; first keydown starts LivingRoomScene; listener removed | integration | — | ❌ W0 | ⬜ manual only (E-1, E-2, E-3) |
 | 01-02-T2 | 02 | 2 | — (housekeeping) | — | opencode.jsonc / robots.txt tracked, byte-identical | shell | `git ls-files --error-unmatch opencode.jsonc public/robots.txt` | n/a | ✅ green (verified 2026-10-20) |
-| 01-03-T1 | 03 | 2 | GAME-02 | — | Player blocked by walls and all four furniture bodies; cannot leave room | integration | — | ❌ W0 | ❌ escalated (E-1, E-2, E-3) |
+| 01-03-T1 | 03 | 2 | GAME-02 | — | Player blocked by walls and all four furniture bodies; cannot leave room | integration | — | ❌ W0 | ⬜ manual only (E-1, E-2, E-3) |
 | 01-03-T2 | 03 | 2 | GAME-02 | — | Facing notch tracks last direction; physics body stays 32×32 | integration | — | ❌ W0 | ⬜ manual only (see Manual-Only) |
 
 *Status: ⬜ pending · ✅ green · ❌ red/missing · ⚠️ partial · ❌ escalated*
@@ -57,11 +57,11 @@ created: "2026-10-20"
 
 | Requirement | Status | Evidence | Gap |
 |-------------|--------|----------|-----|
-| GAME-01 (move at 120 px/s, WASD/arrows) | ⚠️ PARTIAL | `movement.test.ts`: 5 green cases on `velocityFromKeys` (speed, cardinals, opposing keys, diagonal normalization, speed argument) | Scene key→velocity wiring and measured body speed not automated; boot/gate chain not automated |
-| GAME-02 (collide with walls and furniture) | ❌ ESCALATED | none automated | No executable proof of wall or furniture blocking; scene cannot load under vitest (E-1, E-2, E-3) |
-| GAME-03 (camera follows with lerp, not snap) | ❌ ESCALATED | none automated | Camera follow not executable under vitest (E-1, E-2, E-3); lerp 0.05 verified by code reading only |
+| GAME-01 (move at 120 px/s, WASD/arrows) | ⚠️ PARTIAL | `movement.test.ts`: 5 green cases on `velocityFromKeys` (speed, cardinals, opposing keys, diagonal normalization, speed argument) | Scene key→velocity wiring and measured body speed not automated; boot/gate chain not automated — manual-only |
+| GAME-02 (collide with walls and furniture) | ⬜ MANUAL-ONLY | Manual UAT rows in Manual-Only (walk into each piece, both door gaps) | No executable proof; scene cannot load under vitest (E-1, E-2, E-3) |
+| GAME-03 (camera follows with lerp, not snap) | ⬜ MANUAL-ONLY | Manual UAT row in Manual-Only (diagonal walk, trailing lag) | Camera follow not executable under vitest (E-1, E-2, E-3); lerp 0.05 verified by code reading only |
 
-**Overall:** 0/3 COVERED · 1/3 PARTIAL · 2/3 ESCALATED.
+**Overall:** 0/3 COVERED · 1/3 PARTIAL · 2/3 manual-only (escalations accepted 2026-11-04).
 
 ---
 
@@ -136,7 +136,7 @@ No BLOCKER-class defect was found in the implementation by reading. The gaps are
 - [ ] Feedback latency < 10s — **met** for unit (~3s); browser UAT manual
 - [ ] `nyquist_compliant: true` set in frontmatter — **not set** (escalated)
 
-**Approval:** pending — escalations E-1, E-2, E-3 require a user decision before this phase can be marked compliant.
+**Approval:** recorded 2026-11-04 — user chose *skip: mark manual-only*; E-1/E-2/E-3 remain open as documented infrastructure gaps, and their coverage is carried by the Manual-Only UAT rows instead of automated tests. `nyquist_compliant` stays `false` (no new automated coverage).
 
 ---
 
@@ -147,3 +147,12 @@ No BLOCKER-class defect was found in the implementation by reading. The gaps are
 | Gaps found | 3 (GAME-01 partial, GAME-02 missing, GAME-03 missing) |
 | Resolved (new automated tests) | 0 |
 | Escalated | 2 (GAME-02, GAME-03) + GAME-01 wiring |
+
+## Validation Audit 2026-11-04
+
+| Metric | Count |
+|---|---|
+| Gaps found | 3 |
+| Resolved | 0 |
+| Escalated | 0 |
+| Routed to manual-only | 3 |

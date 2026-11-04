@@ -46,3 +46,11 @@ status: secured
 ## Result
 
 All four declared threats are CLOSED. No open threats at or above the `high` blocking threshold, and none below it either. `threats_open: 0`.
+
+## Security Audit 2026-11-04
+
+| Metric | Count |
+|---|---|
+| Threats found | 4 |
+| Closed | 4 |
+| Open | 0 |
