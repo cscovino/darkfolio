@@ -33,9 +33,9 @@
 
 ### Lighting & atmosphere
 
-- [ ] **LITE-01**: Rooms render 70% dark; player has a 4-tile radius warm-yellow light
-- [ ] **LITE-02**: Lamp / computer / TV lights render with their respective colors
-- [ ] **LITE-03**: Lamps flicker subtly
+- [x] **LITE-01**: Rooms render 70% dark; player has a 2.5-tile radius warm-yellow light
+- [x] **LITE-02**: Lamp / computer / TV lights render with their respective colors
+- [x] **LITE-03**: Lamps flicker subtly
 
 ### Audio
 
@@ -108,9 +108,9 @@ Roadmap-confirmed mapping. Every v1 requirement below maps to exactly one phase;
 | INTR-03     | Phase 3 — Interaction         | Complete |
 | INTR-04     | Phase 3 — Interaction         | Complete |
 | INTR-05     | Phase 3 — Interaction         | Complete |
-| LITE-01     | Phase 4 — Lighting            | Pending |
-| LITE-02     | Phase 4 — Lighting            | Pending |
-| LITE-03     | Phase 4 — Lighting            | Pending |
+| LITE-01     | Phase 4 — Lighting            | Complete |
+| LITE-02     | Phase 4 — Lighting            | Complete |
+| LITE-03     | Phase 4 — Lighting            | Complete |
 | AUD-01      | Phase 5 — Audio               | Pending |
 | AUD-02      | Phase 5 — Audio               | Pending |
 | AUD-03      | Phase 5 — Audio               | Pending |

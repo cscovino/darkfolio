@@ -6,7 +6,7 @@
 <domain>
 ## Phase Boundary
 
-The house goes dark: all three rooms render at a 70% darkness baseline, the player carries a facing-weighted 4-tile warm-yellow (`#FFA500`) torch, lamps glow warm (~5–6 tiles), computer and TV glow cold-blue (~2–3 tiles), and lamps flicker subtly. Light pools are wall-occluded and visible through doorway gaps. UI (dialog, overlay, E-badge) is untouched by lighting. (LITE-01, LITE-02, LITE-03; SC#1–5 in ROADMAP §Phase 4.)
+The house goes dark: all three rooms render at a 70% darkness baseline, the player carries a facing-weighted 2.5-tile warm-yellow (`#FFA500`) torch, lamps glow warm (3 tiles), computer and TV glow cold-blue (1.5 tiles), and lamps flicker subtly. Light pools are wall-occluded and visible through doorway gaps. UI (dialog, overlay, E-badge) is untouched by lighting. (LITE-01, LITE-02, LITE-03; SC#1–5 in ROADMAP §Phase 4.)
 
 **Not in scope:** lamp on/off toggling (deferred to Phase 5 — its SFX trigger phase), audio (Phase 5), real sprites/light textures (Phase 7), title screen treatment (Phase 8), any settings/brightness control (Out of Scope).
 
@@ -19,7 +19,7 @@ The house goes dark: all three rooms render at a 70% darkness baseline, the play
 - **D-01:** **Even flat veil at ~30% brightness** (spec-literal LITE-01's "70% dark"), applied **only to the room the player is currently in** — rooms you're not in drop to near-black so their light pools are what you see through the door gaps. Reconciles SC#1 (your room's shapes faintly visible) with SC#5 (elsewhere near-black). — **Reversibility:** costly — the veil being keyed to `currentRoom` is the load-bearing rule for the sightline design; a world-wide veil re-derives occlusion, doorway-glow, and the glide fade.
 - **D-02:** **Glow through doorways** — neighbor rooms are near-black but their lamp/TV/computer pools stay lit and glimpsable through the 48px gaps; keeps Phase 2 D-15's sightline promise.
 - **D-03:** **Occlusion = walls only.** Light pools and the player's torch stop at wall geometry, but pass through doorway openings — one rule, no per-source exceptions. Your torch can reveal the far threshold through a gap; a neighbor's pool peeks around the corner.
-- **D-04:** **Yard/exterior notch shares the current room's veil** — Phase 2 D-12's silhouette props (dead shrub, fence posts) keep faintly reading; the yard never goes separately near-black.
+- **D-04:** **Yard/exterior notch shares the current room's veil** — Phase 2 D-12's silhouette props (dead shrub, fence posts) keep faintly reading; the yard never goes separately near-black. — **Amended 2026-11-08 (UAT G-04-4, Option A):** the shared seam wall bands also ride the current room's level; during a fade the strip switches rooms at the midpoint (both sides equal there), tracking the departed room then the entered room instead of holding a literal while the rooms fade.
 - **D-05:** **Veil switches rooms with a short fade (~0.4 s) at the wall line during a door glide** — the old room fades to near-black behind you as the glide carries you through; no instant swap mid-glide, no delayed flip on arrival.
 - **D-06:** **Soft 2-step falloff** at every pool's rim — a couple of pixel steps, glow reads as light without smearing the pixel grid at 4× zoom.
 - **D-07:** **Furniture silhouette outlines lift only inside the player's torch footprint** — one radius governs glow and readability; no room-wide outline pass, no second ring radius to tune.
@@ -27,7 +27,7 @@ The house goes dark: all three rooms render at a 70% darkness baseline, the play
 
 ### Light source behavior
 - **D-09:** **All sources always on in Phase 4** — three lamps, Office computer, Living Room TV glow constantly; no proximity gating, no mixed on/off states. (House feels alive in every room; zero light state to manage.)
-- **D-10:** **Pool hierarchy:** lamps ~5–6 tiles warm (room anchors), TV/computer ~2–3 tiles cold, torch 4 tiles. — **Reversibility:** costly — PLAN.md's suggested radii (lamps 3, screens 2) are overridden by this (see D-19); radii feed UAT scripts and the flicker tuning.
+- **D-10:** **Pool hierarchy:** lamps 3 tiles (48px) warm, TV/computer 1.5 tiles (24px) cold, torch 2.5 tiles (40px). — **Reversibility:** costly — PLAN.md's suggested radii (lamps 3, screens 2) are overridden by this (see D-19); radii feed UAT scripts and the flicker tuning. — **Amended 2026-11-08 (UAT G-04-3):** original 5–6 / 2–3 / 4-tile radii covered 67–127% of the zoom-4 160x120 view; resized against the view, restoring PLAN.md's pre-D-20 lamp intent.
 - **D-11:** **Pools tint what's inside them** — objects under a cold-blue pool read cold, under a warm pool read warm (SC#3's "render with their respective colors" taken literally); not a flat color wash, not brighten-only.
 - **D-12:** **The source object itself stays full-bright** — bulb/screen renders its true palette color even under the veil, so a lit lamp or running TV is spot-able across a near-black room; the pool falls off around it.
 - **D-13:** **Lamp on/off toggling is deferred to Phase 5** — user explicitly chose deferral: not in LITE-01…03, and Phase 5's AUD-02 "lamp toggle" SFX is the trigger's natural home. Phase 3's lamp "Toggle" verb stays placeholder wording.
@@ -43,11 +43,11 @@ The house goes dark: all three rooms render at a 70% darkness baseline, the play
 - **D-19:** **The boot "press any key" gate is unaffected** — darkness/lights exist only inside the house; lighting is a house system, not a global skin.
 
 ### Scope & performance
-- **D-20:** **PLAN.md §Phase 4 is overridden by this CONTEXT** — its suggested radii (lamps 3 / screens 2), its "Lamp toggle (Press E)" manual test, and "random flicker on all lights" are superseded by D-10, D-13, and D-14/D-16 respectively. Same precedent as Phase 2's D-10 (PLAN instruction overridden with the user's blessing). — **Reversibility:** costly — downstream agents must not silently re-introduce PLAN's numbers; this file is the authority for Phase 4 decisions.
+- **D-20:** **PLAN.md §Phase 4 is overridden by this CONTEXT** — its "Lamp toggle (Press E)" manual test, and "random flicker on all lights" are superseded by D-13 and D-14/D-16 respectively; its suggested radii (lamps 3 / screens 2) were superseded here but reinstated by the 2026-11-08 amendment to D-10. Same precedent as Phase 2's D-10 (PLAN instruction overridden with the user's blessing). — **Reversibility:** costly — downstream agents must not silently re-introduce PLAN's numbers; this file is the authority for Phase 4 decisions.
 - **D-21:** **60 fps is the hard floor — glow quality yields first.** If lighting threatens frames: cheaper falloff / precomputed veil / fewer per-frame updates; every light source and every flicker animation stays. Never trade away sources or animation for frames, and never accept a frame dip.
 
 ### the agent's Discretion
-- Exact pool radii within D-10's hierarchy guidance (5–6 / 2–3 tiles), fade duration (~0.4 s is the intent), falloff step widths, facing-weight bias magnitude, flicker step sizes and seeded pattern tables, screen-wobble amplitude.
+- Exact pool radii within D-10's hierarchy guidance (lamps 3 / screens 1.5 / torch 2.5 tiles), fade duration (~0.4 s is the intent), falloff step widths, facing-weight bias magnitude, flicker step sizes and seeded pattern tables, screen-wobble amplitude.
 - How occlusion, tint, and the veil are computed and rendered (technique is the researcher/planner's call — must honor D-01…D-08's observable behavior), and where the lighting code lives (PLAN.md suggests `src/game/systems/Lighting.ts` + `src/game/objects/Light.ts` — file layout remains planner's choice).
 - TDD-lite split: flicker pattern generation (seeded steps), occlusion membership, pool tint math are pure logic → framework-free vitest modules (`movement.ts` / `doorGlide.ts` precedent); visual behavior browser-verified in `pnpm dev`.
 
@@ -59,7 +59,7 @@ The house goes dark: all three rooms render at a 70% darkness baseline, the play
 **Downstream agents MUST read these before planning or implementing.**
 
 ### Project canon
-- `.planning/ROADMAP.md` §"Phase 4: Lighting" — goal + 5 success criteria (70% dark, 4-tile `#FFA500` torch, colored sources, subtle flicker, near-black outside radii)
+- `.planning/ROADMAP.md` §"Phase 4: Lighting" — goal + 5 success criteria (70% dark, 2.5-tile `#FFA500` torch, colored sources, subtle flicker, near-black outside radii)
 - `.planning/PLAN.md` §"Phase 4: Lighting" (line ~466) — prescribed file suggestions (`src/game/systems/Lighting.ts`, `src/game/objects/Light.ts`) and manual-test checklist; **NOTE: its radii / lamp-toggle test / all-lights-flicker lines are overridden by D-20**
 - `.planning/PLAN.md` §"Path Aliases" — `@/game/*`, `@/scenes/*`, `@/objects/*`, `@/systems/*`, `@/data/*`, `@/state/*`
 - `.planning/PROJECT.md` §Context + §Constraints — Darkwood palette hexes, 60 fps / <5 s load / no-leaks performance lock, tech-stack lock, ponytail style discipline

@@ -3,22 +3,23 @@ gsd_state_version: "1.0"
 milestone: v1.0
 current_plan: Not started
 status: executing
-stopped_at: Phase 4 context gathered
-last_updated: "2026-11-06T23:32:34.596Z"
-state_head: b03883093adc59380b1bc702e66e493e7637f135
+stopped_at: Phase 04 complete, ready to plan Phase 5
+last_updated: "2026-11-10T14:26:27.731Z"
+state_head: d2d75d03e0e2462856f7bbf4ae36c2c5aba0dd63
 progress:
   total_phases: 8
   completed_phases: 4
-  total_plans: 12
+  total_plans: 14
   completed_plans: 15
+  percent: 50
 milestone_name: milestone
-current_phase_name: Lighting
-current_phase: 4
+current_phase: 5
+current_phase_name: Audio
 ---
 
 # State: Darkfolio
 
-*Last updated: 2026-11-04 after Phase 2 verification refresh*
+*Last updated: 2026-11-10 after Phase 4*
 
 ## Project Reference
 
@@ -27,19 +28,19 @@ current_phase: 4
 **Repo:** `/home/jetson/github/darkfolio` (see `.planning/PROJECT.md`)
 **Mode:** mvp (vertical slices — every phase delivers a runnable, end-to-end capability)
 **Granularity:** standard (per `.planning/config.json`)
-**Current focus:** Phase 04 — Lighting
+**Current focus:** Phase 05 — Audio
 
 ## Current Position
 
-- **Current phase:** 04
+- **Current phase:** 05
 
 **Current Plan:** Not started
-**Total Plans in Phase:** 2
+**Total Plans in Phase:** 0
 
-- **Status:** Ready to plan Phase 4 (Lighting)
-- **Active branch:** `feat/interaction` (Phase 3 complete — squash + PR per AGENTS.md)
-- **Last completed phase:** 3 — Interaction, 2026-10-26 (UAT 8/8, SECURITY 0 open, Nyquist-compliant)
-- **Next action:** `/gsd-discuss-phase 4` then `/gsd-plan-phase 4`
+- **Status:** Ready to plan Phase 5
+- **Active branch:** `feat/lighting` (Phase 3's `feat-interaction` also awaits its PR — squash per AGENTS.md)
+- **Last completed phase:** 4 — Lighting, 2026-11-10 (UAT 5/5, SECURITY 0 open)
+- **Next action:** `/gsd-discuss-phase 5` — gather audio context
 
 ## Phase Status
 
@@ -50,7 +51,7 @@ current_phase: 4
 | 1 — Core Game Loop            | `feat/core-game-loop`       | ✅ Complete (2026-10-20) | 3/3 | GAME-01, GAME-02, GAME-03 — UAT 3/3, SECURITY 0 open |
 | 2 — Multi-Room                | `feat/multi-room`      | ✅ Complete (2026-10-21) | 2/2 | GAME-04, ROOM-01, ROOM-02 — UAT 3/3, SECURITY 0 open |
 | 3 — Interaction               | `feat-interaction`     | ✅ Complete (2026-10-26) | 5/5 | INTR-01..05 — UAT 8/8, SECURITY 0 open, Nyquist-compliant |
-| 4 — Lighting                  | `feat-lighting`        | ▶ Next             | 0/? | LITE-01..03 |
+| 4 — Lighting                  | `feat-lighting`        | ✅ Complete (2026-11-10) | 4/4 | LITE-01..03 — UAT 5/5, SECURITY 0 open |
 | 5 — Audio                     | `feat-audio`           | ⏳ Pending            | 0/? | AUD-01..03 |
 | 6 — Content Integration       | `feat-content-integration`         | ⏳ Pending            | 0/? | CONT-01..03 — depends on Phase 3 |
 | 7 — Custom Assets             | `feat-custom-assets`          | ⏳ Pending            | 0/? | No v1 reqs — Aseprite sprites, parallel-safe |
@@ -97,6 +98,8 @@ current_phase: 4
 | Phase 03-interaction P03 | 19min | 2 tasks | 6 files |
 | Phase 03-interaction P04 | 6min | 2 tasks | 4 files |
 | Phase 03-interaction P05 | 10min | 2 tasks | 3 files |
+| Phase 04 P03 | 9min | 3 tasks | 8 files |
+| Phase 04 P04 | 9min | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -110,7 +113,6 @@ current_phase: 4
 
 ### Pending (will be addressed by downstream agents)
 
-- Phaser 4 lighting system specifics (Phase 4) — defer to phase planning.
 - Audio asset sources (Phase 5) — defer — freesound.org / opengameart.org / tabletaopaudio.com are the documented sources per prior plan.
 
 ### Constraints / blockers
@@ -118,6 +120,7 @@ current_phase: 4
 - ✅ [Phase 2] Resolved — Living Room door gaps are now 48px (32px body + 8px slack per side, D-02); the Phase 1 corner-snag blocker no longer applies.
 - ✅ [Phase 2] Resolved 2026-11-04 (re-review) — WR-02 fixed by the Phase 3 scene SHUTDOWN teardown; WR-01 narrowed to a one-frame facing skew and deferred to the Phase 8 polish sweep per the Phase 3 rationale; new WR-03 (scene export contract) and IN-05 (seam test) accepted via verification overrides.
 - ✅ [Deferred 2026-10-26 → Resolved 2026-11-04] Phase 1/2 verification refresh sweep complete — Phase 01 `human_needed` (manual UAT items pending), Phase 02 `passed` (17/17, 2 accepted overrides).
+- ✅ [Phase 4] Resolved 2026-11-10 — lighting UAT 5/5 (`04-UAT.md`); gap closures G-04-1/3/4 and WR-01 verified in the browser; the api-coverage gate is satisfied by a no-external-surface declaration in `04-lighting/COVERAGE.md`.
 
 ### Roadmap Evolution
 
@@ -125,14 +128,14 @@ current_phase: 4
 
 ## Session Continuity
 
-**Last session:** 2026-11-04T21:26:04.055Z
-**Stopped at:** Phase 4 context gathered
-**Resume file:** .planning/phases/04-lighting/04-CONTEXT.md
+**Last session:** 2026-11-10T14:26:27.731Z
+**Stopped at:** Phase 04 complete, ready to plan Phase 5
+**Resume file:** None
 
 **Next session resume:**
 
-1. `/gsd-discuss-phase 4` then `/gsd-plan-phase 4` (Lighting — LITE-01..03; no CONTEXT.md yet).
-2. Open a PR for `feat/interaction` → trunk (squash per AGENTS.md §"Squash discipline" — review `git log --oneline main..HEAD` first; 7 open code-review findings in `03-REVIEW-DISPOSITION.md` await triage).
+1. `/gsd-discuss-phase 5` (Audio — AUD-01..03; branch `feat-audio`, branched from `feat/lighting` once its PR lands).
+2. Open PRs for `feat/lighting` and `feat/interaction` → trunk (squash per AGENTS.md §"Squash discipline" — review `git log --oneline main..HEAD` first; 7 open code-review findings in `03-REVIEW-DISPOSITION.md` await triage).
 
 **Resume anchor:** this file plus `.planning/ROADMAP.md` are enough to recover the full project state. Branches are named by intent/feature (AGENTS.md §"Branches & PRs") — this table's Branch column is the phase↔branch bookkeeping.
 
@@ -170,3 +173,11 @@ current_phase: 4
 - [Phase 03]: Plan 05: every hide path releases focus before `aria-hidden=true` — `closePanel()` blurs `.content`, and a `MutationObserver` covers the scene's SHUTDOWN sweep
 - [Phase 03]: Plan 05: user pre-approved the scoped 03-UI-SPEC.md Focus-row edit before writing
 - [Phase 02]: Verification refresh 2026-11-04 — Nyquist E-1..E-4 accepted as manual-only; contract drift accepted via overrides (scene export alias removed in ee6e8ab, setCurrentRoomFrom seam removed in 2d36f4d); report 17/17 `passed`
+- [Phase 04]: Plan 01: `wallShadows` measures corner angles from the nearest-point direction — raw atan2 min/max picks the far-face corners for a wall due west of the light and leaks light through it
+- [Phase 04]: Plan 01: every shadow quad rides one accumulated Graphics + one `erase` + one `render`; the DynamicTexture buffer stores the Graphics reference, so per-quad erases under a trailing flush replay the last quad only
+- [Phase 04]: Plan 01: `LightLayer` is constructed immediately before `InteractionUI`, so the zoom-1 UI camera's construction-time ignore list keeps the UI full-bright (D-17)
+- [Phase 04]: wallShadows emits 5-point polygons (bisector apex at dmax+far) so wide-angle walls stop pool light; angular sector unchanged, doorway-gap cases stay green
+- [Phase 04]: Radii retuned to torch 40 / lamp 48 / screen 24 with proportional lobe (offset 20 = r/2) per the user-approved 2026-11-08 D-10/D-20 amendment; POOL_RINGS and TORCH_DT_SIZE deliberately unchanged
+- [Phase 04]: Historical 4-tile claims left verbatim in ROADMAP's 04-01 plan-list entry, PLAN.md, and phase-history artifacts; only current docs carry 2.5-tile
+- [Phase 04]: Seam collapse shipped as data deletion: Living bands own both seams; office/bedroom seam tuples removed, gaps 16px thick / 48px wide, doorGlide untouched
+- [Phase 04]: seamStripAlpha Option A: strips ride the min of their two bordering regionAlphas during a fade (midpoint switch, no-jump 0.7->0.825->0.7); idle = current-room level; ROOM_ZONES stays for roomAt

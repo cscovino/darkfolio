@@ -14,7 +14,7 @@
 - [x] **Phase 1: Core Game Loop** — Player walks the Living Room with movement, collision, and camera follow (completed 2026-10-20)
 - [x] **Phase 2: Multi-Room** — Three 20×15 rooms (Living, Office, Bedroom) connected by slide-transition doors (completed 2026-10-21)
 - [x] **Phase 3: Interaction** — E-key prompts, typewriter dialog, CRT overlays (Projects/Skills/Contact), revisit variants (completed 2026-10-26)
-- [ ] **Phase 4: Lighting** — 70% darkness, player torch, colored lamp / computer / TV lights, subtle flicker
+- [x] **Phase 4: Lighting** — 70% darkness, player torch, colored lamp / computer / TV lights, subtle flicker (completed 2026-11-10)
 - [ ] **Phase 5: Audio** — Ambient loops, contextual SFX, mute toggle (corner button + M key) persisting across reloads
 - [ ] **Phase 6: Content Integration** — Projects / Skills / Contact pages wired into Astro content collections + in-game overlays
 - [ ] **Phase 7: Custom Assets** — Aseprite character, tileset, furniture, UI sprites replace placeholders
@@ -217,17 +217,21 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 **Success Criteria** (what must be TRUE):
 
   1. Rooms render 70% dark with room shapes faintly visible at the edges
-  2. Player carries a 4-tile radius warm-yellow (`#FFA500`) light that follows movement
+  2. Player carries a 2.5-tile radius warm-yellow (`#FFA500`) light that follows movement
   3. Lamps render warm-yellow light, computer renders cold-blue, TV renders cold-blue
   4. Lamps flicker subtly — visible offset, low enough to not distract from gameplay
   5. Walking outside any light radius drops the local area to near-black
 
-**Plans**: 2
+**Plans**: 4
 **Wave 1**
-- [ ] 04-01-PLAN.md — tracer: room-keyed darkness veil + wall-occluded 4-tile warm torch + facing lobe (LITE-01)
+- [x] 04-01-PLAN.md — tracer: room-keyed darkness veil + wall-occluded 4-tile warm torch + facing lobe (LITE-01)
 
 **Wave 2** *(blocked on Wave 1 completion)*
-- [ ] 04-02-PLAN.md — colored occluded pools for the five sources + seeded lamp/screen flicker + wall-line veil fade (LITE-02, LITE-03)
+- [x] 04-02-PLAN.md — colored occluded pools for the five sources + seeded lamp/screen flicker + wall-line veil fade (LITE-02, LITE-03)
+
+**Gap closure** *(UAT G-04-1/3/4)*
+- [x] 04-03-PLAN.md — angle-safe wall shadows + radii retuned to the zoomed view (torch 2.5 / lamp 3 / screen 1.5 tiles), D-10/D-20 amended (G-04-1, G-04-3)
+- [x] 04-04-PLAN.md — one shared wall band + door leaf per seam, 16px gaps, seam strips at the current-room veil level (G-04-4; after 04-03)
 
 ---
 
@@ -336,7 +340,7 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 | 1. Core Game Loop            | 3/3 | Complete    | 2026-10-20 |
 | 2. Multi-Room                | 2/2 | Complete    | 2026-10-21 |
 | 3. Interaction               | 5/5 | Complete    | 2026-10-26 |
-| 4. Lighting                  | 0/? | Not started            | - |
+| 4. Lighting                  | 4/4 | Complete    | 2026-11-10 |
 | 5. Audio                     | 0/? | Not started            | - |
 | 6. Content Integration       | 0/? | Not started            | - |
 | 7. Custom Assets             | 0/? | Not started            | - |
@@ -359,9 +363,9 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
 | INTR-03 | Phase 3 | Complete |
 | INTR-04 | Phase 3 | Complete |
 | INTR-05 | Phase 3 | Complete |
-| LITE-01 | Phase 4 | Pending |
-| LITE-02 | Phase 4 | Pending |
-| LITE-03 | Phase 4 | Pending |
+| LITE-01 | Phase 4 | Complete |
+| LITE-02 | Phase 4 | Complete |
+| LITE-03 | Phase 4 | Complete |
 | AUD-01  | Phase 5 | Pending |
 | AUD-02  | Phase 5 | Pending |
 | AUD-03  | Phase 5 | Pending |

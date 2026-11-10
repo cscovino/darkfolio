@@ -23,6 +23,9 @@ The portfolio is the experience — observable behavior (walking, interacting, o
 - ✓ **INTR-03**: Computer opens the Projects overlay; Bookshelf opens Skills; Phone opens Contact — Phase 3
 - ✓ **INTR-04**: Pressing E or Esc closes the CRT overlay — Phase 3
 - ✓ **INTR-05**: Revisiting an object after first interaction shows a different dialog variant — Phase 3
+- ✓ **LITE-01**: Rooms render 70% dark; player has a 2.5-tile radius warm-yellow light — Phase 4
+- ✓ **LITE-02**: Lamp / computer / TV lights render with their respective colors — Phase 4
+- ✓ **LITE-03**: Lamps flicker subtly — Phase 4
 
 ### Active
 
@@ -30,11 +33,6 @@ Landing & shell
 - [ ] **LAND-01**: Visitor sees a game canvas on the landing page (no scroll-first portfolio)
 - [ ] **LAND-02**: Game loads within 5 seconds on a desktop browser
 - [ ] **LAND-03**: Mobile visitors see a blocking "play on desktop" overlay
-
-Lighting & atmosphere
-- [ ] **LITE-01**: Rooms render 70% dark; player has a 4-tile radius warm-yellow light
-- [ ] **LITE-02**: Lamp / computer / TV lights render with their respective colors
-- [ ] **LITE-03**: Lamps flicker subtly
 
 Audio
 - [ ] **AUD-01**: Ambient loops (house drone, wind) play from boot
@@ -63,7 +61,7 @@ Deployment
 
 ## Context
 
-- Repo state: Phase 2 (Multi-Room) complete on `feat/multi-room` — three 20x15 rooms (Living, Office, Bedroom) in one continuous 640x480 L-world, both door pairs data-driven through the same generic glide/store loop, yard dressing non-walkable; UAT-verified 3/3 (walk, entry-tile determinism, sealed doors + yard readability). `src/pages/index.astro` mounts the game via `GameCanvas.astro`.
+- Repo state: Phase 4 (Lighting) complete on `feat/lighting` — three 20x15 rooms lit by a room-keyed darkness veil, wall-occluded warm torch with facing lobe, colored lamp/screen pools and seeded flicker; UAT-verified 5/5. `src/pages/index.astro` mounts the game via `GameCanvas.astro`.
 - Aesthetic: 16-bit pixel art, "Darkwood gritty" palette (browns `#4A3729`/`#6B4E3D`/`#8B6F5E`, grays `#2A2A2A`/`#3D3D3D`/`#555555`, muted greens `#3A4A3A`/`#4A5A4A`, accents warm yellow `#FFA500` / cold blue)
 - Dialog tone: humorous / meta, breaks the fourth wall
 - Game mechanics: Phaser 4.2.1 + Arcade Physics, 60 fps target, 16x16 tiles, 32x32 character
@@ -131,4 +129,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state.
 
 ---
-*Last updated: 2026-10-26 after Phase 3*
+*Last updated: 2026-11-10 after Phase 4*
