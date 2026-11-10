@@ -222,7 +222,12 @@ Phase 2 ────┼──→ Phase 4: Lighting    ────┤
   4. Lamps flicker subtly — visible offset, low enough to not distract from gameplay
   5. Walking outside any light radius drops the local area to near-black
 
-**Plans**: TBD
+**Plans**: 2
+**Wave 1**
+- [ ] 04-01-PLAN.md — tracer: room-keyed darkness veil + wall-occluded 4-tile warm torch + facing lobe (LITE-01)
+
+**Wave 2** *(blocked on Wave 1 completion)*
+- [ ] 04-02-PLAN.md — colored occluded pools for the five sources + seeded lamp/screen flicker + wall-line veil fade (LITE-02, LITE-03)
 
 ---
 
