@@ -14,9 +14,11 @@ import {
   ROOM_W,
   ROOM_ZONES,
   type RoomLayout,
+  SEAM_STRIPS,
   SPAWN_X,
   SPAWN_Y,
   TILE,
+  VEIL_ZONES,
   WORLD_H,
   WORLD_W,
   YARD_LAYOUT,
@@ -42,6 +44,15 @@ function translate(r: Rect, ox: number, oy: number): Rect {
 
 function layoutWalls(layout: RoomLayout, ox: number, oy: number): Rect[] {
   return layout.walls.map((t) => translate(toRect(t), ox, oy));
+}
+
+function insideRect(outer: Rect, inner: Rect): boolean {
+  return (
+    inner.x >= outer.x &&
+    inner.y >= outer.y &&
+    inner.x + inner.w <= outer.x + outer.w &&
+    inner.y + inner.h <= outer.y + outer.h
+  );
 }
 
 // Lane and rest-spot rects are room-local; layout solids are room-local too.
@@ -145,6 +156,98 @@ describe('west door gap alignment', () => {
   it('keeps both west glide rest-spot body rects clear of destination solids', () => {
     expectClearOfSolids(BEDROOM_LAYOUT, { x: 256, y: 88, w: 32, h: 32 });
     expectClearOfSolids(LIVING_LAYOUT, { x: 32, y: 88, w: 32, h: 32 });
+  });
+});
+
+describe('shared seams', () => {
+  it('leaves the north seam band to the living room — no office wall above it', () => {
+    const band: Rect = { x: 336, y: 224, w: 288, h: 16 };
+    const walls = layoutWalls(OFFICE_LAYOUT, OFFICE_ORIGIN.x, OFFICE_ORIGIN.y);
+    for (const wall of walls) {
+      expect(rectsOverlap(wall, band)).toBe(false);
+    }
+  });
+
+  it('leaves the west seam band to the living room — no bedroom wall left of it', () => {
+    const band: Rect = { x: 304, y: 256, w: 16, h: 208 };
+    const walls = layoutWalls(
+      BEDROOM_LAYOUT,
+      BEDROOM_ORIGIN.x,
+      BEDROOM_ORIGIN.y,
+    );
+    for (const wall of walls) {
+      expect(rectsOverlap(wall, band)).toBe(false);
+    }
+  });
+
+  it('keeps exactly one door leaf per seam — the living room one', () => {
+    const northLeaf: Rect = { x: 320, y: 224, w: 320, h: 16 };
+    const westLeaf: Rect = { x: 304, y: 240, w: 16, h: 240 };
+    for (const t of OFFICE_LAYOUT.decor) {
+      const rect = translate(toRect(t), OFFICE_ORIGIN.x, OFFICE_ORIGIN.y);
+      expect(rectsOverlap(rect, northLeaf)).toBe(false);
+    }
+    for (const t of BEDROOM_LAYOUT.decor) {
+      const rect = translate(toRect(t), BEDROOM_ORIGIN.x, BEDROOM_ORIGIN.y);
+      expect(rectsOverlap(rect, westLeaf)).toBe(false);
+    }
+  });
+
+  it('sizes each door gap to the single 16px band', () => {
+    expect(DOOR_NORTH.gap).toEqual({ x: 384, y: 240, w: 48, h: 16 });
+    expect(DOOR_WEST.gap).toEqual({ x: 320, y: 320, w: 16, h: 48 });
+  });
+
+  it('keeps the 48px opening width unchanged', () => {
+    expect(DOOR_NORTH.gap.w).toBe(48);
+    expect(DOOR_WEST.gap.h).toBe(48);
+  });
+});
+
+describe('veil regions', () => {
+  it('mirrors the room zones and stays inside them', () => {
+    expect(VEIL_ZONES.map((z) => z.id)).toEqual(ROOM_ZONES.map((z) => z.id));
+    for (const zone of VEIL_ZONES) {
+      const room = ROOM_ZONES.find((z) => z.id === zone.id);
+      if (!room) throw new Error(`no zone for ${zone.id}`);
+      expect(insideRect(room, zone)).toBe(true);
+    }
+  });
+
+  it('tiles the world with veil zones, seam strips, and the yard', () => {
+    const rects: Rect[] = [...VEIL_ZONES, ...SEAM_STRIPS, YARD_RECT];
+    for (let i = 0; i < rects.length; i++) {
+      for (let j = i + 1; j < rects.length; j++) {
+        expect(rectsOverlap(rects[i], rects[j])).toBe(false);
+      }
+    }
+    const area = rects.reduce((sum, r) => sum + r.w * r.h, 0);
+    expect(area).toBe(WORLD_W * WORLD_H);
+  });
+
+  it('keeps every living seam wall inside a strip', () => {
+    const seamWalls = layoutWalls(
+      LIVING_LAYOUT,
+      LIVING_ORIGIN.x,
+      LIVING_ORIGIN.y,
+    ).filter((r) => (r.w === 16 && r.x === 320) || (r.h === 16 && r.y === 240));
+    expect(seamWalls).toHaveLength(4);
+    for (const wall of seamWalls) {
+      expect(SEAM_STRIPS.some((s) => insideRect(s, wall))).toBe(true);
+    }
+  });
+
+  it('keeps both door gaps inside a strip', () => {
+    for (const gap of [DOOR_NORTH.gap, DOOR_WEST.gap]) {
+      expect(SEAM_STRIPS.some((s) => insideRect(s, gap))).toBe(true);
+    }
+  });
+
+  it('records the two rooms each strip borders', () => {
+    const north = SEAM_STRIPS.find((s) => s.h === 16);
+    const west = SEAM_STRIPS.find((s) => s.w === 16);
+    expect([...(north?.rooms ?? [])].sort()).toEqual(['living', 'office']);
+    expect([...(west?.rooms ?? [])].sort()).toEqual(['bedroom', 'living']);
   });
 });
 

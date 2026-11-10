@@ -12,6 +12,7 @@ import {
 } from '@/data/rooms';
 import { getCurrentRoom, setCurrentRoom } from '@/game/state/currentRoom';
 import { DIALOG_HIDDEN_Y, InteractionUI } from '@/objects/InteractionUI';
+import { LightLayer } from '@/objects/Light';
 import { Player, ensurePlayerTexture } from '@/objects/Player';
 import { buildBedroom } from '@/scenes/BedroomScene';
 import { buildOffice } from '@/scenes/OfficeScene';
@@ -55,6 +56,8 @@ export class LivingRoomScene extends Phaser.Scene {
   private keyE!: Phaser.Input.Keyboard.Key;
   private keyEsc!: Phaser.Input.Keyboard.Key;
   private ui!: InteractionUI;
+  private lighting!: LightLayer;
+  private litElapsed = 0;
   private gliding = false;
   private mode: InteractionMode = 'idle';
   private activeObject: InteractableDef | null = null;
@@ -95,6 +98,7 @@ export class LivingRoomScene extends Phaser.Scene {
 
     // Constructed last: the UI camera ignores every child that exists at
     // construction time, so anything added after it would double-render.
+    this.lighting = new LightLayer(this);
     this.ui = new InteractionUI(this);
 
     // A shutdown mid-dialog, mid-overlay or mid-glide must not leave a stuck
@@ -123,6 +127,7 @@ export class LivingRoomScene extends Phaser.Scene {
       }
       this.ui.hideDialog();
       this.ui.hideBadge();
+      this.lighting.destroy();
       this.activeObject = null;
       this.mode = 'idle';
       this.gliding = false;
@@ -134,6 +139,13 @@ export class LivingRoomScene extends Phaser.Scene {
   }
 
   update(_time: number, delta: number): void {
+    this.litElapsed += delta;
+    this.lighting.update(
+      this.litElapsed,
+      { x: this.player.x, y: this.player.y },
+      this.player.getFacing(),
+    );
+
     // JustDown edges kill OS key-repeat (D-29); read before the glide gate so
     // a press during a glide is consumed, not buffered.
     const eDown = Phaser.Input.Keyboard.JustDown(this.keyE);
@@ -225,6 +237,7 @@ export class LivingRoomScene extends Phaser.Scene {
     const body = this.player.body as Phaser.Physics.Arcade.Body;
     body.enable = false;
     this.player.setFacing(side.dir);
+    this.lighting.beginFade(side.dest, door.axis, side.dir);
 
     const end = glideEnd(door.axis, side.dir);
     this.tweens.add({

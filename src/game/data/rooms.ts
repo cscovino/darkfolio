@@ -1,4 +1,4 @@
-import type { Rect, RoomZone } from '@/systems/currentRoom';
+import type { Rect, RoomId, RoomZone } from '@/systems/currentRoom';
 import type { DoorDef } from '@/systems/doorGlide';
 
 // Anchor convention: RoomLayout walls/solids/decor tuples are CENTER-anchored (x,y = rect center,
@@ -70,8 +70,6 @@ export const OFFICE_LAYOUT: RoomLayout = {
   floorB: 0x42503c,
   wall: 0x2a2a2a,
   walls: [
-    [32, 232, 64, 16],
-    [216, 232, 208, 16],
     [160, 8, 320, 16],
     [8, 120, 16, 240],
     [312, 120, 16, 240],
@@ -88,9 +86,6 @@ export const OFFICE_LAYOUT: RoomLayout = {
     [272, 120, 24, 20, 0x5a4a32],
   ],
   decor: [
-    [88, 232, 48, 16, 0x8b6f5e],
-    [65, 232, 2, 16, 0x9a7d64],
-    [111, 232, 2, 16, 0x9a7d64],
     [200, 26, 14, 6, 0x6b8fbf],
     [56, 24, 8, 8, 0xffa500],
     [24, 56, 12, 4, 0x6b8fbf],
@@ -106,8 +101,6 @@ export const BEDROOM_LAYOUT: RoomLayout = {
   floorB: 0x3a2c1e,
   wall: 0x241c14,
   walls: [
-    [312, 48, 16, 64],
-    [312, 176, 16, 96],
     [160, 8, 320, 16],
     [160, 232, 320, 16],
     [8, 120, 16, 240],
@@ -127,9 +120,6 @@ export const BEDROOM_LAYOUT: RoomLayout = {
     [128, 32, 8, 8, 0xffa500],
     [160, 152, 80, 56, 0x4a3423],
     [208, 152, 12, 8, 0x6b4e3d],
-    [312, 104, 16, 48, 0x8b6f5e],
-    [312, 79, 16, 2, 0x9a7d64],
-    [312, 129, 16, 2, 0x9a7d64],
   ],
 };
 
@@ -163,10 +153,26 @@ export const ROOM_ZONES: RoomZone[] = [
   { id: 'bedroom', x: 0, y: 240, w: 320, h: 240 },
 ];
 
+// Veil cut of ROOM_ZONES: the shared seam bands moved out into SEAM_STRIPS.
+export const VEIL_ZONES: RoomZone[] = [
+  { id: 'living', x: 336, y: 256, w: 304, h: 224 },
+  { id: 'office', x: 320, y: 0, w: 320, h: 240 },
+  { id: 'bedroom', x: 0, y: 240, w: 320, h: 240 },
+];
+
+export type SeamStrip = Rect & { rooms: [RoomId, RoomId] };
+
+// Each strip shades the one wall band two rooms share, switching rooms at the
+// fade midpoint so the band never reads lighter than its own bordering rooms.
+export const SEAM_STRIPS: SeamStrip[] = [
+  { x: 320, y: 240, w: 320, h: 16, rooms: ['office', 'living'] },
+  { x: 320, y: 256, w: 16, h: 224, rooms: ['living', 'bedroom'] },
+];
+
 export const DOOR_NORTH: DoorDef = {
   id: 'north',
   zone: { x: 384, y: 216, w: 48, h: 48 },
-  gap: { x: 384, y: 224, w: 48, h: 32 },
+  gap: { x: 384, y: 240, w: 48, h: 16 },
   axis: { x: 408, y: 240 },
   sides: [
     { dir: 'up', dest: 'office' },
@@ -177,7 +183,7 @@ export const DOOR_NORTH: DoorDef = {
 export const DOOR_WEST: DoorDef = {
   id: 'west',
   zone: { x: 296, y: 320, w: 48, h: 48 },
-  gap: { x: 304, y: 320, w: 32, h: 48 },
+  gap: { x: 320, y: 320, w: 16, h: 48 },
   axis: { x: 320, y: 344 },
   sides: [
     { dir: 'left', dest: 'bedroom' },
