@@ -2,7 +2,7 @@
 name: gameplay-dev
 description: Highest-volume scene/object/system implementer — Spawned by the GSD orchestrator.
 mode: subagent
-model: opencode-go/claude-haiku-5-5
+model: opencode-go/qwen3.8-flash
 steps: 60
 permission:
   edit: allow
